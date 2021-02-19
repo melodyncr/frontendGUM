@@ -11,6 +11,7 @@ android {
         applicationId "com.example.a499_android"
         minSdkVersion 16
         targetSdkVersion 30
+        multiDexEnabled true  //ADD THIS LINE
         versionCode 1
         versionName "1.0"
 
@@ -31,6 +32,7 @@ android {
 
 dependencies {
 
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
