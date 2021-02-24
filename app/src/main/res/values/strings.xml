@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">499_android</string>
+    <string name="appName">Get Up and Move!</string>
+    <string name="loginText">Log In</string>
+    <string name="createAccText">Create Account</string>
 </resources>
