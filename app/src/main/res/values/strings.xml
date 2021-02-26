@@ -3,4 +3,16 @@
     <string name="appName">Get Up and Move!</string>
     <string name="loginText">Log In</string>
     <string name="createAccText">Create Account</string>
+    <string name="_0">0</string>
+    <string name="start_activity">Start Activity</string>
+    <string name="change_avatar">Change Avatar</string>
+    <string name="edit_schedule">Edit Schedule</string>
+    <string name="textview">Longevity Points</string>
+    <color name="soft_yellow">#ffe666</color>
+    <color name="orange">#ff3f00</color>
+    <color name="sand">#f8ddb8</color>
+    <color name="bright_red">#ff1a40</color>
+    <color name="light_purple">#f4c7f4</color>
+    <color name="lime_green">#0fe35d</color>
+
 </resources>
