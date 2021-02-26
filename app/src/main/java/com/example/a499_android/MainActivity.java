@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button toLoginBtn, toCreateAccountBtn;
+    private Button toLoginBtn, toCreateAccountBtn, selectScheduleBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +46,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(toCreateAccountBtn);
             }
         });
+
+        selectScheduleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent selectScheduleBtn = new Intent(MainActivity.this, SelectSchedule.class);
+                startActivity(selectScheduleBtn);
+            }
+        });
     }
 
     private void setButtons() {
         toLoginBtn = findViewById(R.id.toLoginBtn);
         toCreateAccountBtn = findViewById(R.id.toCreateAccountBtn);
+        selectScheduleBtn = findViewById(R.id.toSelectScheduleBtn);
     }
 }
