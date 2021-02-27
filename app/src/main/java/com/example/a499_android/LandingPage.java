@@ -3,6 +3,7 @@ package com.example.a499_android;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,8 +30,9 @@ public class LandingPage extends AppCompatActivity {
     }
 
     //maybe retrieve schedule and pass it through intent first
-//        public void startEditScheduleActivity(View view){
-//            Intent intent = EditSchedule.getIntent(this, "")
-//        }
+    public void startEditScheduleActivity(View view){
+        Intent intent = SelectSchedule.getIntent(this, "");
+        startActivity(intent);
+    }
 
 }
