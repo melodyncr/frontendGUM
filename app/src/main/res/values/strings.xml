@@ -3,6 +3,8 @@
     <string name="appName">Get Up and Move!</string>
     <string name="loginText">Log In</string>
     <string name="createAccText">Create Account</string>
+    <string name="pick_time">Select Time</string>
+    <string name="select_schedule">Select Schedule</string>
     <string name="_0">0</string>
     <string name="start_activity">Start Activity</string>
     <string name="change_avatar">Change Avatar</string>
@@ -14,5 +16,6 @@
     <color name="bright_red">#ff1a40</color>
     <color name="light_purple">#f4c7f4</color>
     <color name="lime_green">#0fe35d</color>
+
 
 </resources>
