@@ -3,6 +3,8 @@ package com.example.a499_android;
 import android.app.AppComponentFactory;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -25,6 +27,8 @@ public class SelectSchedule extends AppCompatActivity {
     TextView tvw;
     TextView schedule;
     ArrayList<String> times = new ArrayList<>();
+    public static final String EXTRA = "SelectSchedule EXTRA";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +83,13 @@ public class SelectSchedule extends AppCompatActivity {
         });
 
 
+    }
+
+    // Intent Factory
+    public static Intent getIntent(Context context, String val){
+        Intent intent = new Intent(context, SelectSchedule.class);
+        intent.putExtra(EXTRA, val);
+        return intent;
     }
 
 }
