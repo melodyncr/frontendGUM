@@ -126,6 +126,10 @@ public class CreateAccount extends AppCompatActivity {
          * If there was a user with entered username found already;
          */
 
+        if(!usernameAvailable[0][0]) {
+            return false;
+        }
+
         if (enteredUsername.length() < 5) {
             Toast.makeText(CreateAccount.this, "This username is too short",
                     Toast.LENGTH_SHORT)
