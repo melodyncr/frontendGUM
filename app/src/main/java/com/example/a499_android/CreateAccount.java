@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -20,7 +22,12 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CreateAccount extends AppCompatActivity {
+
+    private final String TAG = "User Doc";
 
     private TextView usernameField, passwordField;
     private Button createAccountBtn;
@@ -44,10 +51,34 @@ public class CreateAccount extends AppCompatActivity {
                     /**
                      * Add to database. Warnings will come from the functions themselves.
                      */
+                    Map<String, Object> newUser = new HashMap<>();
+                    newUser.put("Password", enteredPassword);
+                    newUser.put("Points", 0);
 
-                    Toast.makeText(CreateAccount.this, "Your account has been successfully created",
-                            Toast.LENGTH_SHORT)
-                            .show();
+                    users.document(enteredUsername.toLowerCase()).set(newUser)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                                    Toast.makeText(CreateAccount.this,
+                                            "Your account has been successfully created",
+                                            Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error writing document", e);
+                                    Toast.makeText(CreateAccount.this,
+                                            "Something went wrong with the creating account " +
+                                                    "process",
+                                            Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+                            });
+                } else {
+                    Log.d(TAG, "Validity Failed");
                 }
             }
         });
@@ -77,11 +108,11 @@ public class CreateAccount extends AppCompatActivity {
                     if (document.exists()) {
                         Log.d(USERTAG, "DocumentSnapshot data: " + document.getData());
                         Log.d("Warning", "Uh oh username is taken");
+                        usernameAvailable[0] = false;
                         Toast.makeText(CreateAccount.this,
                                 "This username is taken! Please enter a different username",
                                 Toast.LENGTH_SHORT)
                                 .show();
-                        usernameAvailable[0] = false;
                     } else {
                         Log.d(USERTAG, "No such document, This Username is available");
                     }
@@ -95,8 +126,6 @@ public class CreateAccount extends AppCompatActivity {
          * If there was a user with entered username found already;
          */
 
-        if(!usernameAvailable[0]) return false;
-
         if (enteredUsername.length() < 5) {
             Toast.makeText(CreateAccount.this, "This username is too short",
                     Toast.LENGTH_SHORT)
@@ -104,6 +133,7 @@ public class CreateAccount extends AppCompatActivity {
             return false;
         }
 
+        Log.d("Status", "All Good!");
         return true;
     }
 
