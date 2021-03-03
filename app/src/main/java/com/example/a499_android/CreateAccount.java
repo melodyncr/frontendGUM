@@ -126,7 +126,7 @@ public class CreateAccount extends AppCompatActivity {
          * If there was a user with entered username found already;
          */
 
-        if(!usernameAvailable[0][0]) {
+        if(!usernameAvailable[0]) {
             return false;
         }
 
