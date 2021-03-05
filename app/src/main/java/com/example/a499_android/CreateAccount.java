@@ -1,5 +1,6 @@
 package com.example.a499_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -103,6 +104,9 @@ public class CreateAccount extends AppCompatActivity {
                         }
                     }
                 });
+
+                Intent loginIntent = new Intent(CreateAccount.this, LoginActivity.class);
+                startActivity(loginIntent);
             }
         });
     }
