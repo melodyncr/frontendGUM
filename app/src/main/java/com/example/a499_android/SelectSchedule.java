@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,39 +11,22 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 
 
 public class SelectSchedule extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-
     private final String TAG = "Select Schedule";
-
     TimePicker picker;
-    Button btnSelectTime;
-    Button btnUpdateSchedule;
-    TextView tvw;
+    Button btnSelectTime,btnUpdateSchedule, clearBtn;
     TextView schedule;
     ArrayList<String> times = new ArrayList<>();
     public static final String EXTRA = "SelectSchedule EXTRA";
@@ -54,45 +36,16 @@ public class SelectSchedule extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_schedule);
-        tvw=(TextView)findViewById(R.id.time_view1);
         picker=(TimePicker)findViewById(R.id.timePicker1);
         schedule=(TextView)findViewById(R.id.schedule_list);
+        clearBtn = findViewById(R.id.clearSchedule);
         picker.setIs24HourView(false);
         btnSelectTime=(Button)findViewById(R.id.selectTimeBtn);
         btnUpdateSchedule= findViewById(R.id.confirmSchedule);
 
 
         DocumentReference docRef = db.collection("Users").document("raul_676");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        Map<String, Object> data = document.getData();
-                        String password;
-                        int points;
-                        ArrayList<String> group  = new ArrayList<>();
-                        Iterator it = data.entrySet().iterator();
-                        while (it.hasNext()) {
-                            Map.Entry pair = (Map.Entry)it.next();
-                            Log.d(TAG, pair.getKey() + " = " + pair.getValue());
-                            if(pair.getKey().toString().equals("Password")){password = pair.getValue().toString();}
-                            if(pair.getKey().toString().equals("Points")){points = Integer.parseInt(pair.getValue().toString());}
-                            if(pair.getKey().toString().equals("Schedule")){ group = (ArrayList<String>) document.get("Schedule"); }
-                            it.remove(); // avoids a ConcurrentModificationException
-                        }
-                        Log.d(TAG, group.get(0));
-                        Toast.makeText(SelectSchedule.this, document.getData().toString(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
+
         // Will upload/update schedule when
         btnUpdateSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,13 +82,18 @@ public class SelectSchedule extends AppCompatActivity {
                     if (hour > 12) {
                         am_pm = "PM";
                         hour = hour - 12;
-                    } else {
+                    } else if(hour == 0){
+                        hour = 12;
+                        am_pm = "AM";
+                    }else if(hour == 12){
+                        am_pm = "PM";
+                        hour = 12;
+                    }else{
                         am_pm = "AM";
                     }
                     if (times.isEmpty()) {
-                        times.add("Schedule for the week");
+                        times.add("Schedule for the week.");
                     }
-                    tvw.setText("Selected Date: " + hour + ":" + minute + " " + am_pm);
                     times.add("" + hour + ":" + minute + " " + am_pm);
                     String time = "";
                     int count = 0;
@@ -153,7 +111,13 @@ public class SelectSchedule extends AppCompatActivity {
             }
         });
 
-
+        clearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                times.clear();
+                schedule.setText("");
+            }
+        });
     }
 
     public ArrayList<String> returnSchedule(ArrayList<String> list){

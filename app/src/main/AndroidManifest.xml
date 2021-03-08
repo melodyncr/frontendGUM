@@ -12,6 +12,8 @@
 
         <activity android:name=".CreateAccount"></activity>
         <activity android:name=".SelectSchedule"></activity>
+        <activity android:name=".UpdateSchedule"></activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +22,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".LandingPage"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
 
     </application>
