@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         selectScheduleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent selectScheduleBtn = new Intent(MainActivity.this, SelectSchedule.class);
+                Intent selectScheduleBtn = new Intent(MainActivity.this, LandingPage.class);
                 startActivity(selectScheduleBtn);
             }
         });
