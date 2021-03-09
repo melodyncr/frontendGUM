@@ -11,12 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 public class LandingPage extends AppCompatActivity {
 
     public static final String EXTRA = "LandingPage EXTRA";
-    Button editSchedule = findViewById(R.id.button6);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        Button editSchedule = findViewById(R.id.button6);
 
         //connect to db and retrieve user info
             //username, points
@@ -39,6 +41,11 @@ public class LandingPage extends AppCompatActivity {
     //maybe retrieve schedule and pass it through intent first
     public void startEditScheduleActivity(View view){
         Intent intent = SelectSchedule.getIntent(this, "");
+        startActivity(intent);
+    }
+
+    public void startAnimationTestActivity(View view){
+        Intent intent = AnimationTest.getIntent(this, "");
         startActivity(intent);
     }
 

@@ -13,6 +13,8 @@
         <activity android:name=".CreateAccount"></activity>
         <activity android:name=".SelectSchedule"></activity>
         <activity android:name=".UpdateSchedule"></activity>
+        <activity android:name=".LandingPage"></activity>
+        <activity android:name=".AnimationTest"></activity>
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -21,7 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LandingPage"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
