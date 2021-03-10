@@ -9,11 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.499_android">
-
-        <activity android:name=".CreateAccount"></activity>
-        <activity android:name=".SelectSchedule"></activity>
-        <activity android:name=".UpdateSchedule"></activity>
-
+        <activity android:name=".SelectAvatar"></activity>
+        <activity android:name=".CreateAccount" />
+        <activity android:name=".SelectSchedule" />
+        <activity android:name=".UpdateSchedule" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,13 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LandingPage"></activity>
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LandingPage" />
+        <activity android:name=".LoginActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-
     </application>
+
 </manifest>
