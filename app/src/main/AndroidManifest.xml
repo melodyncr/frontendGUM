@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.499_android">
-        <activity android:name=".SelectAvatar"></activity>
+        <activity android:name=".SelectAvatar" />
         <activity android:name=".CreateAccount" />
         <activity android:name=".SelectSchedule" />
         <activity android:name=".UpdateSchedule" />
