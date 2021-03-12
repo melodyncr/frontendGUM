@@ -31,7 +31,7 @@ public class LandingPage extends AppCompatActivity {
         setContentView(R.layout.activity_landing_page);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        Button editSchedule = findViewById(R.id.button6);
+        Button editSchedule = findViewById(R.id.editScheduleBtn);
         TextView displayedPoints = findViewById(R.id.pointDisplay);
         TextView displayedUsername = findViewById(R.id.usernameDisplay);
 

@@ -24,16 +24,10 @@
         android:id="@+id/changeAvatarBtn"
         android:layout_width="280dp"
         android:layout_height="75dp"
-<<<<<<< HEAD
-        android:layout_marginTop="409dp"
-        android:layout_marginBottom="247dp"
-        android:text="@string/change_avatar"
-=======
         android:layout_marginTop="338dp"
         android:layout_marginBottom="318dp"
         android:onClick="startAnimationTestActivity"
         android:text="@string/start_activity"
->>>>>>> 9a5116a23d3de50a641718a09279b481904dba9b
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -55,11 +49,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-<<<<<<< HEAD
-        android:id="@+id/longevityPts"
-=======
         android:id="@+id/pointDisplay"
->>>>>>> 9a5116a23d3de50a641718a09279b481904dba9b
         android:layout_width="112dp"
         android:layout_height="66dp"
         android:layout_gravity="center_horizontal"
