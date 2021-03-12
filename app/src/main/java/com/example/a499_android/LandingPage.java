@@ -36,7 +36,7 @@ public class LandingPage extends AppCompatActivity {
         TextView displayedUsername = findViewById(R.id.usernameDisplay);
 
         // NOTE: user info read from db will be hardcoded until login activity is done
-        String currentUserName = "ExampleUserName";
+        String currentUserName = LoginActivity.loggedUserName;
 
         // Access a Cloud Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
