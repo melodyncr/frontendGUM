@@ -26,6 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     final String TAG = "";
     SharedPreferences sp;
 
+    public static String loggedUserName = "";
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference users = db.collection("Users");
     DocumentReference userDocRef;
@@ -56,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.d("HEREEEEE", passwordValue);
                                 //sp.edit().putString("username", usernameInput).apply();
                                 //sp.edit().putInt("Points", Integer.parseInt(document.getString("Points"))).apply();
+                                Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                                loggedUserName = usernameInput;
                                 Intent toLandingPage = new Intent(LoginActivity.this, LandingPage.class);
                                 startActivity(toLandingPage);
                             }
