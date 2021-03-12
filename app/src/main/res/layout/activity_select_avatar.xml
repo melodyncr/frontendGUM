@@ -30,6 +30,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <HorizontalScrollView
+        android:id="@+id/imageScrollView"
         android:layout_width="411dp"
         android:layout_height="345dp"
         android:layout_marginTop="92dp"
@@ -38,11 +39,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/imageConstraintLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/ex1"
+                android:id="@+id/example1"
                 android:layout_width="330dp"
                 android:layout_height="320dp"
                 android:layout_marginStart="5dp"
@@ -53,15 +55,26 @@
                 app:srcCompat="@drawable/dead" />
 
             <ImageButton
-                android:id="@+id/ex2"
+                android:id="@+id/example2"
                 android:layout_width="330dp"
                 android:layout_height="320dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                app:layout_constraintStart_toEndOf="@+id/ex1"
-                app:layout_constraintTop_toTopOf="@+id/ex1"
+                app:layout_constraintStart_toEndOf="@+id/example1"
+                app:layout_constraintTop_toTopOf="@+id/example1"
                 app:srcCompat="@drawable/gum_" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="274dp"
+        android:layout_height="115dp"
+        android:layout_marginBottom="28dp"
+        android:text="we may not need this confirm button. just clicking on the image is enough"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/confirmBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
