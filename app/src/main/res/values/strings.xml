@@ -10,6 +10,9 @@
     <string name="change_avatar">Change Avatar</string>
     <string name="edit_schedule">Edit Schedule</string>
     <string name="textview">Longevity Points</string>
+    <string name="username">Username</string>
+    <string name="Back">Back</string>
+    <string name="confirm">Confirm</string>
     <color name="soft_yellow">#ffe666</color>
     <color name="orange">#ff3f00</color>
     <color name="sand">#f8ddb8</color>

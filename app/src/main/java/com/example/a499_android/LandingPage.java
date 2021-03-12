@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,9 +18,17 @@ public class LandingPage extends AppCompatActivity {
         setContentView(R.layout.activity_landing_page);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        Button editSchedule = findViewById(R.id.button6);
+
         //connect to db and retrieve user info
             //username, points
-
+        editSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingPage.this, UpdateSchedule.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // Intent Factory
@@ -32,6 +41,11 @@ public class LandingPage extends AppCompatActivity {
     //maybe retrieve schedule and pass it through intent first
     public void startEditScheduleActivity(View view){
         Intent intent = SelectSchedule.getIntent(this, "");
+        startActivity(intent);
+    }
+
+    public void startAnimationTestActivity(View view){
+        Intent intent = AnimationTest.getIntent(this, "");
         startActivity(intent);
     }
 
