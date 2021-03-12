@@ -12,12 +12,15 @@ public class LandingPage extends AppCompatActivity {
 
     public static final String EXTRA = "LandingPage EXTRA";
     Button editSchedule;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         editSchedule = findViewById(R.id.button6);
+
         //connect to db and retrieve user info
             //username, points
         editSchedule.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +42,11 @@ public class LandingPage extends AppCompatActivity {
     //maybe retrieve schedule and pass it through intent first
     public void startEditScheduleActivity(View view){
         Intent intent = SelectSchedule.getIntent(this, "");
+        startActivity(intent);
+    }
+
+    public void startAnimationTestActivity(View view){
+        Intent intent = AnimationTest.getIntent(this, "");
         startActivity(intent);
     }
 

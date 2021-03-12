@@ -47,18 +47,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        selectScheduleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent selectScheduleBtn = new Intent(MainActivity.this, SelectSchedule.class);
-                startActivity(selectScheduleBtn);
-            }
-        });
+    }
+
+    public void startLandingPageActivity(View view){
+        Intent intent = LandingPage.getIntent(this, "");
+        startActivity(intent);
+
     }
 
     private void setButtons() {
         toLoginBtn = findViewById(R.id.toLoginBtn);
         toCreateAccountBtn = findViewById(R.id.toCreateAccountBtn);
-        selectScheduleBtn = findViewById(R.id.toSelectScheduleBtn);
     }
 }
