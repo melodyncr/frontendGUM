@@ -22,11 +22,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class LandingPage extends AppCompatActivity {
 
     public static final String EXTRA = "LandingPage EXTRA";
-<<<<<<< HEAD
-    Button editScheduleBtn, startActivityBtn;
-=======
     private static final String TAG = "Current User Data";
->>>>>>> 9a5116a23d3de50a641718a09279b481904dba9b
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +31,6 @@ public class LandingPage extends AppCompatActivity {
         setContentView(R.layout.activity_landing_page);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-<<<<<<< HEAD
-        editScheduleBtn = findViewById(R.id.editScheduleBtn);
-
-        //connect to db and retrieve user info
-            //username, points
-        editScheduleBtn.setOnClickListener(new View.OnClickListener() {
-=======
         Button editSchedule = findViewById(R.id.button6);
         TextView displayedPoints = findViewById(R.id.pointDisplay);
         TextView displayedUsername = findViewById(R.id.usernameDisplay);
@@ -69,7 +59,6 @@ public class LandingPage extends AppCompatActivity {
         }, userNameRef);
 
         editSchedule.setOnClickListener(new View.OnClickListener() {
->>>>>>> 9a5116a23d3de50a641718a09279b481904dba9b
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LandingPage.this, UpdateSchedule.class);
