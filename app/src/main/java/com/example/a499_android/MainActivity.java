@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     public void startLandingPageActivity(View view){
         Intent intent = LandingPage.getIntent(this, "");
         startActivity(intent);
+
     }
 
     private void setButtons() {
