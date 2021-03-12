@@ -24,9 +24,16 @@
         android:id="@+id/changeAvatarBtn"
         android:layout_width="280dp"
         android:layout_height="75dp"
+<<<<<<< HEAD
         android:layout_marginTop="409dp"
         android:layout_marginBottom="247dp"
         android:text="@string/change_avatar"
+=======
+        android:layout_marginTop="338dp"
+        android:layout_marginBottom="318dp"
+        android:onClick="startAnimationTestActivity"
+        android:text="@string/start_activity"
+>>>>>>> 9a5116a23d3de50a641718a09279b481904dba9b
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -39,16 +46,20 @@
         android:layout_height="75dp"
         android:layout_marginTop="481dp"
         android:layout_marginBottom="175dp"
+        android:onClick="startEditScheduleActivity"
         android:text="@string/edit_schedule"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:onClick="startEditScheduleActivity"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+<<<<<<< HEAD
         android:id="@+id/longevityPts"
+=======
+        android:id="@+id/pointDisplay"
+>>>>>>> 9a5116a23d3de50a641718a09279b481904dba9b
         android:layout_width="112dp"
         android:layout_height="66dp"
         android:layout_gravity="center_horizontal"
@@ -61,7 +72,7 @@
         android:background="@color/light_purple"
         android:ems="10"
         android:fontFamily="cursive"
-        android:text="@string/_0"
+        android:text="@string/loading"
         android:textAlignment="center"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,7 +95,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gum_" />
+        app:srcCompat="@drawable/gum_"
+        android:contentDescription="@string/logotext" />
 
     <TextView
         android:id="@+id/textView"
@@ -104,5 +116,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.555" />
+
+    <TextView
+        android:id="@+id/usernameDisplay"
+        android:layout_width="89dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="306dp"
+        android:layout_marginLeft="306dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="660dp"
+        android:gravity="center_horizontal"
+        android:text="@string/loading"
+        android:textAlignment="center"
+        android:textColor="#3F51B5"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
