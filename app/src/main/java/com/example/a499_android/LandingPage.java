@@ -24,13 +24,14 @@ public class LandingPage extends AppCompatActivity {
     public static final String EXTRA = "LandingPage EXTRA";
     private static final String TAG = "Current User Data";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        Button editSchedule = findViewById(R.id.button6);
+        Button editSchedule = findViewById(R.id.editScheduleBtn);
         TextView displayedPoints = findViewById(R.id.pointDisplay);
         TextView displayedUsername = findViewById(R.id.usernameDisplay);
 
