@@ -13,6 +13,8 @@
     <string name="username">Username</string>
     <string name="Back">Back</string>
     <string name="confirm">Confirm</string>
+    <string name="loading">loading...</string>
+    <string name="logotext">logoText</string>
     <color name="soft_yellow">#ffe666</color>
     <color name="orange">#ff3f00</color>
     <color name="sand">#f8ddb8</color>
