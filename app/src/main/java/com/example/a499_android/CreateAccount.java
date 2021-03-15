@@ -28,7 +28,7 @@ public class CreateAccount extends AppCompatActivity {
     private final String TAG = "Create Account";
 
     private TextView usernameField, passwordField;
-    private Button createAccountBtn;
+    private Button createAccountBtn, createAccToMain;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference users = db.collection("Users");
     DocumentReference userDocRef;
@@ -39,6 +39,14 @@ public class CreateAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         wiredUp();
+
+        createAccToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent backToMainIntent = new Intent(CreateAccount.this, MainActivity.class);
+                startActivity(backToMainIntent);
+            }
+        });
 
         createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +96,9 @@ public class CreateAccount extends AppCompatActivity {
                                                     "Your account has been successfully created",
                                                     Toast.LENGTH_SHORT)
                                                     .show();
+
+                                            Intent toLoginIntent = new Intent(CreateAccount.this, LoginActivity.class);
+                                            startActivity(toLoginIntent);
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -115,6 +126,7 @@ public class CreateAccount extends AppCompatActivity {
         usernameField = findViewById(R.id.newUsernameText);
         passwordField = findViewById(R.id.newPasswordText);
         createAccountBtn = findViewById(R.id.createAccountBtn);
+        createAccToMain = findViewById(R.id.createAccToMain);
     }
 
     private boolean checkUsernameLength(String enteredUsername) {
