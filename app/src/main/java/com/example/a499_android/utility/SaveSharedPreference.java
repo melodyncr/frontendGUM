@@ -29,4 +29,8 @@ public class SaveSharedPreference {
         editor.clear(); //clear all stored data
         editor.commit();
     }
+
+    /**
+     * Additional setters and getters or methods can be made here to keep data.
+     */
 }
