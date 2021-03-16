@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.a499_android.utility.SaveSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -32,16 +33,18 @@ public class LandingPage extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Button editSchedule = findViewById(R.id.editScheduleBtn);
+        Button logoutUser = findViewById(R.id.logoutBtn);
         TextView displayedPoints = findViewById(R.id.pointDisplay);
         TextView displayedUsername = findViewById(R.id.usernameDisplay);
 
         // NOTE: user info read from db will be hardcoded until login activity is done
         String currentUserName = LoginActivity.loggedUserName;
-
+        String uName = SaveSharedPreference.getUserName(LandingPage.this);
         // Access a Cloud Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        DocumentReference userNameRef = db.collection("Users").document(currentUserName);
+        //This originally used currentUserName
+        DocumentReference userNameRef = db.collection("Users").document(uName);
 
         // Read User Info
         getUserInfo(new FirestoreCallback() {
@@ -51,7 +54,7 @@ public class LandingPage extends AppCompatActivity {
                     Log.d(TAG, "Found User Data");
                     Toast.makeText(LandingPage.this, "Successfully Found User Data", Toast.LENGTH_SHORT).show();
                     displayedPoints.setText(document.getData().get("Points").toString());
-                    displayedUsername.setText(currentUserName);
+                    displayedUsername.setText(uName);//This originally used currentUserName
                 } else {
                     Toast.makeText(LandingPage.this, "Unable to Load User Data", Toast.LENGTH_SHORT).show();
                 }
@@ -63,6 +66,15 @@ public class LandingPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LandingPage.this, UpdateSchedule.class);
                 startActivity(intent);
+            }
+        });
+
+        logoutUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SaveSharedPreference.clearUserName(LandingPage.this); //clears preference of username and anything else in there
+                Intent toMainActivityIntent = new Intent(LandingPage.this, MainActivity.class);
+                startActivity(toMainActivityIntent);
             }
         });
     }
