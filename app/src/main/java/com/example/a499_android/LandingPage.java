@@ -33,6 +33,7 @@ public class LandingPage extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Button editSchedule = findViewById(R.id.editScheduleBtn);
+        Button changeAvatar = findViewById(R.id.changeAvatarBtn);
         Button logoutUser = findViewById(R.id.logoutBtn);
         TextView displayedPoints = findViewById(R.id.pointDisplay);
         TextView displayedUsername = findViewById(R.id.usernameDisplay);
@@ -75,6 +76,14 @@ public class LandingPage extends AppCompatActivity {
                 SaveSharedPreference.clearUserName(LandingPage.this); //clears preference of username and anything else in there
                 Intent toMainActivityIntent = new Intent(LandingPage.this, MainActivity.class);
                 startActivity(toMainActivityIntent);
+            }
+        });
+
+        changeAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LandingPage.this, SelectAvatar.class);
+                startActivity(intent);
             }
         });
     }
