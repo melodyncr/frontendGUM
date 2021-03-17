@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a499_android.utility.SaveSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -24,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView username, password;
     Button loginButton;
     final String TAG = "";
-    SharedPreferences sp;
 
     public static String loggedUserName = "";
 
@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                                 //sp.edit().putInt("Points", Integer.parseInt(document.getString("Points"))).apply();
                                 Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
                                 loggedUserName = usernameInput;
+                                SaveSharedPreference.setUserName(LoginActivity.this, usernameInput);
                                 Intent toLandingPage = new Intent(LoginActivity.this, LandingPage.class);
                                 startActivity(toLandingPage);
                             }
