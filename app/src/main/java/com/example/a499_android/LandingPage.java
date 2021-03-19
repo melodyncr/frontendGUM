@@ -20,11 +20,18 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import static com.example.a499_android.LoginActivity.loggedUserName;
+
 public class LandingPage extends AppCompatActivity {
 
     public static final String EXTRA = "LandingPage EXTRA";
     private static final String TAG = "Current User Data";
-
+    public static final String WSURVEYQ = "WSurveyQ";
+    public static final String WSURVEYR = "WSurveyR";
+    public static final String TYPE_SURVEY = "Weekly Survey";
+    public static final String W_SURVEY_COUNT = "w_survey_count";
+    public static final String W_SURVEY_Q = "w_survey_q";
+    public static final String W_SURVEY_QC = "w_survey_qc";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,7 @@ public class LandingPage extends AppCompatActivity {
         Button editSchedule = findViewById(R.id.editScheduleBtn);
         Button changeAvatar = findViewById(R.id.changeAvatarBtn);
         Button logoutUser = findViewById(R.id.logoutBtn);
+        Button startSurveyBtn = findViewById(R.id.startSurveyBtn);
         TextView displayedPoints = findViewById(R.id.pointDisplay);
         TextView displayedUsername = findViewById(R.id.usernameDisplay);
 
@@ -86,6 +94,15 @@ public class LandingPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        startSurveyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(LandingPage.this, DetermineQuestionType.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // Intent Factory
@@ -115,6 +132,9 @@ public class LandingPage extends AppCompatActivity {
                     if (document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                         firestoreCallback.onSuccess(document);
+                        Log.d(TAG, currentUserName.getId() + " username");
+                        loggedUserName = currentUserName.getId();
+                        CreateAccount.first_survey = false;
                     }
                 } else {
                     Log.d(TAG, "ERROR: ", task.getException());

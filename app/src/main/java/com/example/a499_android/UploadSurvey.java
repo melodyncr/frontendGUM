@@ -16,12 +16,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 
+
+import static com.example.a499_android.LoginActivity.loggedUserName;
 import static com.example.a499_android.DetermineQuestionType.responseList;
-import static com.example.a499_android.DetermineQuestionType.documentColumn;
 import static com.example.a499_android.DetermineQuestionType.getResponseList;
 public class UploadSurvey extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -35,14 +33,18 @@ public class UploadSurvey extends AppCompatActivity {
 
         Object response_list_obj = responseList;
         Object updateCountObj = getResponseList;
-        DocumentReference docRef = db.collection("Surveys").document(documentColumn);
-        docRef.update("raul_676", response_list_obj);
-        docRef.update("f_survey_count", updateCountObj);
+        DocumentReference docRef = db.collection("Surveys").document(DetermineQuestionType.SURVEYR);
+        Log.d(TAG, response_list_obj.toString()  + "    " + updateCountObj.toString());
+        docRef.update(loggedUserName, response_list_obj);
+        docRef.update(DetermineQuestionType.SURVEY_COUNT, updateCountObj);
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
+                    responseList.clear();
+                    getResponseList.clear();
+                    Log.d(TAG, response_list_obj.toString() + " " + getResponseList.toString() + "cleared list is success.");
                     Toast.makeText(UploadSurvey.this, "Survey is uploaded!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(UploadSurvey.this, MainActivity.class);
                     startActivity(intent);

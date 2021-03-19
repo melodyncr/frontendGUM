@@ -27,6 +27,15 @@ public class CreateAccount extends AppCompatActivity {
 
     private final String TAG = "Create Account";
 
+    public static final String FSURVEYQ = "FSurveyQ";
+    public static final String FSURVEYR = "FSurveyR";
+    public static final String TYPE_SURVEY = "First Survey";
+    public static final String F_SURVEY_COUNT = "f_survey_count";
+    public static final String F_SURVEY_Q = "f_survey_q";
+    public static final String F_SURVEY_QC = "f_survey_qc";
+    public static boolean first_survey = false;
+
+
     private TextView usernameField, passwordField;
     private Button createAccountBtn, createAccToMain;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -84,6 +93,7 @@ public class CreateAccount extends AppCompatActivity {
                             Map<String, Object> newUser = new HashMap<>();
                             newUser.put("Password", enteredPassword);
                             newUser.put("Points", 0);
+                            newUser.put("Score", 0);
 
                             Log.d(TAG, String.valueOf(newUser));
 
@@ -96,8 +106,9 @@ public class CreateAccount extends AppCompatActivity {
                                                     "Your account has been successfully created",
                                                     Toast.LENGTH_SHORT)
                                                     .show();
-
-                                            Intent toLoginIntent = new Intent(CreateAccount.this, LoginActivity.class);
+                                            first_survey = true;
+                                            LoginActivity.loggedUserName = enteredUsername.toLowerCase();
+                                            Intent toLoginIntent = new Intent(CreateAccount.this, DetermineQuestionType.class);
                                             startActivity(toLoginIntent);
                                         }
                                     })

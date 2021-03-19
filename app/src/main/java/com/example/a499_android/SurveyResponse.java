@@ -15,7 +15,7 @@ import static com.example.a499_android.DetermineQuestionType.question_count;
 import static com.example.a499_android.DetermineQuestionType.weeklyQuestionsList;
 import static com.example.a499_android.DetermineQuestionType.responseList;
 import static com.example.a499_android.DetermineQuestionType.response_count;
-import static com.example.a499_android.DetermineQuestionType.TYPE_SURVEY;
+
 
 
 public class SurveyResponse extends AppCompatActivity {
@@ -37,6 +37,7 @@ public class SurveyResponse extends AppCompatActivity {
                     Toast.makeText(SurveyResponse.this, "Please enter some text", Toast.LENGTH_SHORT).show();
                 }else {
                     if (question_count >= weeklyQuestionsList.size() - 1) {
+                        responseList.add(responseText.getText().toString());
                         Intent intent = new Intent(SurveyResponse.this, UploadSurvey.class);
                         startActivity(intent);
                     } else {
@@ -97,7 +98,7 @@ public class SurveyResponse extends AppCompatActivity {
         backBtn = findViewById(R.id.previousBtn);
         submitBtn = findViewById(R.id.submitBtn);
         finishLaterBtn = findViewById(R.id.finishLaterBtn);
-        typeSurvey.setText(""+TYPE_SURVEY);
+        typeSurvey.setText(""+DetermineQuestionType.T_TYPE_SURVEY);
         String question = weeklyQuestionsList.get(question_count).substring(1);
         questionText.setText(question);
         if(question_count >= weeklyQuestionsList.size()-1){

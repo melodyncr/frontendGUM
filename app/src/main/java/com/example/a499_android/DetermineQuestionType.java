@@ -16,24 +16,51 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+
+
 public class DetermineQuestionType extends AppCompatActivity {
 
     public static String TAG = "Determine Questions";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    DocumentReference surveyQuestions = db.collection("Surveys").document("FSurveyQ");
-    DocumentReference surveyTotal = db.collection("Surveys").document("FSurveyR");
+    public static String SURVEYQ = "";
+    public static String SURVEYR = "";
+    public static String T_TYPE_SURVEY = "";
+    public static String SURVEY_COUNT = "";
+    public static String SURVEY_Q = "";
+    public static String SURVEY_QC = "";
+    DocumentReference surveyQuestions;
+    DocumentReference surveyTotal;
     public static ArrayList<String> weeklyQuestionsList  = new ArrayList<>();
     public static ArrayList<String> choicesList = new ArrayList<>();
     public static ArrayList<String> responseList = new ArrayList<>();
     public static ArrayList<String> getResponseList = new ArrayList<>();
     public static  int question_count = 0;
     public static  int response_count=0;
-    public static String TYPE_SURVEY  = "First Survey";
-    public static String documentColumn = "FSurveyR";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_questions);
+        boolean f_or_w = first_or_weekly(CreateAccount.first_survey);
+        if(f_or_w){
+            //first survey will be shown
+            SURVEYQ = CreateAccount.FSURVEYQ;
+            SURVEYR = CreateAccount.FSURVEYR;
+            T_TYPE_SURVEY = CreateAccount.TYPE_SURVEY;
+            SURVEY_COUNT = CreateAccount.F_SURVEY_COUNT;
+            SURVEY_Q = CreateAccount.F_SURVEY_Q;
+            SURVEY_QC = CreateAccount.F_SURVEY_QC;
+        }else{
+            //second survey
+            SURVEYQ = LandingPage.WSURVEYQ;
+            SURVEYR = LandingPage.WSURVEYR;
+            T_TYPE_SURVEY = LandingPage.TYPE_SURVEY;
+            SURVEY_COUNT = LandingPage.W_SURVEY_COUNT;
+            SURVEY_Q = LandingPage.W_SURVEY_Q;
+            SURVEY_QC = LandingPage.W_SURVEY_QC;
+        }
+        surveyQuestions = db.collection("Surveys").document(SURVEYQ);
+        surveyTotal = db.collection("Surveys").document(SURVEYR);
         getSurveyTotal();
         init_firebase();
         question_count =0;
@@ -52,7 +79,7 @@ public class DetermineQuestionType extends AppCompatActivity {
                         Iterator it = data.entrySet().iterator();
                         while (it.hasNext()) {
                             Map.Entry pair = (Map.Entry)it.next();
-                            if(pair.getKey().toString().equals("f_survey_count")){ getResponseList = (ArrayList<String>) document.get("f_survey_count"); }
+                            if(pair.getKey().toString().equals(SURVEY_COUNT)){ getResponseList = (ArrayList<String>) document.get(SURVEY_COUNT); }
                             it.remove(); // avoids a ConcurrentModificationException
                         }
                         Log.d(TAG, getResponseList.toString());
@@ -80,8 +107,8 @@ public class DetermineQuestionType extends AppCompatActivity {
                         Iterator it = data.entrySet().iterator();
                         while (it.hasNext()) {
                             Map.Entry pair = (Map.Entry)it.next();
-                            if(pair.getKey().toString().equals("f_survey_q")){ weeklyQuestionsList = (ArrayList<String>) document.get("f_survey_q"); }
-                            if(pair.getKey().toString().equals("f_survey_qc")){ choicesList = (ArrayList<String>) document.get("f_survey_qc"); }
+                            if(pair.getKey().toString().equals(SURVEY_Q)){ weeklyQuestionsList = (ArrayList<String>) document.get(SURVEY_Q); }
+                            if(pair.getKey().toString().equals(SURVEY_QC)){ choicesList = (ArrayList<String>) document.get(SURVEY_QC); }
                             it.remove(); // avoids a ConcurrentModificationException
                         }
                         Log.d(TAG, weeklyQuestionsList.toString() + "\n" + choicesList.toString());
@@ -109,6 +136,13 @@ public class DetermineQuestionType extends AppCompatActivity {
             return true;
         }else{
             return false;
+        }
+    }
+    public boolean first_or_weekly(boolean f_or_w){
+        if (f_or_w) {
+            return true;// is first survey
+        }else{
+            return false;// is weekly survey
         }
     }
 }

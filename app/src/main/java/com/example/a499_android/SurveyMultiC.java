@@ -21,7 +21,6 @@ import static com.example.a499_android.DetermineQuestionType.responseList;
 import static com.example.a499_android.DetermineQuestionType.getResponseList;
 import static com.example.a499_android.DetermineQuestionType.response_count;
 import static com.example.a499_android.DetermineQuestionType.question_count;
-import static com.example.a499_android.DetermineQuestionType.TYPE_SURVEY;
 public class SurveyMultiC extends AppCompatActivity {
     ArrayList<String> tempChoiceList = new ArrayList<>();
     TextView typeSurvey, questionText;
@@ -127,7 +126,7 @@ public class SurveyMultiC extends AppCompatActivity {
         finishLtrBtn = findViewById(R.id.finishLaterBtn);
         submitBtn = findViewById(R.id.submitBtn);
         previousBtn = findViewById(R.id.previousBtn);
-        typeSurvey.setText(""+TYPE_SURVEY);
+        typeSurvey.setText(""+DetermineQuestionType.T_TYPE_SURVEY);
         b1 = findViewById(R.id.question1);
         b2 = findViewById(R.id.question2);
         b3 = findViewById(R.id.question3);
@@ -186,7 +185,10 @@ public class SurveyMultiC extends AppCompatActivity {
                 list.add(Integer.parseInt(substr));
             }
         }
-            Integer value = list.get(index) + 1;
+
+        Log.d(TAG,"Index  "+index);
+
+            int value = list.get(index) +1;
             Log.d(TAG,"value  "+value);
             list.set(index,value);
             String newCount ="";

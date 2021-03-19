@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.d("HEREEEEE", passwordValue);
                                 //sp.edit().putString("username", usernameInput).apply();
                                 //sp.edit().putInt("Points", Integer.parseInt(document.getString("Points"))).apply();
-                                Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Login Successful!" + usernameInput, Toast.LENGTH_SHORT).show();
                                 loggedUserName = usernameInput;
                                 SaveSharedPreference.setUserName(LoginActivity.this, usernameInput);
                                 Intent toLandingPage = new Intent(LoginActivity.this, LandingPage.class);
