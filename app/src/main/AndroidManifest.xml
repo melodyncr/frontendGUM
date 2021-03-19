@@ -13,7 +13,10 @@
         <activity android:name=".CreateAccount"></activity>
         <activity android:name=".SelectSchedule"></activity>
         <activity android:name=".UpdateSchedule"></activity>
-
+        <activity android:name=".SurveyResponse"></activity>
+        <activity android:name=".DetermineQuestionType"></activity>
+        <activity android:name=".SurveyMultiC"></activity>
+        <activity android:name=".UploadSurvey"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

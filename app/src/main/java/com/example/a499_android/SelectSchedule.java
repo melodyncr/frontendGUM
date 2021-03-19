@@ -18,6 +18,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -28,9 +29,9 @@ public class SelectSchedule extends AppCompatActivity {
     TimePicker picker;
     Button btnSelectTime,btnUpdateSchedule, clearBtn;
     TextView schedule;
-    ArrayList<String> times = new ArrayList<>();
+    ArrayList<String> timeList_string = new ArrayList<>();
+    HashMap<Integer,Integer> timesList_int = new HashMap<Integer, Integer>();
     public static final String EXTRA = "SelectSchedule EXTRA";
-    public List<SelectSchedule> scheduleList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +51,8 @@ public class SelectSchedule extends AppCompatActivity {
         btnUpdateSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (times.size() == 7) {
-                    ArrayList<String> new_schedule = returnSchedule(times);
+                if (timeList_string.size() == 7) {
+                    ArrayList<String> new_schedule = returnSchedule(timeList_string);
                     Log.d(TAG, new_schedule.toString());
                     Object schedule_obj = new_schedule;
                     docRef.update("Schedule", schedule_obj );
@@ -67,17 +68,21 @@ public class SelectSchedule extends AppCompatActivity {
         btnSelectTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (times.size() == 7) {
+                if (timeList_string.size() == 7) {
                     Toast.makeText(SelectSchedule.this, "List is full", Toast.LENGTH_SHORT).show();
                 } else {
-                    int hour, minute;
+                    int mil_hour, hour, minute;
                     String am_pm;
+                    boolean less_than_10 = false;
+                    String min_less_than_ten="";
                     if (Build.VERSION.SDK_INT >= 23) {
                         hour = picker.getHour();
                         minute = picker.getMinute();
+                        mil_hour = picker.getHour();
                     } else {
                         hour = picker.getCurrentHour();
                         minute = picker.getCurrentMinute();
+                        mil_hour = picker.getCurrentHour();
                     }
                     if (hour > 12) {
                         am_pm = "PM";
@@ -91,22 +96,37 @@ public class SelectSchedule extends AppCompatActivity {
                     }else{
                         am_pm = "AM";
                     }
-                    if (times.isEmpty()) {
-                        times.add("Schedule for the week.");
+                    if (timeList_string.isEmpty()) {
+                        timeList_string.add("Schedule for the week.");
                     }
-                    times.add("" + hour + ":" + minute + " " + am_pm);
-                    String time = "";
-                    int count = 0;
-                    for (String s : times) {
-                        if (count == 0) {
-                            time += s + "\n";
-                        } else {
-                            time += "Workout " + count + " " + s + "\n";
+                    boolean add_time = validSchedule(mil_hour,minute,timesList_int);
+                    if(!add_time){
+                        Toast.makeText(SelectSchedule.this, "This time is not an hour between all others!", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Log.d(TAG, "time inserted"+ mil_hour + ": " + minute );
+                        timesList_int.put(mil_hour,minute);
+                        if(minute <10){
+                            min_less_than_ten = "0"+minute;
+                            less_than_10= true;
                         }
-                        count++;
-                    }
-                    schedule.setText("" + time);
+                        if(less_than_10){
+                            timeList_string.add(""+ hour + ":"+ min_less_than_ten+ " "+ am_pm);
+                        }else {
+                            timeList_string.add("" + hour + ":" + minute + " " + am_pm);
+                        }
+                            String time = "";
+                            int count = 0;
+                            for (String s : timeList_string) {
+                                if (count == 0) {
+                                    time += s + "\n";
+                                } else {
+                                    time += "Workout " + count + " " + s + "\n";
+                                }
+                                count++;
+                            }
+                            schedule.setText("" + time);
 
+                    }
                 }
             }
         });
@@ -114,21 +134,51 @@ public class SelectSchedule extends AppCompatActivity {
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                times.clear();
+                timeList_string.clear();
+                timesList_int.clear();
                 schedule.setText("");
             }
         });
     }
 
     public ArrayList<String> returnSchedule(ArrayList<String> list){
-        ArrayList<String> updated_list  = new ArrayList<>();
-        for(String s : list){
-            if (s.equals("Schedule for the week")) {//do not add this
-            }else{
-                updated_list.add(s);
+        list.remove(list.get(0));
+        return list;
+    }
+    public boolean validSchedule(int hour, int minute, HashMap<Integer,Integer>list){
+        if(list.size() ==0){
+            return true;
+        }else{
+            int index = list.size()-1;
+            Object obj_hr = list.keySet().toArray()[index];
+            Object obj_min= list.values().toArray()[index];
+            int pre_hour = Integer.parseInt(obj_hr.toString());
+            int pre_min = Integer.parseInt(obj_min.toString());
+            Log.d(TAG, "Previous time"+ pre_hour + ": " + pre_min);
+            Log.d(TAG, "Current time"+ hour + ": " + minute );
+            int answer1 = hour-pre_hour;
+            int answer2= minute-pre_min;
+            Log.d(TAG, ""+ answer1 + " " + answer2 );
+            if(hour-pre_hour > 3){
+                return false;// over three hour gap between workouts
+            }else if(hour - pre_hour == 3){
+                if(minute - pre_min  <= 0) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }else if(hour - pre_hour == 1){
+                if(minute - pre_min  <= 0) {
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+            else if(hour-pre_hour <=0){
+                return false;// hours not in between schedule
             }
         }
-        return updated_list;
+        return true;
     }
     // Intent Factory
     public static Intent getIntent(Context context, String val){
