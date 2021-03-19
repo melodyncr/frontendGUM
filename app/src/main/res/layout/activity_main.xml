@@ -25,9 +25,10 @@
         android:id="@+id/toLoginBtn"
         android:layout_width="172dp"
         android:layout_height="48dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="96dp"
         android:text="@string/loginText"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appTitle" />
 
@@ -38,17 +39,6 @@
         android:layout_marginTop="52dp"
         android:text="@string/createAccText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toLoginBtn" />
-
-    <Button
-        android:id="@+id/toSelectScheduleBtn"
-        android:layout_width="172dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="160dp"
-        android:text="@string/select_schedule"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toLoginBtn" />
 

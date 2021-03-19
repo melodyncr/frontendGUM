@@ -10,9 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.499_android">
 
-        <activity android:name=".CreateAccount"></activity>
-        <activity android:name=".SelectSchedule"></activity>
-        <activity android:name=".UpdateSchedule"></activity>
+
+        <activity android:name=".CreateAccount" />
+        <activity android:name=".SelectSchedule" />
+        <activity android:name=".UpdateSchedule" />
+        <activity android:name=".LandingPage" />
+        <activity android:name=".AnimationTest" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SelectAvatar" />
         <activity android:name=".SurveyResponse"></activity>
         <activity android:name=".DetermineQuestionType"></activity>
         <activity android:name=".SurveyMultiC"></activity>
@@ -24,12 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LandingPage"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-
     </application>
+
 </manifest>

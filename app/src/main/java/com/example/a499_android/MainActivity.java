@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.a499_android.utility.SaveSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setButtons();
 
+        if(SaveSharedPreference.getUserName(MainActivity.this).length() > 0) {
+            Log.d("Pref", SaveSharedPreference.getUserName(MainActivity.this) + " is found");
+            Intent toLandingPageIntent = new Intent(MainActivity.this, LandingPage.class);
+            startActivity(toLandingPageIntent);
+        } else {
+            Log.d("Pref", "username not saved. Not logged in");
+        }
+
         toLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,18 +56,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        selectScheduleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent selectScheduleBtn = new Intent(MainActivity.this, SelectSchedule.class);
-                startActivity(selectScheduleBtn);
-            }
-        });
     }
 
     private void setButtons() {
         toLoginBtn = findViewById(R.id.toLoginBtn);
         toCreateAccountBtn = findViewById(R.id.toCreateAccountBtn);
-        selectScheduleBtn = findViewById(R.id.toSelectScheduleBtn);
     }
 }
