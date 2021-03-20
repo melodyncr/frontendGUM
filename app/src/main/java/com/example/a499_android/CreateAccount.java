@@ -20,7 +20,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CreateAccount extends AppCompatActivity {
@@ -95,7 +97,9 @@ public class CreateAccount extends AppCompatActivity {
                             newUser.put("Points", 0);
                             newUser.put("Score", 0);
                             newUser.put("AvatarUrl", "dead.png");
-                            String[] listOfAvatars = new String[]{"dead.png"};
+                            List<String> listOfAvatars = new ArrayList<String>(){{
+                                add("dead.png");
+                            }};
                             newUser.put("UnlockedAvatars", listOfAvatars);
 
                             Log.d(TAG, String.valueOf(newUser));
