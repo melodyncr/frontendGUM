@@ -94,6 +94,9 @@ public class CreateAccount extends AppCompatActivity {
                             newUser.put("Password", enteredPassword);
                             newUser.put("Points", 0);
                             newUser.put("Score", 0);
+                            newUser.put("AvatarUrl", "dead.png");
+                            String[] listOfAvatars = new String[]{"dead.png"};
+                            newUser.put("UnlockedAvatars", listOfAvatars);
 
                             Log.d(TAG, String.valueOf(newUser));
 
