@@ -6,11 +6,17 @@ import androidx.savedstate.SavedStateRegistryOwner;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.a499_android.utility.SaveSharedPreference;
@@ -27,16 +33,25 @@ import java.util.List;
 public class SelectAvatar extends AppCompatActivity {
 
     public static final String TAG = "Select Avatar: ";
+    private PopupWindow confirmWindow;
+    private LayoutInflater layoutInflater;
     private ImageButton ex1, ex2, ex3;
-    private Button backButton;
+    private Button backButton, yesBuyBtn, noBuyBtn;
     List<String> unlockedAvatars;
     DocumentReference userDocRef;
+    private RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_avatar);
         wiredUp();
+
+        DisplayMetrics dm = new DisplayMetrics();
+        relativeLayout = (RelativeLayout) findViewById(R.id.relative);
+
+        int phoneWidth = dm.widthPixels;
+        int phoneHeight = dm.heightPixels;
 
         String username = SaveSharedPreference.getUserName(SelectAvatar.this);
         // Access a Cloud Firestore instance
@@ -76,11 +91,31 @@ public class SelectAvatar extends AppCompatActivity {
         ex2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isUnlocked("gum_.png")) {
-                    setImage("gum_.png");
-                } else {
-                    Log.d("","");
-                }
+
+                layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+                ViewGroup container =
+                        (ViewGroup) layoutInflater.inflate(R.layout.unlock_avatar_confirm, null);
+
+                confirmWindow = new PopupWindow(container, (int) (phoneHeight * 0.7 ), (int) (phoneWidth * 0.7) , true);
+                Toast.makeText(SelectAvatar.this,
+                        "Showing window",
+                        Toast.LENGTH_SHORT).show();
+                confirmWindow.showAtLocation(relativeLayout, Gravity.CENTER, (int) (phoneHeight * 0.5 ), (int) (phoneWidth * 0.5));
+
+//                container.setOnTouchListener(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View view, MotionEvent motionEvent) {
+//                        confirmWindow.dismiss();
+//                        return true;
+//                    }
+//                });
+
+//                if (isUnlocked("gum_.png")) {
+//                    setImage("gum_.png");
+//                } else {
+//                    Log.d("IN HERE", "AHSDBALSDGAIDGUAS");
+//                }
             }
         });
 
@@ -148,6 +183,8 @@ public class SelectAvatar extends AppCompatActivity {
 
     private void wiredUp() {
         backButton = findViewById(R.id.backBtn);
+        yesBuyBtn = findViewById(R.id.yesBuyAvatar);
+        noBuyBtn = findViewById(R.id.noAvatarBuy);
         ex1 = findViewById(R.id.example1);
         ex2 = findViewById(R.id.example2);
         ex3 = findViewById(R.id.example3);
