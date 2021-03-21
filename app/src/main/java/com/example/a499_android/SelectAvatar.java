@@ -4,15 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.savedstate.SavedStateRegistryOwner;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
@@ -47,11 +50,15 @@ public class SelectAvatar extends AppCompatActivity {
         setContentView(R.layout.activity_select_avatar);
         wiredUp();
 
+        final WindowManager w = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        final Display d = w.getDefaultDisplay();
         DisplayMetrics dm = new DisplayMetrics();
+        d.getMetrics(dm);
+
         relativeLayout = (RelativeLayout) findViewById(R.id.relative);
 
-        int phoneWidth = dm.widthPixels;
-        int phoneHeight = dm.heightPixels;
+        int phoneWidth = RelativeLayout.LayoutParams.MATCH_PARENT;
+        int phoneHeight = RelativeLayout.LayoutParams.MATCH_PARENT;
 
         String username = SaveSharedPreference.getUserName(SelectAvatar.this);
         // Access a Cloud Firestore instance
@@ -97,25 +104,25 @@ public class SelectAvatar extends AppCompatActivity {
                 ViewGroup container =
                         (ViewGroup) layoutInflater.inflate(R.layout.unlock_avatar_confirm, null);
 
-                confirmWindow = new PopupWindow(container, (int) (phoneHeight * 0.7 ), (int) (phoneWidth * 0.7) , true);
-                Toast.makeText(SelectAvatar.this,
-                        "Showing window",
-                        Toast.LENGTH_SHORT).show();
-                confirmWindow.showAtLocation(relativeLayout, Gravity.CENTER, (int) (phoneHeight * 0.5 ), (int) (phoneWidth * 0.5));
+                int width = (int) (dm.widthPixels * 0.8);
+                int height = (int) (dm.heightPixels * 0.9);
+                Log.d("After int cast", width + " and " + height);
 
-//                container.setOnTouchListener(new View.OnTouchListener() {
-//                    @Override
-//                    public boolean onTouch(View view, MotionEvent motionEvent) {
-//                        confirmWindow.dismiss();
-//                        return true;
-//                    }
-//                });
+                confirmWindow = new PopupWindow(container, width , height , true);
+                confirmWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                container.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        confirmWindow.dismiss();
+                        return true;
+                    }
+                });
 
-//                if (isUnlocked("gum_.png")) {
-//                    setImage("gum_.png");
-//                } else {
-//                    Log.d("IN HERE", "AHSDBALSDGAIDGUAS");
-//                }
+                if (isUnlocked("gum_.png")) {
+                    setImage("gum_.png");
+                } else {
+                    Log.d("IN HERE", "AHSDBALSDGAIDGUAS");
+                }
             }
         });
 
