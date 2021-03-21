@@ -4,12 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.savedstate.SavedStateRegistryOwner;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.a499_android.utility.SaveSharedPreference;
@@ -21,13 +31,18 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.List;
+
 public class SelectAvatar extends AppCompatActivity {
 
     public static final String TAG = "Select Avatar: ";
-    private ImageButton ex1, ex2;
-    private Button confirmButton, backButton;
-
+    private PopupWindow confirmWindow;
+    private LayoutInflater layoutInflater;
+    private ImageButton ex1, ex2, ex3;
+    private Button backButton, yesBuyBtn, noBuyBtn;
+    List<String> unlockedAvatars;
     DocumentReference userDocRef;
+    private RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +50,32 @@ public class SelectAvatar extends AppCompatActivity {
         setContentView(R.layout.activity_select_avatar);
         wiredUp();
 
+        final WindowManager w = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        final Display d = w.getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        d.getMetrics(dm);
+
+        relativeLayout = (RelativeLayout) findViewById(R.id.relative);
+
+        int phoneWidth = RelativeLayout.LayoutParams.MATCH_PARENT;
+        int phoneHeight = RelativeLayout.LayoutParams.MATCH_PARENT;
+
         String username = SaveSharedPreference.getUserName(SelectAvatar.this);
         // Access a Cloud Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         userDocRef = db.collection("Users").document(username);
+        readData(new FirestoreCallback() {
+            @Override
+            public void onSuccess(DocumentSnapshot document) {
+                if(document.exists()) {
+                    unlockedAvatars = (List<String>) document.getData().get("UnlockedAvatars");
+                    Log.d("Unlocked Avatars", String.valueOf(unlockedAvatars));
+                } else {
+                    Toast.makeText(SelectAvatar.this, "Unable to Load User Data", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, userDocRef);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +84,10 @@ public class SelectAvatar extends AppCompatActivity {
                 startActivity(landingPageIntent);
             }
         });
+
+        /**
+         *
+         */
 
         ex1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,24 +98,59 @@ public class SelectAvatar extends AppCompatActivity {
         ex2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setImage("test.png");
+
+                layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+                ViewGroup container =
+                        (ViewGroup) layoutInflater.inflate(R.layout.unlock_avatar_confirm, null);
+
+                int width = (int) (dm.widthPixels * 0.8);
+                int height = (int) (dm.heightPixels * 0.9);
+                Log.d("After int cast", width + " and " + height);
+
+                confirmWindow = new PopupWindow(container, width , height , true);
+                confirmWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                container.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        confirmWindow.dismiss();
+                        return true;
+                    }
+                });
+
+                if (isUnlocked("gum_.png")) {
+                    setImage("gum_.png");
+                } else {
+                    Log.d("IN HERE", "AHSDBALSDGAIDGUAS");
+                }
+            }
+        });
+
+        ex3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isUnlocked("thinkingemoji.png")) {
+                    setImage("thinkingemoji.png");
+                } else {
+                    Log.d("","");
+                }
             }
         });
     }
 
+    private boolean isUnlocked(String avatarUrl) {
+        if (unlockedAvatars.contains(avatarUrl)) {
+            return true;
+        } else {
+            Toast.makeText(SelectAvatar.this,
+                    "You have not unlocked this avatar",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
     private void setImage(String imageName) {
-//        readData(new FirestoreCallback() {
-//            @Override
-//            public void onSuccess(DocumentSnapshot document) {
-//                if(document.exists()) {
-//                    document
-//                } else {
-//                    Toast.makeText(SelectAvatar.this, "Unable to set image", Toast
-//                    .LENGTH_SHORT).show();
-//                }
-//            }
-//        }, userDocRef);
-        userDocRef.update("AvatarImage", imageName).addOnSuccessListener(new OnSuccessListener<Void>() {
+        userDocRef.update("AvatarUrl", imageName).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(SelectAvatar.this,
@@ -114,9 +189,11 @@ public class SelectAvatar extends AppCompatActivity {
     }
 
     private void wiredUp() {
-        confirmButton = findViewById(R.id.confirmBtn);
         backButton = findViewById(R.id.backBtn);
+        yesBuyBtn = findViewById(R.id.yesBuyAvatar);
+        noBuyBtn = findViewById(R.id.noAvatarBuy);
         ex1 = findViewById(R.id.example1);
         ex2 = findViewById(R.id.example2);
+        ex3 = findViewById(R.id.example3);
     }
 }

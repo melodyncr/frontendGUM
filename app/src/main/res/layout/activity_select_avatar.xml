@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF385"
+    android:id="@+id/relative"
     tools:context=".SelectAvatar">
 
     <Button
@@ -18,21 +20,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/confirmBtn"
-        android:layout_width="150dp"
-        android:layout_height="67dp"
-        android:layout_marginBottom="60dp"
-        android:text="@string/confirm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <HorizontalScrollView
         android:id="@+id/imageScrollView"
-        android:layout_width="411dp"
-        android:layout_height="345dp"
+        android:layout_width="421dp"
+        android:layout_height="503dp"
         android:layout_marginTop="92dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +40,7 @@
                 android:layout_height="320dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/dead" />
@@ -60,21 +51,23 @@
                 android:layout_height="320dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="4dp"
                 app:layout_constraintStart_toEndOf="@+id/example1"
                 app:layout_constraintTop_toTopOf="@+id/example1"
                 app:srcCompat="@drawable/gum_" />
+
+            <ImageButton
+                android:id="@+id/example3"
+                android:layout_width="330dp"
+                android:layout_height="320dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toEndOf="@+id/example2"
+                app:layout_constraintTop_toTopOf="@+id/example2"
+                app:srcCompat="@drawable/thinkingemoji" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </HorizontalScrollView>
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="274dp"
-        android:layout_height="115dp"
-        android:layout_marginBottom="28dp"
-        android:text="we may not need this confirm button. just clicking on the image is enough"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/confirmBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
