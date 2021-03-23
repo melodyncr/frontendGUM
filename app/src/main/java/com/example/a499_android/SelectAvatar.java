@@ -18,8 +18,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a499_android.utility.SaveSharedPreference;
@@ -40,9 +42,11 @@ public class SelectAvatar extends AppCompatActivity {
     private LayoutInflater layoutInflater;
     private ImageButton ex1, ex2, ex3;
     private Button backButton, yesBuyBtn, noBuyBtn;
+    private TextView ptsView, confirmQuestion;
     List<String> unlockedAvatars;
+    private long fitnessPts; // fitness points
     DocumentReference userDocRef;
-    private RelativeLayout relativeLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +58,6 @@ public class SelectAvatar extends AppCompatActivity {
         final Display d = w.getDefaultDisplay();
         DisplayMetrics dm = new DisplayMetrics();
         d.getMetrics(dm);
-
-        relativeLayout = (RelativeLayout) findViewById(R.id.relative);
 
         int phoneWidth = RelativeLayout.LayoutParams.MATCH_PARENT;
         int phoneHeight = RelativeLayout.LayoutParams.MATCH_PARENT;
@@ -71,6 +73,9 @@ public class SelectAvatar extends AppCompatActivity {
                 if(document.exists()) {
                     unlockedAvatars = (List<String>) document.getData().get("UnlockedAvatars");
                     Log.d("Unlocked Avatars", String.valueOf(unlockedAvatars));
+                    fitnessPts = (long) document.getData().get("Points");
+                    Log.d("Fitness Points", String.valueOf(fitnessPts));
+                    ptsView.setText(String.valueOf(fitnessPts));
                 } else {
                     Toast.makeText(SelectAvatar.this, "Unable to Load User Data", Toast.LENGTH_SHORT).show();
                 }
@@ -86,7 +91,7 @@ public class SelectAvatar extends AppCompatActivity {
         });
 
         /**
-         *
+         * Options
          */
 
         ex1.setOnClickListener(new View.OnClickListener() {
@@ -95,33 +100,14 @@ public class SelectAvatar extends AppCompatActivity {
                 setImage("dead.png");
             }
         });
+
         ex2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-
-                ViewGroup container =
-                        (ViewGroup) layoutInflater.inflate(R.layout.unlock_avatar_confirm, null);
-
-                int width = (int) (dm.widthPixels * 0.8);
-                int height = (int) (dm.heightPixels * 0.9);
-                Log.d("After int cast", width + " and " + height);
-
-                confirmWindow = new PopupWindow(container, width , height , true);
-                confirmWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-                container.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View view, MotionEvent motionEvent) {
-                        confirmWindow.dismiss();
-                        return true;
-                    }
-                });
-
                 if (isUnlocked("gum_.png")) {
                     setImage("gum_.png");
                 } else {
-                    Log.d("IN HERE", "AHSDBALSDGAIDGUAS");
+                    onButtonShowPopupWindowClick(view, "gum_.png",500);
                 }
             }
         });
@@ -132,7 +118,7 @@ public class SelectAvatar extends AppCompatActivity {
                 if (isUnlocked("thinkingemoji.png")) {
                     setImage("thinkingemoji.png");
                 } else {
-                    Log.d("","");
+                    onButtonShowPopupWindowClick(view, "thinkingemoji.png", 1000);
                 }
             }
         });
@@ -190,10 +176,63 @@ public class SelectAvatar extends AppCompatActivity {
 
     private void wiredUp() {
         backButton = findViewById(R.id.backBtn);
-        yesBuyBtn = findViewById(R.id.yesBuyAvatar);
-        noBuyBtn = findViewById(R.id.noAvatarBuy);
         ex1 = findViewById(R.id.example1);
         ex2 = findViewById(R.id.example2);
         ex3 = findViewById(R.id.example3);
+        ptsView = findViewById(R.id.selectAvatarPts);
+    }
+
+    public void onButtonShowPopupWindowClick(View view, String avatarUrl, int cost) {
+        final WindowManager w = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        final Display d = w.getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        d.getMetrics(dm);
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_window, null);
+
+        int width = (int) (dm.widthPixels * 0.8);
+        int height = (int) (dm.heightPixels * 0.5);
+        Log.d("Width and height...", width + " : " + height);
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+
+        yesBuyBtn = popupView.findViewById(R.id.popupYesBtn);
+        noBuyBtn = popupView.findViewById(R.id.popupNoBtn);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        yesBuyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Click", "YES works");
+                unlockedAvatars.add(avatarUrl);
+                userDocRef.update("UnlockedAvatars", unlockedAvatars);
+                fitnessPts = fitnessPts - cost;
+                userDocRef.update("Points", fitnessPts);
+                ptsView.setText(String.valueOf(fitnessPts));
+                popupWindow.dismiss();
+            }
+        });
+
+        noBuyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Click", "NO works");
+                popupWindow.dismiss();
+            }
+        });
+//        popupView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                popupWindow.dismiss();
+//                return true;
+//            }
+//        });
     }
 }
