@@ -96,6 +96,7 @@ public class CreateAccount extends AppCompatActivity {
                             newUser.put("Password", enteredPassword);
                             newUser.put("Points", 0);
                             newUser.put("Score", 0);
+                            newUser.put("FitnessLvl"," ");
                             newUser.put("AvatarUrl", "dead.png");
                             List<String> listOfAvatars = new ArrayList<String>(){{
                                 add("dead.png");
@@ -133,9 +134,6 @@ public class CreateAccount extends AppCompatActivity {
                         }
                     }
                 });
-
-                Intent loginIntent = new Intent(CreateAccount.this, LoginActivity.class);
-                startActivity(loginIntent);
             }
         });
     }
