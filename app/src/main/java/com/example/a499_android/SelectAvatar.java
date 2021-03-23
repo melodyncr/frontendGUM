@@ -38,7 +38,7 @@ import java.util.List;
 public class SelectAvatar extends AppCompatActivity {
 
     public static final String TAG = "Select Avatar: ";
-    private PopupWindow confirmWindow;
+    private PopupWindow confirmTxt;
     private LayoutInflater layoutInflater;
     private ImageButton ex1, ex2, ex3;
     private Button backButton, yesBuyBtn, noBuyBtn;
@@ -201,7 +201,8 @@ public class SelectAvatar extends AppCompatActivity {
 
         yesBuyBtn = popupView.findViewById(R.id.popupYesBtn);
         noBuyBtn = popupView.findViewById(R.id.popupNoBtn);
-
+        confirmQuestion = popupView.findViewById(R.id.confirmText);
+        confirmQuestion.setText("Do you want to purchase this avatar for " + cost + "?");
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
@@ -211,12 +212,19 @@ public class SelectAvatar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("Click", "YES works");
-                unlockedAvatars.add(avatarUrl);
-                userDocRef.update("UnlockedAvatars", unlockedAvatars);
-                fitnessPts = fitnessPts - cost;
-                userDocRef.update("Points", fitnessPts);
-                ptsView.setText(String.valueOf(fitnessPts));
-                popupWindow.dismiss();
+                if (fitnessPts < cost) {
+                    Toast.makeText(SelectAvatar.this,
+                            "Not enough points to purchase",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    unlockedAvatars.add(avatarUrl);
+                    userDocRef.update("UnlockedAvatars", unlockedAvatars);
+                    fitnessPts = fitnessPts - cost;
+                    userDocRef.update("Points", fitnessPts);
+                    ptsView.setText(String.valueOf(fitnessPts));
+                    setImage(avatarUrl);
+                    popupWindow.dismiss();
+                }
             }
         });
 
