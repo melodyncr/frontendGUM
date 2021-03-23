@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static com.example.a499_android.DetermineQuestionType.weeklyQuestionsList;
@@ -168,6 +169,9 @@ public class SurveyMultiC extends AppCompatActivity {
                 }
                 i++;
             }
+            if(CreateAccount.first_survey){
+                determineScore(DetermineQuestionType.fitnessLevelScoreList.get(question_count), i);
+            }
             recordAnswer(i, getResponseList.get(question_count));
             return true;
         }
@@ -185,9 +189,6 @@ public class SurveyMultiC extends AppCompatActivity {
                 list.add(Integer.parseInt(substr));
             }
         }
-
-        Log.d(TAG,"Index  "+index);
-
             int value = list.get(index) +1;
             Log.d(TAG,"value  "+value);
             list.set(index,value);
@@ -196,11 +197,20 @@ public class SurveyMultiC extends AppCompatActivity {
                 newCount += list.get(j).toString() + ",";
             }
             getResponseList.set(question_count, newCount );
-            Log.d(TAG,"new count "+getResponseList.toString() + list.size());
-
     }
-
-
-
-
+    void determineScore(String score_str, int index){
+        int last_comma = 0;
+        String substr = "";
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < score_str.length(); i++) {
+            if (score_str.charAt(i) == ',') {
+                substr = score_str.substring(last_comma, i);
+                last_comma = i + 1;
+                list.add(Integer.parseInt(substr));
+            }
+        }
+        int temp_score = list.get(index);
+        DetermineQuestionType.survey_score = DetermineQuestionType.survey_score + temp_score;
+        Log.d(TAG, ""+ DetermineQuestionType.survey_score + " right now...");
+    }
 }

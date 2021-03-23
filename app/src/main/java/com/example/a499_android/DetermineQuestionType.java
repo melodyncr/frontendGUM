@@ -28,14 +28,19 @@ public class DetermineQuestionType extends AppCompatActivity {
     public static String SURVEY_COUNT = "";
     public static String SURVEY_Q = "";
     public static String SURVEY_QC = "";
+    public static String F_SURVEY_SCORE =" ";
+    public static String F_SURVEY_LEVEL = " ";
     DocumentReference surveyQuestions;
     DocumentReference surveyTotal;
     public static ArrayList<String> weeklyQuestionsList  = new ArrayList<>();
     public static ArrayList<String> choicesList = new ArrayList<>();
     public static ArrayList<String> responseList = new ArrayList<>();
     public static ArrayList<String> getResponseList = new ArrayList<>();
-    public static  int question_count = 0;
-    public static  int response_count=0;
+    public static ArrayList<String> fitnessLevelScoreList = new ArrayList<>();
+    public static ArrayList<String> levelList = new ArrayList<>();
+    public static int survey_score = 0;
+    public static int question_count = 0;
+    public static int response_count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,8 @@ public class DetermineQuestionType extends AppCompatActivity {
             SURVEY_COUNT = CreateAccount.F_SURVEY_COUNT;
             SURVEY_Q = CreateAccount.F_SURVEY_Q;
             SURVEY_QC = CreateAccount.F_SURVEY_QC;
+            F_SURVEY_SCORE = "f_survey_score";
+            F_SURVEY_LEVEL = "f_survey_level";
         }else{
             //second survey
             SURVEYQ = LandingPage.WSURVEYQ;
@@ -102,16 +109,17 @@ public class DetermineQuestionType extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                         Map<String, Object> data = document.getData();
                         Iterator it = data.entrySet().iterator();
                         while (it.hasNext()) {
                             Map.Entry pair = (Map.Entry)it.next();
                             if(pair.getKey().toString().equals(SURVEY_Q)){ weeklyQuestionsList = (ArrayList<String>) document.get(SURVEY_Q); }
                             if(pair.getKey().toString().equals(SURVEY_QC)){ choicesList = (ArrayList<String>) document.get(SURVEY_QC); }
+                            if(pair.getKey().toString().equals(F_SURVEY_SCORE)){ fitnessLevelScoreList = (ArrayList<String>) document.get(F_SURVEY_SCORE); }
+                            if(pair.getKey().toString().equals(F_SURVEY_LEVEL)){ levelList = (ArrayList<String>) document.get(F_SURVEY_LEVEL); }
                             it.remove(); // avoids a ConcurrentModificationException
                         }
-                        Log.d(TAG, weeklyQuestionsList.toString() + "\n" + choicesList.toString());
+                        Log.d(TAG, fitnessLevelScoreList.toString() + "\n" + choicesList.toString() + "\n"+ fitnessLevelScoreList.toString() + levelList.toString());
                         boolean multiChoiceQ = determineQuestion(weeklyQuestionsList.get(0).charAt(0));
                         Intent intent;
                         if(multiChoiceQ){

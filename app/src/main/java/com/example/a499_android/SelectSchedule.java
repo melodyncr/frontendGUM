@@ -45,7 +45,7 @@ public class SelectSchedule extends AppCompatActivity {
         btnUpdateSchedule= findViewById(R.id.confirmSchedule);
 
 
-        DocumentReference docRef = db.collection("Users").document("raul_676");
+        DocumentReference docRef = db.collection("Users").document(UploadSurvey.F_S_USERNAME);
 
         // Will upload/update schedule when
         btnUpdateSchedule.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +57,9 @@ public class SelectSchedule extends AppCompatActivity {
                     Object schedule_obj = new_schedule;
                     docRef.update("Schedule", schedule_obj );
 
-                    Toast.makeText(SelectSchedule.this, "Schedule is  Updated!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SelectSchedule.this, "Schedule is  Updated! Now please login!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SelectSchedule.this, LoginActivity.class);
+                    startActivity(intent);
                 }else{
                     Toast.makeText(SelectSchedule.this, "Schedule is not full", Toast.LENGTH_SHORT).show();
                 }
