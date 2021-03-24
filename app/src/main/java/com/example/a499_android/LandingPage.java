@@ -1,7 +1,12 @@
 package com.example.a499_android;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +25,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.Map;
+
 import static com.example.a499_android.LoginActivity.loggedUserName;
 
 public class LandingPage extends AppCompatActivity {
@@ -32,7 +42,8 @@ public class LandingPage extends AppCompatActivity {
     public static final String W_SURVEY_COUNT = "w_survey_count";
     public static final String W_SURVEY_Q = "w_survey_q";
     public static final String W_SURVEY_QC = "w_survey_qc";
-
+    public ArrayList<String> workoutList = new ArrayList<>();
+    DocumentReference docRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +65,7 @@ public class LandingPage extends AppCompatActivity {
 
         //This originally used currentUserName
         DocumentReference userNameRef = db.collection("Users").document(uName);
+        docRef = db.collection("Users").document(uName);
 
         // Read User Info
         getUserInfo(new FirestoreCallback() {
@@ -135,6 +147,17 @@ public class LandingPage extends AppCompatActivity {
                         Log.d(TAG, currentUserName.getId() + " username");
                         loggedUserName = currentUserName.getId();
                         CreateAccount.first_survey = false;
+
+                        Map<String, Object> data = document.getData();// map to get workoutlist data
+                        Iterator it = data.entrySet().iterator();
+                        while (it.hasNext()) {
+                            Map.Entry pair = (Map.Entry)it.next();
+                            Log.d(TAG, pair.getKey() + " = " + pair.getValue());
+                            if(pair.getKey().toString().equals("Schedule")){ workoutList = (ArrayList<String>) document.get("Schedule"); }
+                            it.remove(); // avoids a ConcurrentModificationException
+                        }
+                        setNotifications(workoutList);
+                        Log.d(TAG, "workout list: " + workoutList.toString());
                     }
                 } else {
                     Log.d(TAG, "ERROR: ", task.getException());
@@ -145,6 +168,117 @@ public class LandingPage extends AppCompatActivity {
 
     private interface FirestoreCallback {
         void onSuccess(DocumentSnapshot document);
+    }
+
+    void setNotifications(ArrayList<String> list){
+        Calendar calendar = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+        Calendar calendar3 = Calendar.getInstance();
+        Calendar calendar4 = Calendar.getInstance();
+        Calendar calendar5 = Calendar.getInstance();
+        Calendar calendar6 = Calendar.getInstance();
+
+        Log.d(TAG,list.get(0) + " time 1");
+
+        int h1,h2,h3,h4,h5,h6;
+        int min1,min2,min3,min4,min5,min6;
+        //set all hours and minutes convert them to military time
+        h1= setHourOrMin(list.get(0),true);
+        h2= setHourOrMin(list.get(1),true);
+        h3= setHourOrMin(list.get(2),true);
+        h4= setHourOrMin(list.get(3),true);
+        h5= setHourOrMin(list.get(4),true);
+        h6= setHourOrMin(list.get(5),true);
+        min1 = setHourOrMin(list.get(0), false);
+        min2 = setHourOrMin(list.get(1), false);
+        min3 = setHourOrMin(list.get(2), false);
+        min4 = setHourOrMin(list.get(3), false);
+        min5 = setHourOrMin(list.get(4), false);
+        min6 = setHourOrMin(list.get(5), false);
+
+        calendar.set(Calendar.HOUR_OF_DAY,h1);
+        calendar.set(Calendar.MINUTE,min1);
+
+        calendar2.set(Calendar.HOUR_OF_DAY,h2);
+        calendar2.set(Calendar.MINUTE,min2);
+
+        calendar3.set(Calendar.HOUR_OF_DAY,h3);
+        calendar3.set(Calendar.MINUTE,min3);
+
+        calendar4.set(Calendar.HOUR_OF_DAY,h4);
+        calendar4.set(Calendar.MINUTE,min4);
+
+        calendar5.set(Calendar.HOUR_OF_DAY,h5);
+        calendar5.set(Calendar.MINUTE,min5);
+
+        calendar6.set(Calendar.HOUR_OF_DAY,h6);
+        calendar6.set(Calendar.MINUTE,min6);
+
+
+        Log.d(TAG, "Time 1 and 2......" + calendar.getTime()  + calendar2.getTime());
+        Log.d(TAG, "Time 3 and 4......" + calendar3.getTime()  + calendar4.getTime());
+        Log.d(TAG, "Time 5 and 6......" + calendar5.getTime()  + calendar6.getTime());
+
+        Intent intent = new Intent(LandingPage.this, NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(LandingPage.this, 100,intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,pendingIntent);
+
+        Intent intent2 = new Intent(LandingPage.this, NotificationReceiver.class);
+        PendingIntent pendingIntent2 = PendingIntent.getBroadcast(LandingPage.this, 200,intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager2 = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager2.setRepeating(AlarmManager.RTC_WAKEUP,calendar2.getTimeInMillis(),alarmManager2.INTERVAL_DAY,pendingIntent2);
+
+        Intent intent3 = new Intent(LandingPage.this, NotificationReceiver.class);
+        PendingIntent pendingIntent3 = PendingIntent.getBroadcast(LandingPage.this, 300,intent3, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager3 = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager3.setRepeating(AlarmManager.RTC_WAKEUP,calendar3.getTimeInMillis(),alarmManager3.INTERVAL_DAY,pendingIntent3);
+
+        Intent intent4 = new Intent(LandingPage.this, NotificationReceiver.class);
+        PendingIntent pendingIntent4 = PendingIntent.getBroadcast(LandingPage.this, 400,intent4, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager4 = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager4.setRepeating(AlarmManager.RTC_WAKEUP,calendar4.getTimeInMillis(),alarmManager4.INTERVAL_DAY,pendingIntent4);
+
+        Intent intent5 = new Intent(LandingPage.this, NotificationReceiver.class);
+        PendingIntent pendingIntent5 = PendingIntent.getBroadcast(LandingPage.this, 500,intent5, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager5 = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager5.setRepeating(AlarmManager.RTC_WAKEUP,calendar5.getTimeInMillis(),alarmManager5.INTERVAL_DAY,pendingIntent5);
+
+        Intent intent6 = new Intent(LandingPage.this, NotificationReceiver.class);
+        PendingIntent pendingIntent6 = PendingIntent.getBroadcast(LandingPage.this, 600,intent6, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager6 = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager6.setRepeating(AlarmManager.RTC_WAKEUP,calendar6.getTimeInMillis(),alarmManager6.INTERVAL_DAY,pendingIntent6);
+    }
+    int setHourOrMin(String time_str, boolean hour_or_min){
+        int time;
+        int start = time_str.length()-2;
+        String am_or_pm = time_str.substring(start);
+        if(hour_or_min){//this is an hour
+            if(time_str.charAt(1) == ':'){
+                time = Integer.parseInt(time_str.substring(0,1));
+            }else{
+                time = Integer.parseInt(time_str.substring(0,2));
+            }
+            if(am_or_pm.equals("PM") && time != 12){
+                time = time + 12;
+            }
+            if (am_or_pm.equals("AM") && time == 12) {
+                time = time - 12;
+            }
+        }else{
+            if(time_str.charAt(1) == ':'){
+                time = Integer.parseInt(time_str.substring(2,4));
+            }else{
+                time = Integer.parseInt(time_str.substring(3,5));
+            }
+        }
+        return time;
     }
 
 }

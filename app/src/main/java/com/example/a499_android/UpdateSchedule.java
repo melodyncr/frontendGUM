@@ -36,7 +36,7 @@ public class UpdateSchedule extends AppCompatActivity {
         setContentView(R.layout.activity_update_schedule);
         setButtons();
 
-        DocumentReference docRef = db.collection("Users").document("raul_676");
+        DocumentReference docRef = db.collection("Users").document(LoginActivity.loggedUserName);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
