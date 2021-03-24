@@ -193,7 +193,7 @@ public class LandingPage extends AppCompatActivity {
         Calendar calendar5 = Calendar.getInstance();
         Calendar calendar6 = Calendar.getInstance();
 
-        Log.d(TAG,list.get(0) + " time 1");
+        //Log.d(TAG,list.get(0) + " time 1");
 
         int h1,h2,h3,h4,h5,h6;
         int min1,min2,min3,min4,min5,min6;
