@@ -43,6 +43,10 @@ public class LandingPage extends AppCompatActivity {
         Button changeAvatar = findViewById(R.id.changeAvatarBtn);
         Button logoutUser = findViewById(R.id.logoutBtn);
         Button startSurveyBtn = findViewById(R.id.startSurveyBtn);
+
+        // Start Exercise
+        Button startExerciseBtn = findViewById(R.id.startActivityBtn);
+
         TextView displayedPoints = findViewById(R.id.pointDisplay);
         TextView displayedUsername = findViewById(R.id.usernameDisplay);
 
@@ -103,6 +107,17 @@ public class LandingPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Start Activity
+        startExerciseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(LandingPage.this, StartExercise.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     // Intent Factory
