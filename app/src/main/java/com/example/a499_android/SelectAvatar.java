@@ -51,12 +51,12 @@ public class SelectAvatar extends AppCompatActivity {
     List<String> unlockedAvatars;
     private long fitnessPts; // fitness points
     DocumentReference userDocRef;
-
+    ActionBar actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_avatar);
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setTitle("Select Avatar");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -231,6 +231,7 @@ public class SelectAvatar extends AppCompatActivity {
                     fitnessPts = fitnessPts - cost;
                     userDocRef.update("Points", fitnessPts);
                     ptsView.setText(String.valueOf(fitnessPts));
+                    actionBar.setSubtitle("FP: " + String.valueOf(fitnessPts));
                     setImage(avatarUrl);
                     popupWindow.dismiss();
                 }
