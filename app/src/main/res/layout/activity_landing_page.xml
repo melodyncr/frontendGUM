@@ -29,7 +29,7 @@
         android:layout_height="75dp"
         android:layout_marginStart="66dp"
         android:layout_marginLeft="66dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="65dp"
         android:layout_marginRight="65dp"
         android:text="@string/change_avatar"
@@ -85,8 +85,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="409dp"
-        android:layout_height="125dp"
+        android:layout_width="455dp"
+        android:layout_height="156dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="53dp"
@@ -99,7 +99,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gum_" />
+        app:layout_constraintVertical_bias="0.694"
+        app:srcCompat="@drawable/gum_logo1" />
 
     <TextView
         android:id="@+id/textView"

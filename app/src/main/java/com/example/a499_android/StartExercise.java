@@ -49,7 +49,7 @@ public class StartExercise extends AppCompatActivity {
         timer.schedule(new TimerTask()  {
             @Override
             public void run()   {   // switch activity intent after timer expires
-                Intent intent = new Intent(StartExercise.this, LandingPage.class);
+                Intent intent = new Intent(StartExercise.this, FinishedExerciseActivity.class);
                 startActivity(intent);
                 finish();
             }
