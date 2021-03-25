@@ -44,7 +44,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="156dp"
         android:text="Points Earned: 10"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
