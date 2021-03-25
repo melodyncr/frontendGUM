@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--This is an example of a toolbar/menubar that I made,
+        Best BASIC tutorial here:
+        https://www.youtube.com/watch?v=T9S9rhFOxao
+    -->
+    <item android:title="Back"
+        android:id="@+id/back_btn"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_arrow_back_24px"
+        app:showAsAction="always"/>
+</menu>

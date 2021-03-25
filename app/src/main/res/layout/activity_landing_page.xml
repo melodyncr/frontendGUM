@@ -120,32 +120,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.555" />
 
-    <TextView
-        android:id="@+id/usernameDisplay"
-        android:layout_width="89dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginBottom="508dp"
-        android:gravity="center_horizontal"
-        android:text="@string/loading"
-        android:textAlignment="center"
-        android:textColor="#3F51B5"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView" />
+<!--    <TextView-->
+<!--        android:id="@+id/usernameDisplay"-->
+<!--        android:layout_width="89dp"-->
+<!--        android:layout_height="32dp"-->
+<!--        android:layout_marginStart="36dp"-->
+<!--        android:layout_marginLeft="36dp"-->
+<!--        android:layout_marginBottom="508dp"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:text="@string/loading"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="#3F51B5"-->
+<!--        android:textSize="18sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/textView" />-->
 
-    <Button
-        android:id="@+id/logoutBtn"
-        android:layout_width="85dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="488dp"
-        android:text="@string/logout"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/logoutBtn"-->
+<!--        android:layout_width="85dp"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginLeft="16dp"-->
+<!--        android:layout_marginBottom="488dp"-->
+<!--        android:text="@string/logout"-->
+<!--        android:textSize="12sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

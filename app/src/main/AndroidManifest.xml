@@ -16,7 +16,10 @@
         <activity android:name=".LandingPage" />
         <activity android:name=".AnimationTest" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".SelectAvatar" />
+        <activity android:name=".SelectAvatar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LandingPage" />
+        </activity>
         <activity android:name=".SurveyResponse"></activity>
         <activity android:name=".DetermineQuestionType"></activity>
         <activity android:name=".SurveyMultiC"></activity>

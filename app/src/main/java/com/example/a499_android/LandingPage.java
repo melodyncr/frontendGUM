@@ -9,12 +9,15 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a499_android.utility.SaveSharedPreference;
@@ -48,21 +51,22 @@ public class LandingPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Welcome...");
+//        actionBar.setDisplayShowTitleEnabled(false);
 
         Button editSchedule = findViewById(R.id.editScheduleBtn);
         Button changeAvatar = findViewById(R.id.changeAvatarBtn);
-        Button logoutUser = findViewById(R.id.logoutBtn);
+        //Button logoutUser = findViewById(R.id.logoutBtn);
         Button startSurveyBtn = findViewById(R.id.startSurveyBtn);
 
         // Start Exercise
         Button startExerciseBtn = findViewById(R.id.startActivityBtn);
 
         TextView displayedPoints = findViewById(R.id.pointDisplay);
-        TextView displayedUsername = findViewById(R.id.usernameDisplay);
+//        TextView displayedUsername = findViewById(R.id.usernameDisplay);
 
         // NOTE: user info read from db will be hardcoded until login activity is done
-        String currentUserName = LoginActivity.loggedUserName;
         String uName = SaveSharedPreference.getUserName(LandingPage.this);
         // Access a Cloud Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -79,7 +83,8 @@ public class LandingPage extends AppCompatActivity {
                     Log.d(TAG, "Found User Data");
                     Toast.makeText(LandingPage.this, "Successfully Found User Data", Toast.LENGTH_SHORT).show();
                     displayedPoints.setText(document.getData().get("Points").toString());
-                    displayedUsername.setText(uName);//This originally used currentUserName
+//                    displayedUsername.setText(uName);//This originally used currentUserName
+                    actionBar.setTitle("Welcome, " + uName);
                 } else {
                     Toast.makeText(LandingPage.this, "Unable to Load User Data", Toast.LENGTH_SHORT).show();
                 }
@@ -94,14 +99,14 @@ public class LandingPage extends AppCompatActivity {
             }
         });
 
-        logoutUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SaveSharedPreference.clearUserName(LandingPage.this); //clears preference of username and anything else in there
-                Intent toMainActivityIntent = new Intent(LandingPage.this, MainActivity.class);
-                startActivity(toMainActivityIntent);
-            }
-        });
+//        logoutUser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                SaveSharedPreference.clearUserName(LandingPage.this); //clears preference of username and anything else in there
+//                Intent toMainActivityIntent = new Intent(LandingPage.this, MainActivity.class);
+//                startActivity(toMainActivityIntent);
+//            }
+//        });
 
         changeAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -296,4 +301,21 @@ public class LandingPage extends AppCompatActivity {
         return time;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.landing_page, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout_item:
+                SaveSharedPreference.clearUserName(LandingPage.this); //clears preference of username and anything else in there
+                Intent toMainActivityIntent = new Intent(LandingPage.this, MainActivity.class);
+                startActivity(toMainActivityIntent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
