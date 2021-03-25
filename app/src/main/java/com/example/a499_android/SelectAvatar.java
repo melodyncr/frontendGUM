@@ -1,9 +1,11 @@
 package com.example.a499_android;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.savedstate.SavedStateRegistryOwner;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +14,8 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +27,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.a499_android.utility.SaveSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,11 +52,14 @@ public class SelectAvatar extends AppCompatActivity {
     private long fitnessPts; // fitness points
     DocumentReference userDocRef;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_avatar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Select Avatar");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         wiredUp();
 
         final WindowManager w = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
@@ -76,19 +84,20 @@ public class SelectAvatar extends AppCompatActivity {
                     fitnessPts = (long) document.getData().get("Points");
                     Log.d("Fitness Points", String.valueOf(fitnessPts));
                     ptsView.setText(String.valueOf(fitnessPts));
+                    actionBar.setSubtitle("FP: " + String.valueOf(fitnessPts));
                 } else {
                     Toast.makeText(SelectAvatar.this, "Unable to Load User Data", Toast.LENGTH_SHORT).show();
                 }
             }
         }, userDocRef);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent landingPageIntent = new Intent(SelectAvatar.this, LandingPage.class);
-                startActivity(landingPageIntent);
-            }
-        });
+//        backButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent landingPageIntent = new Intent(SelectAvatar.this, LandingPage.class);
+//                startActivity(landingPageIntent);
+//            }
+//        });
 
         /**
          * Options
@@ -175,7 +184,7 @@ public class SelectAvatar extends AppCompatActivity {
     }
 
     private void wiredUp() {
-        backButton = findViewById(R.id.backBtn);
+//        backButton = findViewById(R.id.backBtn);
         ex1 = findViewById(R.id.example1);
         ex2 = findViewById(R.id.example2);
         ex3 = findViewById(R.id.example3);
@@ -235,12 +244,25 @@ public class SelectAvatar extends AppCompatActivity {
                 popupWindow.dismiss();
             }
         });
-//        popupView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                popupWindow.dismiss();
-//                return true;
-//            }
-//        });
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.select_avatar, menu);
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
+
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//
+//        switch (item.getItemId()) {
+//            case R.id.back_btn:
+//                startActivity(new Intent(SelectAvatar.this, LandingPage.class));
+//                break;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 }
