@@ -103,7 +103,7 @@ public class SelectSchedule extends AppCompatActivity {
                     }
                     boolean add_time = validSchedule(mil_hour,minute,timesList_int);
                     if(!add_time){
-                        Toast.makeText(SelectSchedule.this, "This time is not an hour between all others!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SelectSchedule.this, "Times must be spaced out by at least 1 hour!", Toast.LENGTH_SHORT).show();
                     }else {
                         Log.d(TAG, "time inserted"+ mil_hour + ": " + minute );
                         timesList_int.put(mil_hour,minute);
@@ -147,41 +147,31 @@ public class SelectSchedule extends AppCompatActivity {
         list.remove(list.get(0));
         return list;
     }
+
     public boolean validSchedule(int hour, int minute, HashMap<Integer,Integer>list){
-        if(list.size() ==0){
+        if(list.size() == 0){
             return true;
-        }else{
-            int index = list.size()-1;
-            Object obj_hr = list.keySet().toArray()[index];
-            Object obj_min= list.values().toArray()[index];
-            int pre_hour = Integer.parseInt(obj_hr.toString());
-            int pre_min = Integer.parseInt(obj_min.toString());
-            Log.d(TAG, "Previous time"+ pre_hour + ": " + pre_min);
-            Log.d(TAG, "Current time"+ hour + ": " + minute );
-            int answer1 = hour-pre_hour;
-            int answer2= minute-pre_min;
-            Log.d(TAG, ""+ answer1 + " " + answer2 );
-            if(hour-pre_hour > 3){
-                return false;// over three hour gap between workouts
-            }else if(hour - pre_hour == 3){
-                if(minute - pre_min  <= 0) {
-                    return true;
-                }else{
-                    return false;
-                }
-            }else if(hour - pre_hour == 1){
-                if(minute - pre_min  <= 0) {
-                    return false;
-                }else{
-                    return true;
-                }
-            }
-            else if(hour-pre_hour <=0){
-                return false;// hours not in between schedule
-            }
         }
-        return true;
+        int index = list.size()-1;
+        Object obj_hr = list.keySet().toArray()[index];
+        Object obj_min= list.values().toArray()[index];
+        int pre_hour = Integer.parseInt(obj_hr.toString());
+        int pre_min = Integer.parseInt(obj_min.toString());
+
+        Log.d(TAG, "Previous time"+ pre_hour + ": " + pre_min);
+        Log.d(TAG, "Current time"+ hour + ": " + minute );
+
+        if(hour - pre_hour > 1){
+            return true;
+        }else if(hour - pre_hour == 1){
+            if(minute - pre_min < 0) {
+                return false;
+                } else {
+                    return true;
+                }
+        }else{ return false; }
     }
+
     // Intent Factory
     public static Intent getIntent(Context context, String val){
         Intent intent = new Intent(context, SelectSchedule.class);
