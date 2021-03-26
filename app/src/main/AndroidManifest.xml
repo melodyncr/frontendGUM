@@ -26,6 +26,7 @@
         <activity android:name=".SurveyMultiC"></activity>
         <activity android:name=".UploadSurvey"></activity>
         <receiver android:name=".NotificationReceiver"/>
+        <activity android:name=".SelectWorkout"></activity>
 
 
         <activity android:name=".MainActivity">
