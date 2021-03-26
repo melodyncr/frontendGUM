@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="easy_workouts">
+        <item>bouncing</item>
+        <item>counter_swing</item>
+        <item>swaying</item>
+        <item>praise_sun</item>
+    </string-array>
+</resources>

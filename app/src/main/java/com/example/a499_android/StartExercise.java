@@ -30,7 +30,8 @@ public class StartExercise extends AppCompatActivity {
         videoView = findViewById(R.id.scalableVideoView);
         // video files will later follow this naming format: "avatarName_workoutName.mp4"
         // create string based off of current avatar and selected workout
-        String videoName = "counter_swing"; // do not include file extension in name
+//        String videoName = "counter_swing"; // do not include file extension in name
+        String videoName = SelectWorkout.selectedWorkout; // do not include file extension in name
 
         Context mContext = getApplicationContext();
         int videoResId = mContext.getResources().getIdentifier(videoName, "raw", mContext.getPackageName());  // retrieve the resource id number for a video located in the raw directory
