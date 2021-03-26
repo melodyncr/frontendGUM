@@ -130,7 +130,7 @@ public class LandingPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(LandingPage.this, StartExercise.class);
+                Intent intent = new Intent(LandingPage.this, SelectWorkout.class);
                 startActivity(intent);
             }
         });

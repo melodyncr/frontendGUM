@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="medium_workouts">
+        <item>medium bouncing</item>
+        <item>medium_swinging</item>
+    </string-array>
+</resources>
