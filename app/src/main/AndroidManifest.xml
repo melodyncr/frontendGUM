@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.a499_android">
-<uses-permission android:name="android.permission.SET_ALARM"/>
+
+    <uses-permission android:name="android.permission.SET_ALARM" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,26 +11,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.499_android">
-        <activity android:name=".StartExercise"></activity>
+        <activity android:name=".ViewResponses">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
+        <activity android:name=".Tidbits">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
+        <activity android:name=".AdminLanding">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LandingPage" />
+        </activity>
+        <activity android:name=".StartExercise" />
         <activity android:name=".CreateAccount" />
         <activity android:name=".SelectSchedule" />
         <activity android:name=".UpdateSchedule" />
         <activity android:name=".LandingPage" />
-        <activity android:name=".AnimationTest" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".FinishedExerciseActivity" />
         <activity android:name=".SelectAvatar">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LandingPage" />
         </activity>
-        <activity android:name=".SurveyResponse"></activity>
-        <activity android:name=".DetermineQuestionType"></activity>
-        <activity android:name=".SurveyMultiC"></activity>
-        <activity android:name=".UploadSurvey"></activity>
-        <receiver android:name=".NotificationReceiver"/>
-        <activity android:name=".SelectWorkout"></activity>
+        <activity android:name=".SurveyResponse" />
+        <activity android:name=".DetermineQuestionType" />
+        <activity android:name=".SurveyMultiC" />
+        <activity android:name=".UploadSurvey" />
 
+        <receiver android:name=".NotificationReceiver" />
 
+        <activity android:name=".SelectWorkout" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -47,6 +47,10 @@ public class LandingPage extends AppCompatActivity {
     public static final String W_SURVEY_QC = "w_survey_qc";
     public ArrayList<String> workoutList = new ArrayList<>();
     DocumentReference docRef;
+    private boolean isAdmin = false;
+
+    MenuItem toAdmin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +58,6 @@ public class LandingPage extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Welcome...");
 //        actionBar.setDisplayShowTitleEnabled(false);
-
         Button editSchedule = findViewById(R.id.editScheduleBtn);
         Button changeAvatar = findViewById(R.id.changeAvatarBtn);
         //Button logoutUser = findViewById(R.id.logoutBtn);
@@ -83,8 +86,11 @@ public class LandingPage extends AppCompatActivity {
                     Log.d(TAG, "Found User Data");
                     Toast.makeText(LandingPage.this, "Successfully Found User Data", Toast.LENGTH_SHORT).show();
                     displayedPoints.setText(document.getData().get("Points").toString());
-//                    displayedUsername.setText(uName);//This originally used currentUserName
                     actionBar.setTitle("Welcome, " + uName);
+                    if (document.getData().get("IsAdmin") == null) {
+                        isAdmin = true;
+                        invalidateOptionsMenu();
+                    }
                 } else {
                     Toast.makeText(LandingPage.this, "Unable to Load User Data", Toast.LENGTH_SHORT).show();
                 }
@@ -98,15 +104,6 @@ public class LandingPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-//        logoutUser.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                SaveSharedPreference.clearUserName(LandingPage.this); //clears preference of username and anything else in there
-//                Intent toMainActivityIntent = new Intent(LandingPage.this, MainActivity.class);
-//                startActivity(toMainActivityIntent);
-//            }
-//        });
 
         changeAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,11 +144,6 @@ public class LandingPage extends AppCompatActivity {
     //maybe retrieve schedule and pass it through intent first
     public void startEditScheduleActivity(View view){
         Intent intent = SelectSchedule.getIntent(this, "");
-        startActivity(intent);
-    }
-
-    public void startAnimationTestActivity(View view){
-        Intent intent = AnimationTest.getIntent(this, "");
         startActivity(intent);
     }
 
@@ -302,8 +294,27 @@ public class LandingPage extends AppCompatActivity {
     }
 
     @Override
+    public void invalidateOptionsMenu() {
+        super.invalidateOptionsMenu();
+    }
+
+    /**
+     * The isAdmin if block is weird...
+     * @param menu
+     * @return
+     */
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.landing_page, menu);
+
+        if (isAdmin) {
+            menu.findItem(R.id.to_admin).setVisible(false);
+        } else {
+            menu.findItem(R.id.to_admin).setVisible(true);
+        }
+        invalidateOptionsMenu();
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -314,8 +325,13 @@ public class LandingPage extends AppCompatActivity {
                 SaveSharedPreference.clearUserName(LandingPage.this); //clears preference of username and anything else in there
                 Intent toMainActivityIntent = new Intent(LandingPage.this, MainActivity.class);
                 startActivity(toMainActivityIntent);
+                break;
+            case R.id.to_admin:
+                startActivity(new Intent(LandingPage.this, AdminLanding.class));
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 }
