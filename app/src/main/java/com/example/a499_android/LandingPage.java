@@ -47,6 +47,10 @@ public class LandingPage extends AppCompatActivity {
     public static final String W_SURVEY_QC = "w_survey_qc";
     public ArrayList<String> workoutList = new ArrayList<>();
     DocumentReference docRef;
+    private boolean isAdmin = false;
+
+    MenuItem toAdmin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +58,6 @@ public class LandingPage extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Welcome...");
 //        actionBar.setDisplayShowTitleEnabled(false);
-
         Button editSchedule = findViewById(R.id.editScheduleBtn);
         Button changeAvatar = findViewById(R.id.changeAvatarBtn);
         //Button logoutUser = findViewById(R.id.logoutBtn);
@@ -83,8 +86,11 @@ public class LandingPage extends AppCompatActivity {
                     Log.d(TAG, "Found User Data");
                     Toast.makeText(LandingPage.this, "Successfully Found User Data", Toast.LENGTH_SHORT).show();
                     displayedPoints.setText(document.getData().get("Points").toString());
-//                    displayedUsername.setText(uName);//This originally used currentUserName
                     actionBar.setTitle("Welcome, " + uName);
+                    if (document.getData().get("IsAdmin") == null) {
+                        isAdmin = true;
+                        invalidateOptionsMenu();
+                    }
                 } else {
                     Toast.makeText(LandingPage.this, "Unable to Load User Data", Toast.LENGTH_SHORT).show();
                 }
@@ -293,8 +299,27 @@ public class LandingPage extends AppCompatActivity {
     }
 
     @Override
+    public void invalidateOptionsMenu() {
+        super.invalidateOptionsMenu();
+    }
+
+    /**
+     * The isAdmin if block is weird...
+     * @param menu
+     * @return
+     */
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.landing_page, menu);
+
+        if (isAdmin) {
+            menu.findItem(R.id.to_admin).setVisible(false);
+        } else {
+            menu.findItem(R.id.to_admin).setVisible(true);
+        }
+        invalidateOptionsMenu();
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -313,4 +338,5 @@ public class LandingPage extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
