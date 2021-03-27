@@ -147,11 +147,6 @@ public class LandingPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void startAnimationTestActivity(View view){
-        Intent intent = AnimationTest.getIntent(this, "");
-        startActivity(intent);
-    }
-
     private void getUserInfo(FirestoreCallback firestoreCallback, DocumentReference currentUserName) {
         currentUserName.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
