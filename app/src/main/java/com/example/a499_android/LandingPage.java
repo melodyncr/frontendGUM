@@ -99,15 +99,6 @@ public class LandingPage extends AppCompatActivity {
             }
         });
 
-//        logoutUser.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                SaveSharedPreference.clearUserName(LandingPage.this); //clears preference of username and anything else in there
-//                Intent toMainActivityIntent = new Intent(LandingPage.this, MainActivity.class);
-//                startActivity(toMainActivityIntent);
-//            }
-//        });
-
         changeAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -314,6 +305,10 @@ public class LandingPage extends AppCompatActivity {
                 SaveSharedPreference.clearUserName(LandingPage.this); //clears preference of username and anything else in there
                 Intent toMainActivityIntent = new Intent(LandingPage.this, MainActivity.class);
                 startActivity(toMainActivityIntent);
+                break;
+            case R.id.to_admin:
+                startActivity(new Intent(LandingPage.this, AdminLanding.class));
+                break;
         }
 
         return super.onOptionsItemSelected(item);
