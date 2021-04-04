@@ -20,7 +20,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         Intent repeating_intent = new Intent(context, LandingPage.class);
         repeating_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        Log.d(TAG, "starting receiver..");
+        //Log.d(TAG, "starting receiver..");
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context,100,repeating_intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -37,7 +37,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         Intent repeating_intent2 = new Intent(context, LandingPage.class);
         repeating_intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//>?
-        Log.d(TAG, "starting receiver..");
+        //Log.d(TAG, "starting receiver..");
 
         PendingIntent pendingIntent2 = PendingIntent.getActivity(context,200,repeating_intent2,PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -54,7 +54,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         Intent repeating_intent3 = new Intent(context, LandingPage.class);
         repeating_intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//>?
-        Log.d(TAG, "starting receiver..");
+        //Log.d(TAG, "starting receiver..");
 
         PendingIntent pendingIntent3 = PendingIntent.getActivity(context,300,repeating_intent3,PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -71,7 +71,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         Intent repeating_intent4 = new Intent(context, LandingPage.class);
         repeating_intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//>?
-        Log.d(TAG, "starting receiver..");
+        //Log.d(TAG, "starting receiver..");
 
         PendingIntent pendingIntent4 = PendingIntent.getActivity(context,400,repeating_intent4,PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -88,7 +88,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         Intent repeating_intent5 = new Intent(context, LandingPage.class);
         repeating_intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//>?
-        Log.d(TAG, "starting receiver..");
+        //Log.d(TAG, "starting receiver..");
 
         PendingIntent pendingIntent5 = PendingIntent.getActivity(context,500,repeating_intent5,PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -105,7 +105,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         Intent repeating_intent6 = new Intent(context, LandingPage.class);
         repeating_intent6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//>?
-        Log.d(TAG, "starting receiver..");
+        //Log.d(TAG, "starting receiver..");
 
         PendingIntent pendingIntent6 = PendingIntent.getActivity(context,600,repeating_intent2,PendingIntent.FLAG_UPDATE_CURRENT);
 

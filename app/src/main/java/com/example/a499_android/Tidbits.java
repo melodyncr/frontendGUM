@@ -3,12 +3,15 @@ package com.example.a499_android;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.a499_android.utility.TidbitsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -26,6 +29,7 @@ public class Tidbits extends AppCompatActivity {
     ActionBar actionBar;
     CollectionReference tidbits;
     List<String> tidBitsList;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +41,17 @@ public class Tidbits extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         tidbits = db.collection("Tidbits");
 
+        recyclerView = findViewById(R.id.tidbitsView);
+
         getTidbits(new FirestoreCallback() {
             @Override
             public void onSuccess(List<String> tidbits) {
                 if(tidbits.size() >= 0) {
                     tidBitsList = tidbits;
                     Log.d("In onCreate, ", String.valueOf(tidBitsList));
+                    TidbitsAdapter tidbitsAdapter = new TidbitsAdapter(Tidbits.this, tidBitsList);
+                    recyclerView.setAdapter(tidbitsAdapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(Tidbits.this));
                 } else {
                     Log.d(TAG, "Something happened!");
                 }
@@ -89,4 +98,6 @@ public class Tidbits extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
