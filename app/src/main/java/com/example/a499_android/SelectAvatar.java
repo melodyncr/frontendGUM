@@ -1,33 +1,23 @@
 package com.example.a499_android;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.savedstate.SavedStateRegistryOwner;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a499_android.utility.SaveSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -66,9 +56,6 @@ public class SelectAvatar extends AppCompatActivity {
         final Display d = w.getDefaultDisplay();
         DisplayMetrics dm = new DisplayMetrics();
         d.getMetrics(dm);
-
-        int phoneWidth = RelativeLayout.LayoutParams.MATCH_PARENT;
-        int phoneHeight = RelativeLayout.LayoutParams.MATCH_PARENT;
 
         String username = SaveSharedPreference.getUserName(SelectAvatar.this);
         // Access a Cloud Firestore instance
@@ -246,24 +233,4 @@ public class SelectAvatar extends AppCompatActivity {
             }
         });
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        getMenuInflater().inflate(R.menu.select_avatar, menu);
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//
-//        switch (item.getItemId()) {
-//            case R.id.back_btn:
-//                startActivity(new Intent(SelectAvatar.this, LandingPage.class));
-//                break;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }
