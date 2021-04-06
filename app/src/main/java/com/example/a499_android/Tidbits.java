@@ -11,11 +11,15 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.PopupWindow;
 
 import com.example.a499_android.utility.TidbitsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,6 +40,8 @@ public class Tidbits extends AppCompatActivity {
     CollectionReference tidbits;
     List<String> tidBitsList;
     RecyclerView recyclerView;
+    EditText newTidtbit;
+    Button addNewTidbitBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +120,18 @@ public class Tidbits extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater)
                 getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.tidbits_popup, null);
+        View layout = getLayoutInflater().inflate(R.layout.tidbits_popup, null);
+        int width = (int) (dm.widthPixels * 0.8);
+        int height = (int) (dm.heightPixels * 0.5);
+        Log.d("Width and height...", width + " : " + height);
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        newTidtbit = popupView.findViewById(R.id.newTidbitText);
+        addNewTidbitBtn = popupView.findViewById(R.id.addNewTidbitBtn);
+
+        popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
+
 
     }
 }

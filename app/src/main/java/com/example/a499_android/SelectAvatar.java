@@ -171,7 +171,6 @@ public class SelectAvatar extends AppCompatActivity {
     }
 
     private void wiredUp() {
-//        backButton = findViewById(R.id.backBtn);
         ex1 = findViewById(R.id.example1);
         ex2 = findViewById(R.id.example2);
         ex3 = findViewById(R.id.example3);
