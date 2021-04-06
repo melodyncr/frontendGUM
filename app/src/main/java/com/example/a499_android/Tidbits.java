@@ -6,10 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
 
 import com.example.a499_android.utility.TidbitsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -93,11 +99,21 @@ public class Tidbits extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_tidbit:
+                onButtonShowPopupWindowClick();
                 Log.d("Add Tidbit", "Clicked");
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    public void onButtonShowPopupWindowClick() {
+        final WindowManager w = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        final Display d = w.getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        d.getMetrics(dm);
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.tidbits_popup, null);
 
+    }
 }
