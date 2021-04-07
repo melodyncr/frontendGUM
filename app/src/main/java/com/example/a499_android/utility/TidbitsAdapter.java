@@ -1,7 +1,6 @@
 package com.example.a499_android.utility;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a499_android.R;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class TidbitsAdapter extends RecyclerView.Adapter<TidbitsAdapter.MyViewHolder> {
 
     List<String> listOfTidbits;
+    List<String> listOfTidbitsIds;
     Context context;
 
-    public TidbitsAdapter(Context ct, List<String> tidbitsList) {
+    public TidbitsAdapter(Context ct, List<String> tidbitsIds,List<String> tidbitsList) {
         context = ct;
         listOfTidbits = tidbitsList;
+        listOfTidbitsIds = tidbitsIds;
     }
 
     @NonNull
@@ -37,6 +36,7 @@ public class TidbitsAdapter extends RecyclerView.Adapter<TidbitsAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.tidbitId.setText(listOfTidbitsIds.get(position));
         holder.tidbit.setText(listOfTidbits.get(position));
     }
 
@@ -49,10 +49,11 @@ public class TidbitsAdapter extends RecyclerView.Adapter<TidbitsAdapter.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tidbit;
-
+        TextView tidbitId;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tidbit = itemView.findViewById(R.id.tidbitsText);
+            tidbit = itemView.findViewById(R.id.tidbitText);
+            tidbitId = itemView.findViewById(R.id.tidbitId);
         }
     }
 }
