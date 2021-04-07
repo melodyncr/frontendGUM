@@ -20,9 +20,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.example.a499_android.utility.TidbitsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,7 +33,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Tidbits extends AppCompatActivity {
 
@@ -39,6 +45,7 @@ public class Tidbits extends AppCompatActivity {
     ActionBar actionBar;
     CollectionReference tidbits;
     List<String> tidBitsList;
+    List<String> tidbitsIdList;
     RecyclerView recyclerView;
     EditText newTidtbit;
     Button addNewTidbitBtn;
@@ -57,11 +64,13 @@ public class Tidbits extends AppCompatActivity {
 
         getTidbits(new FirestoreCallback() {
             @Override
-            public void onSuccess(List<String> tidbits) {
+            public void onSuccess(List<String> tbIds, List<String> tidbits) {
                 if(tidbits.size() >= 0) {
                     tidBitsList = tidbits;
-                    Log.d("In onCreate, ", String.valueOf(tidBitsList));
-                    TidbitsAdapter tidbitsAdapter = new TidbitsAdapter(Tidbits.this, tidBitsList);
+                    tidbitsIdList = tbIds;
+                    Log.d("In onCreate, IDs: ", String.valueOf(tidbitsIdList));
+                    Log.d("In onCreate, Values: ", String.valueOf(tidBitsList));
+                    TidbitsAdapter tidbitsAdapter = new TidbitsAdapter(Tidbits.this, tidbitsIdList, tidBitsList);
                     recyclerView.setAdapter(tidbitsAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(Tidbits.this));
                 } else {
@@ -72,17 +81,18 @@ public class Tidbits extends AppCompatActivity {
     }
 
     private void getTidbits(FirestoreCallback firestoreCallback) {
-
         tidbits.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 List<String> listOfTidbits = new ArrayList<String>();
+                List<String> listOfIds = new ArrayList<String>();
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String tidbitVal = document.getString("Tidbit");
+                        listOfIds.add(document.getId());
                         listOfTidbits.add(tidbitVal);
                     }
-                    firestoreCallback.onSuccess(listOfTidbits);
+                    firestoreCallback.onSuccess(listOfIds, listOfTidbits);
                 } else {
                     Log.d(TAG, "=====================");
                 }
@@ -91,7 +101,7 @@ public class Tidbits extends AppCompatActivity {
     }
 
     private interface FirestoreCallback {
-        void onSuccess(List<String> tidbits);
+        void onSuccess(List<String> tidbits, List<String> tbIdList);
     }
 
     @Override
@@ -121,8 +131,8 @@ public class Tidbits extends AppCompatActivity {
                 getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.tidbits_popup, null);
         View layout = getLayoutInflater().inflate(R.layout.tidbits_popup, null);
-        int width = (int) (dm.widthPixels * 0.8);
-        int height = (int) (dm.heightPixels * 0.5);
+        int width = (int) (dm.widthPixels * 0.9);
+        int height = (int) (dm.heightPixels * 0.8);
         Log.d("Width and height...", width + " : " + height);
         boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
@@ -132,6 +142,48 @@ public class Tidbits extends AppCompatActivity {
 
         popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
 
+        addNewTidbitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String newTidbitTxt = newTidtbit.getText().toString();
 
+                if (newTidbitTxt.length() == 0) {
+                    Toast.makeText(Tidbits.this,
+                            "Please Enter a tidbit",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    String lastTidbitId = tidbitsIdList.get(tidbitsIdList.size() - 1);
+                    int newTidBitIdInteger = Integer.parseInt(lastTidbitId.substring(lastTidbitId.length() - 1)) + 1;
+                    String newTidbitId = "tidbit-" + String.valueOf(newTidBitIdInteger);
+                    Log.d("new tidbit", newTidbitId + ": " + newTidbitTxt);
+                    tidbitsIdList.add(newTidbitId);
+                    tidBitsList.add(newTidbitTxt);
+                    Map<String, String> newTidbit = new HashMap<>();
+                    newTidbit.put("Tidbit", newTidbitTxt);
+                    tidbits.document(newTidbitId).set(newTidbit).addOnSuccessListener(
+                            new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "Successfully added new Tidbit");
+                                    Toast.makeText(Tidbits.this,
+                                            "New Tidbit Added",
+                                            Toast.LENGTH_SHORT)
+                                            .show();
+                                    recyclerView.refreshDrawableState();
+                                    popupWindow.dismiss();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("Failure", e.getMessage());
+                            Toast.makeText(Tidbits.this,
+                                    "Uh Oh Something went wrong",
+                                    Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    });
+                }
+            }
+        });
     }
 }
