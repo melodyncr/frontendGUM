@@ -16,6 +16,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".AdminLanding" />
         </activity>
+        <activity android:name=".ViewResponseR">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
         <activity android:name=".Tidbits">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -26,6 +31,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LandingPage" />
         </activity>
+        <activity android:name=".GetResponseListQuery">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
+        <activity android:name=".SelectASurvey">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
+        <activity android:name=".LoadPreviousSurvey">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
+
         <activity android:name=".StartExercise" />
         <activity android:name=".CreateAccount" />
         <activity android:name=".SelectSchedule" />
@@ -42,7 +63,6 @@
         <activity android:name=".DetermineQuestionType" />
         <activity android:name=".SurveyMultiC" />
         <activity android:name=".UploadSurvey" />
-
         <receiver android:name=".NotificationReceiver" />
 
         <activity android:name=".SelectWorkout" />

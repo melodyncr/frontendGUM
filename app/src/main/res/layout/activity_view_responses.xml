@@ -1,9 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ViewResponses">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:paddingLeft="16dp"
+android:paddingTop="16dp"
+    android:paddingRight="16dp"
+android:paddingBottom="16dp"
+tools:context=".ViewResponses">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barchart"
+        android:layout_width="396dp"
+        android:layout_height="400dp" />
+
+    <Button
+        android:id="@+id/backBtnChart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/barchart"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="90dp"
+        android:text="Back" />
+
+    <Button
+        android:id="@+id/nextBtnChart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/barchart"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="90dp"
+        android:text="Next" />
+
+    <Button
+        android:id="@+id/question1Btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backBtnChart"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:text="A1" />
+
+    <Button
+        android:id="@+id/question2Btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backBtnChart"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="110dp"
+        android:text="A2" />
+    <Button
+        android:id="@+id/question3Btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backBtnChart"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="110dp"
+        android:text="A3" />
+
+    <Button
+        android:id="@+id/question4Btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backBtnChart"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text="A4" />
+
+
+
+
+    <TextView
+        android:id="@+id/textView1P"
+        android:text="Empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question1Btn"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/textView2P"
+        android:text="Empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question2Btn"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="120dp" />
+
+    <TextView
+        android:id="@+id/textView3P"
+        android:text="Empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question3Btn"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="120dp" />
+
+    <TextView
+        android:id="@+id/textView4P"
+        android:text="Empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question4Btn"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp" />
+
+
+</RelativeLayout>

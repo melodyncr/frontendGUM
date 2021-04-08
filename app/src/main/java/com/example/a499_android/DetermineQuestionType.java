@@ -25,7 +25,7 @@ public class DetermineQuestionType extends AppCompatActivity {
     public static String SURVEYQ = "";
     public static String SURVEYR = "";
     public static String T_TYPE_SURVEY = "";
-    public static String SURVEY_COUNT = "";
+    public static String SURVEY_COUNT = " ";
     public static String SURVEY_Q = "";
     public static String SURVEY_QC = "";
     public static String F_SURVEY_SCORE =" ";
@@ -65,42 +65,13 @@ public class DetermineQuestionType extends AppCompatActivity {
             SURVEY_COUNT = LandingPage.W_SURVEY_COUNT;
             SURVEY_Q = LandingPage.W_SURVEY_Q;
             SURVEY_QC = LandingPage.W_SURVEY_QC;
+            //F_SURVEY_SCORE = "w_survey_count";
         }
         surveyQuestions = db.collection("Surveys").document(SURVEYQ);
-        surveyTotal = db.collection("Surveys").document(SURVEYR);
-        getSurveyTotal();
         init_firebase();
         question_count =0;
         response_count =0;
     }
-
-    void getSurveyTotal(){
-        surveyTotal.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        Map<String, Object> data = document.getData();
-                        Iterator it = data.entrySet().iterator();
-                        while (it.hasNext()) {
-                            Map.Entry pair = (Map.Entry)it.next();
-                            if(pair.getKey().toString().equals(SURVEY_COUNT)){ getResponseList = (ArrayList<String>) document.get(SURVEY_COUNT); }
-                            it.remove(); // avoids a ConcurrentModificationException
-                        }
-                        Log.d(TAG, getResponseList.toString());
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
-        //return getResponseList;
-    }
-
 
     void init_firebase(){
         surveyQuestions.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -117,9 +88,11 @@ public class DetermineQuestionType extends AppCompatActivity {
                             if(pair.getKey().toString().equals(SURVEY_QC)){ choicesList = (ArrayList<String>) document.get(SURVEY_QC); }
                             if(pair.getKey().toString().equals(F_SURVEY_SCORE)){ fitnessLevelScoreList = (ArrayList<String>) document.get(F_SURVEY_SCORE); }
                             if(pair.getKey().toString().equals(F_SURVEY_LEVEL)){ levelList = (ArrayList<String>) document.get(F_SURVEY_LEVEL); }
+                            if(pair.getKey().toString().equals(SURVEY_COUNT)){ getResponseList = (ArrayList<String>) document.get(SURVEY_COUNT); }
                             it.remove(); // avoids a ConcurrentModificationException
                         }
-                        Log.d(TAG, fitnessLevelScoreList.toString() + "\n" + choicesList.toString() + "\n"+ fitnessLevelScoreList.toString() + levelList.toString());
+                        Log.d(TAG,  getResponseList.toString() +"response list!!!!!");
+                        Log.d(TAG, fitnessLevelScoreList.toString() + "\n" + choicesList.toString() + "\n"+ fitnessLevelScoreList.toString() + levelList.toString() +"\n" + getResponseList.toString());
                         boolean multiChoiceQ = determineQuestion(weeklyQuestionsList.get(0).charAt(0));
                         Intent intent;
                         if(multiChoiceQ){

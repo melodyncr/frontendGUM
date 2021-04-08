@@ -38,10 +38,10 @@ public class UploadSurvey extends AppCompatActivity {
 
         Object response_list_obj = responseList;
         Object updateCountObj = getResponseList;
-        DocumentReference docRef = db.collection("Surveys").document(DetermineQuestionType.SURVEYR);
-        DocumentReference docDetermineLevel = db.collection("Users").document(loggedUserName);
+        DocumentReference docRef = db.collection("Surveys").document(DetermineQuestionType.SURVEYQ);
+        DocumentReference docDetermineLevel = db.collection("Surveys").document(DetermineQuestionType.SURVEYR);
         Log.d(TAG, response_list_obj.toString()  + "    " + updateCountObj.toString());
-        docRef.update(loggedUserName, response_list_obj);
+        docDetermineLevel.update(loggedUserName, response_list_obj);
         docRef.update(DetermineQuestionType.SURVEY_COUNT, updateCountObj);
 
         if(CreateAccount.first_survey){

@@ -18,7 +18,7 @@ public class AdminLanding extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_landing);
-
+        clearLists();
         actionBar = getSupportActionBar();
         actionBar.setTitle("Admin Landing Page");
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -34,7 +34,7 @@ public class AdminLanding extends AppCompatActivity {
         viewResponsesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdminLanding.this, ViewResponses.class));
+                startActivity(new Intent(AdminLanding.this, LoadPreviousSurvey.class));
             }
         });
 
@@ -43,5 +43,17 @@ public class AdminLanding extends AppCompatActivity {
     private void wiredUp() {
         addEditTidbits = findViewById(R.id.addEditTidbits);
         viewResponsesBtn = findViewById(R.id.viewResponsesBtn);
+    }
+    private void clearLists(){
+        LoadPreviousSurvey.w_survey_list_names.clear();
+        GetResponseListQuery.listSelected_questions.clear();
+        GetResponseListQuery.listSelected_questions_c.clear();
+        GetResponseListQuery.listSelected_responses.clear();
+        SelectASurvey.survey_list_names.clear();
+        SelectASurvey.past_survey= false;
+        GetResponseListQuery.index_charts = 0;
+       // ViewResponses.questionsListC.clear();
+       // ViewResponses.responseList.clear();
+       // ViewResponses.questionsList.clear();
     }
 }
