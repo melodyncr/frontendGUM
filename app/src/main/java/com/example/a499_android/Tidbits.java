@@ -153,7 +153,9 @@ public class Tidbits extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 } else {
                     String lastTidbitId = tidbitsIdList.get(tidbitsIdList.size() - 1);
-                    int newTidBitIdInteger = Integer.parseInt(lastTidbitId.substring(lastTidbitId.length() - 1)) + 1;
+                    int indexOfDash = lastTidbitId.indexOf('-');
+                    Log.d("Index of dash", String.valueOf(indexOfDash));
+                    int newTidBitIdInteger = Integer.parseInt(lastTidbitId.substring(indexOfDash + 1)) + 1;
                     String newTidbitId = "tidbit-" + String.valueOf(newTidBitIdInteger);
                     Log.d("new tidbit", newTidbitId + ": " + newTidbitTxt);
                     tidbitsIdList.add(newTidbitId);
