@@ -69,9 +69,9 @@ public class SelectAvatar extends AppCompatActivity {
                     unlockedAvatars = (List<String>) document.getData().get("UnlockedAvatars");
                     Log.d("Unlocked Avatars", String.valueOf(unlockedAvatars));
                     fitnessPts = (long) document.getData().get("Points");
-                    Log.d("Fitness Points", String.valueOf(fitnessPts));
+                    Log.d("Longevity Points", String.valueOf(fitnessPts));
                     ptsView.setText(String.valueOf(fitnessPts));
-                    actionBar.setSubtitle("FP: " + String.valueOf(fitnessPts));
+//                    actionBar.setSubtitle("FP: " + String.valueOf(fitnessPts));
                 } else {
                     Toast.makeText(SelectAvatar.this, "Unable to Load User Data", Toast.LENGTH_SHORT).show();
                 }
