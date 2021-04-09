@@ -40,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Pref", "username not saved. Not logged in");
         }
 
-        toLoginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent toLoginIntent = new Intent(MainActivity.this, LoginActivity.class); //or whatever the login activity is called
-                startActivity(toLoginIntent);
-            }
-        });
+//        toLoginBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent toLoginIntent = new Intent(MainActivity.this, LoginActivity.class); //or whatever the login activity is called
+//                startActivity(toLoginIntent);
+//            }
+//        });
 
         toCreateAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +59,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setButtons() {
-        toLoginBtn = findViewById(R.id.toLoginBtn);
+//        toLoginBtn = findViewById(R.id.toLoginBtn);
         toCreateAccountBtn = findViewById(R.id.toCreateAccountBtn);
+    }
+
+    public void toLogin(View view) {
+        Intent toLoginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(toLoginIntent);
     }
 }

@@ -8,49 +8,54 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/appTitle"
-        android:layout_width="349dp"
-        android:layout_height="128dp"
-        android:gravity="center"
-        android:text="@string/appName"
-        android:textColor="#000000"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.341" />
-
-    <Button
         android:id="@+id/toLoginBtn"
-        android:layout_width="172dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/comfortaa_bold"
+        android:onClick="toLogin"
         android:text="@string/loginText"
+        android:textColor="@color/orange"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/toCreateAccountBtn" />
 
     <Button
         android:id="@+id/toCreateAccountBtn"
-        android:layout_width="172dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="52dp"
-        android:text="@string/createAccText"
+        android:layout_width="220dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_corners"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="@string/sign_up"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toLoginBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="270dp"
-        android:layout_height="160dp"
+        android:layout_width="404dp"
+        android:layout_height="263dp"
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gum_logo1" />
+        app:srcCompat="@drawable/logo_sand" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="@string/begin_your_journey_to_better_health_now"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
