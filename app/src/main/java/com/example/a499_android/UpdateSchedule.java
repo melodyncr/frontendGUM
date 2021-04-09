@@ -68,12 +68,12 @@ public class UpdateSchedule extends AppCompatActivity {
                 try {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
                         currentTime.setText(times_list.get(0));
-                        wBtn1.setBackgroundColor(getResources().getColor(R.color.soft_yellow));
-                        wBtn2.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn3.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn4.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn5.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn6.setBackgroundColor(getResources().getColor(R.color.teal_700));
+                        wBtn1.setBackgroundColor(getResources().getColor(R.color.orange));
+                        wBtn2.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn3.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn4.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn5.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn6.setBackgroundColor(getResources().getColor(R.color.logo_orange));
                         index_to_update = 0;
                         return true;
                     }
@@ -90,12 +90,12 @@ public class UpdateSchedule extends AppCompatActivity {
                 try {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
                         currentTime.setText(times_list.get(1));
-                        wBtn2.setBackgroundColor(getResources().getColor(R.color.soft_yellow));
-                        wBtn1.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn3.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn4.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn5.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn6.setBackgroundColor(getResources().getColor(R.color.teal_700));
+                        wBtn2.setBackgroundColor(getResources().getColor(R.color.orange));
+                        wBtn1.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn3.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn4.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn5.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn6.setBackgroundColor(getResources().getColor(R.color.logo_orange));
                         index_to_update = 1;
                         return true;
                     }
@@ -113,12 +113,12 @@ public class UpdateSchedule extends AppCompatActivity {
                 try {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
                         currentTime.setText(times_list.get(2));
-                        wBtn3.setBackgroundColor(getResources().getColor(R.color.soft_yellow));
-                        wBtn2.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn1.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn4.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn5.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn6.setBackgroundColor(getResources().getColor(R.color.teal_700));
+                        wBtn3.setBackgroundColor(getResources().getColor(R.color.orange));
+                        wBtn2.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn1.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn4.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn5.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn6.setBackgroundColor(getResources().getColor(R.color.logo_orange));
                         index_to_update = 2;
                         return true;
                     }
@@ -136,12 +136,12 @@ public class UpdateSchedule extends AppCompatActivity {
                 try {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
                         currentTime.setText(times_list.get(3));
-                        wBtn4.setBackgroundColor(getResources().getColor(R.color.soft_yellow));
-                        wBtn2.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn3.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn1.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn5.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn6.setBackgroundColor(getResources().getColor(R.color.teal_700));
+                        wBtn4.setBackgroundColor(getResources().getColor(R.color.orange));
+                        wBtn2.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn3.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn1.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn5.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn6.setBackgroundColor(getResources().getColor(R.color.logo_orange));
                         index_to_update = 3;
                         return true;
                     }
@@ -159,12 +159,12 @@ public class UpdateSchedule extends AppCompatActivity {
                 try {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
                         currentTime.setText(times_list.get(4));
-                        wBtn5.setBackgroundColor(getResources().getColor(R.color.soft_yellow));
-                        wBtn2.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn3.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn4.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn1.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn6.setBackgroundColor(getResources().getColor(R.color.teal_700));
+                        wBtn5.setBackgroundColor(getResources().getColor(R.color.orange));
+                        wBtn2.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn3.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn4.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn1.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn6.setBackgroundColor(getResources().getColor(R.color.logo_orange));
                         index_to_update = 4;
                         return true;
                     }
@@ -182,12 +182,12 @@ public class UpdateSchedule extends AppCompatActivity {
                 try {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
                         currentTime.setText(times_list.get(5));
-                        wBtn6.setBackgroundColor(getResources().getColor(R.color.soft_yellow));
-                        wBtn2.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn3.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn4.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn5.setBackgroundColor(getResources().getColor(R.color.teal_700));
-                        wBtn1.setBackgroundColor(getResources().getColor(R.color.teal_700));
+                        wBtn6.setBackgroundColor(getResources().getColor(R.color.orange));
+                        wBtn2.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn3.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn4.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn5.setBackgroundColor(getResources().getColor(R.color.logo_orange));
+                        wBtn1.setBackgroundColor(getResources().getColor(R.color.logo_orange));
                         index_to_update = 5;
                         return true;
                     }

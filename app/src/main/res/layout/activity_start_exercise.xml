@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/sand"
     tools:context=".StartExercise">
 
     <ImageView
@@ -14,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_1" />
+        app:srcCompat="@drawable/logo_sand" />
 
     <!--    <VideoView-->
     <!--        android:id="@+id/videoView"-->
@@ -28,8 +29,8 @@
 
     <com.example.a499_android.utility.ScalableVideoView
         android:id="@+id/scalableVideoView"
-        android:layout_width="408dp"
-        android:layout_height="412dp"
+        android:layout_width="0dp"
+        android:layout_height="460dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -42,7 +43,9 @@
         android:layout_marginBottom="78dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.131" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

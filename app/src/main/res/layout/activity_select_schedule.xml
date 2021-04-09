@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_200">
+    android:background="@color/sand">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:fontFamily="@font/adamina"
+        android:fontFamily="@font/comfortaa_bold"
         android:textSize="20dp"
         android:text="Select six time slots for your schedule."
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,12 +23,11 @@
         android:id="@+id/timePicker1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:timePickerMode="spinner"
-        android:theme="@style/timePickerTeal"
+        android:layout_marginTop="92dp"
         android:background="@color/black"
+        android:theme="@style/timePickerTeal"
+        android:timePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,14 +43,15 @@
         app:layout_constraintHorizontal_bias="0.659"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/timePicker1">
+
         <Button
             android:id="@+id/selectTimeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
             android:onClick="showTimePickerDialog"
             android:text="@string/pick_time"
-            app:layout_constraintEnd_toEndOf="parent"
             android:theme="@style/timePickerTeal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.202"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -59,25 +59,28 @@
         <View
             android:layout_width="8dp"
             android:layout_height="match_parent" />
+
         <Button
             android:id="@+id/clearSchedule"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
             android:onClick="showTimePickerDialog"
             android:text="clear List"
-            app:layout_constraintEnd_toEndOf="parent"
             android:theme="@style/timePickerTeal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.202"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <View
             android:layout_width="8dp"
             android:layout_height="match_parent" />
+
         <Button
             android:id="@+id/confirmSchedule"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
             android:text="Update Schedule"
+            android:textSize="12dp"
             android:theme="@style/timePickerTeal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.835"
