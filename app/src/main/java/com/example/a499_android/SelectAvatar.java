@@ -217,7 +217,7 @@ public class SelectAvatar extends AppCompatActivity {
                     fitnessPts = fitnessPts - cost;
                     userDocRef.update("Points", fitnessPts);
                     ptsView.setText(String.valueOf(fitnessPts));
-                    actionBar.setSubtitle("FP: " + String.valueOf(fitnessPts));
+                    //.setSubtitle("FP: " + String.valueOf(fitnessPts));
                     setImage(avatarUrl);
                     popupWindow.dismiss();
                 }
