@@ -28,6 +28,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -48,7 +49,7 @@ public class LandingPage extends AppCompatActivity {
     public ArrayList<String> workoutList = new ArrayList<>();
     DocumentReference docRef;
     private boolean isAdmin = false;
-
+    int index;
     MenuItem toAdmin;
 
     @Override
@@ -210,12 +211,16 @@ public class LandingPage extends AppCompatActivity {
 
         calendar.set(Calendar.HOUR_OF_DAY,h1);
         calendar.set(Calendar.MINUTE,min1);
+        calendar.set(Calendar.SECOND,0);
 
         calendar2.set(Calendar.HOUR_OF_DAY,h2);
         calendar2.set(Calendar.MINUTE,min2);
+        calendar2.set(Calendar.SECOND,0);
 
         calendar3.set(Calendar.HOUR_OF_DAY,h3);
         calendar3.set(Calendar.MINUTE,min3);
+        calendar3.set(Calendar.SECOND,0);
+
 
         calendar4.set(Calendar.HOUR_OF_DAY,h4);
         calendar4.set(Calendar.MINUTE,min4);
@@ -227,45 +232,47 @@ public class LandingPage extends AppCompatActivity {
         calendar6.set(Calendar.MINUTE,min6);
 
 
-        Log.d(TAG, "Time 1 and 2......" + calendar.getTime()  + calendar2.getTime());
-        Log.d(TAG, "Time 3 and 4......" + calendar3.getTime()  + calendar4.getTime());
-        Log.d(TAG, "Time 5 and 6......" + calendar5.getTime()  + calendar6.getTime());
+        Log.d(TAG, "\nTime 1 and 2." + calendar.getTime()  + calendar2.getTime());
+        Log.d(TAG, "Time 3 and 4." + calendar3.getTime()  + calendar4.getTime());
+        Log.d(TAG, "Time 5 and 6." + calendar5.getTime()  + calendar6.getTime());
 
         Intent intent = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(LandingPage.this, 100,intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
         Intent intent2 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent2 = PendingIntent.getBroadcast(LandingPage.this, 200,intent2, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager2 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager2.setRepeating(AlarmManager.RTC_WAKEUP,calendar2.getTimeInMillis(),alarmManager2.INTERVAL_DAY,pendingIntent2);
+        alarmManager2.set(AlarmManager.RTC_WAKEUP, calendar2.getTimeInMillis(), pendingIntent2);
 
         Intent intent3 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent3 = PendingIntent.getBroadcast(LandingPage.this, 300,intent3, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager3 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager3.setRepeating(AlarmManager.RTC_WAKEUP,calendar3.getTimeInMillis(),alarmManager3.INTERVAL_DAY,pendingIntent3);
+        alarmManager3.set(AlarmManager.RTC_WAKEUP, calendar3.getTimeInMillis(), pendingIntent3);
 
         Intent intent4 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent4 = PendingIntent.getBroadcast(LandingPage.this, 400,intent4, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager4 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager4.setRepeating(AlarmManager.RTC_WAKEUP,calendar4.getTimeInMillis(),alarmManager4.INTERVAL_DAY,pendingIntent4);
+        alarmManager4.set(AlarmManager.RTC_WAKEUP, calendar4.getTimeInMillis(), pendingIntent4);
 
         Intent intent5 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent5 = PendingIntent.getBroadcast(LandingPage.this, 500,intent5, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager5 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager5.setRepeating(AlarmManager.RTC_WAKEUP,calendar5.getTimeInMillis(),alarmManager5.INTERVAL_DAY,pendingIntent5);
+        alarmManager5.set(AlarmManager.RTC_WAKEUP, calendar5.getTimeInMillis(), pendingIntent5);
 
         Intent intent6 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent6 = PendingIntent.getBroadcast(LandingPage.this, 600,intent6, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager6 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager6.setRepeating(AlarmManager.RTC_WAKEUP,calendar6.getTimeInMillis(),alarmManager6.INTERVAL_DAY,pendingIntent6);
+        alarmManager6.set(AlarmManager.RTC_WAKEUP, calendar6.getTimeInMillis(), pendingIntent6);
+
+
     }
     int setHourOrMin(String time_str, boolean hour_or_min){
         int time;
