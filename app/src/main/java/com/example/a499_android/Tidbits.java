@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -152,20 +153,14 @@ public class Tidbits extends AppCompatActivity {
                             "Please Enter a tidbit",
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    String lastTidbitId = tidbitsIdList.get(tidbitsIdList.size() - 1);
-                    int indexOfDash = lastTidbitId.indexOf('-');
-                    Log.d("Index of dash", String.valueOf(indexOfDash));
-                    int newTidBitIdInteger = Integer.parseInt(lastTidbitId.substring(indexOfDash + 1)) + 1;
-                    String newTidbitId = "tidbit-" + String.valueOf(newTidBitIdInteger);
-                    Log.d("new tidbit", newTidbitId + ": " + newTidbitTxt);
-                    tidbitsIdList.add(newTidbitId);
-                    tidBitsList.add(newTidbitTxt);
                     Map<String, String> newTidbit = new HashMap<>();
                     newTidbit.put("Tidbit", newTidbitTxt);
-                    tidbits.document(newTidbitId).set(newTidbit).addOnSuccessListener(
-                            new OnSuccessListener<Void>() {
+                    tidbits.add(newTidbit).addOnSuccessListener(
+                            new OnSuccessListener<DocumentReference>() {
                                 @Override
-                                public void onSuccess(Void aVoid) {
+                                public void onSuccess(DocumentReference documentReference) {
+                                    tidbitsIdList.add(documentReference.getId());
+                                    tidBitsList.add(newTidbitTxt);
                                     Log.d(TAG, "Successfully added new Tidbit");
                                     Toast.makeText(Tidbits.this,
                                             "New Tidbit Added",
@@ -177,11 +172,11 @@ public class Tidbits extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.d("Failure", e.getMessage());
                             Toast.makeText(Tidbits.this,
-                                    "Uh Oh Something went wrong",
+                                    "Something went wrong!",
                                     Toast.LENGTH_SHORT)
                                     .show();
+                            Log.e("Error: ", e.getMessage());
                         }
                     });
                 }
