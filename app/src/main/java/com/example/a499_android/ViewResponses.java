@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewResponses extends AppCompatActivity {
+
     private ArrayList<String> responseList = GetResponseListQuery.listSelected_responses;
     private ArrayList<String> questionsList = GetResponseListQuery.listSelected_questions;
     private ArrayList<String> questionsListC = GetResponseListQuery.listSelected_questions_c;
@@ -43,6 +44,7 @@ public class ViewResponses extends AppCompatActivity {
     private Handler hdlr = new Handler();
     private int max_num = 0;
     private int i = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -212,7 +214,7 @@ public class ViewResponses extends AppCompatActivity {
                     i+=1;
                     //double n = max_count;
                     double d = max_num;
-                double p = (i/ d) * 100.0;
+                    double p = (i/ d) * 100.0;
                     String percent_long = Double.toString(p);
                     String percent = percent_long.substring(0,3);
                     // Update the progress bar and display the current value in text view

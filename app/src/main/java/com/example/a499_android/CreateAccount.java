@@ -116,7 +116,7 @@ public class CreateAccount extends AppCompatActivity {
                                                     .show();
                                             first_survey = true;
                                             LoginActivity.loggedUserName = enteredUsername.toLowerCase();
-                                            Intent toLoginIntent = new Intent(CreateAccount.this, DetermineQuestionType.class);
+                                            Intent toLoginIntent = new Intent(CreateAccount.this, IntroVideo.class);
                                             startActivity(toLoginIntent);
                                         }
                                     })
