@@ -1,0 +1,87 @@
+package com.example.a499_android;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class IntroVideo extends AppCompatActivity {
+    RecyclerView recyclerView;
+    ArrayList<String> video = new ArrayList<>();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    DocumentReference videosDoc;
+    Timer timer;
+    public String TAG = "Intro Video";
+    String delay;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.intro_video);
+
+        videosDoc = db.collection("Videos").document("IntroVideo");
+        init_firebase();
+
+        // create timer for activity completion (add visual timer later)
+    }
+    void init_firebase(){
+        videosDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        Iterator it = data.entrySet().iterator();
+                        while (it.hasNext()) {
+                            Map.Entry pair = (Map.Entry)it.next();
+                            if(pair.getKey().toString().equals("intro_video")){ video = (ArrayList<String>) document.get("intro_video"); }
+                            if(pair.getKey().toString().equals("delay")){ delay = (String) document.get("delay");}
+                            it.remove(); // avoids a ConcurrentModificationException
+                        }
+                        recyclerView = (RecyclerView) findViewById(R.id.videosListRecyclerView);
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(IntroVideo.this));
+                        Log.d(TAG, video.toString());
+                        VideoAdapter videosAdapter = new VideoAdapter(video);
+                        recyclerView.setAdapter(videosAdapter);
+                        Log.d(TAG,  "delay" + delay);
+
+                        timer = new Timer();
+                        int delay_int = Integer.parseInt(delay);
+                        timer.schedule(new TimerTask()  {
+                            @Override
+                            public void run()   {   // switch activity intent after timer expires
+                                Intent intent = new Intent(IntroVideo.this, DetermineQuestionType.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }, delay_int);// one minute delay
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+        //return weeklyQuestionsList;
+    }
+
+}

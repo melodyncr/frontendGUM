@@ -11,12 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.499_android">
-        <activity android:name=".ViewResponses">
+        <activity android:name=".ViewResponseR">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".AdminLanding" />
         </activity>
-        <activity android:name=".ViewResponseR">
+        <activity android:name=".ViewResponses">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".AdminLanding" />
@@ -53,6 +53,7 @@
         <activity android:name=".UpdateSchedule" />
         <activity android:name=".LandingPage" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".IntroVideo"/>
         <activity android:name=".FinishedExerciseActivity" />
         <activity android:name=".SelectAvatar">
             <meta-data
