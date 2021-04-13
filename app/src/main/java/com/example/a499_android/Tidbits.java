@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class Tidbits extends AppCompatActivity {
     RecyclerView recyclerView;
     EditText newTidtbit;
     Button addNewTidbitBtn;
+    ImageButton closeTidbitPopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +142,7 @@ public class Tidbits extends AppCompatActivity {
 
         newTidtbit = popupView.findViewById(R.id.newTidbitText);
         addNewTidbitBtn = popupView.findViewById(R.id.addNewTidbitBtn);
+        closeTidbitPopup = popupView.findViewById(R.id.closeTidbitPopup);
 
         popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
 
@@ -180,6 +183,13 @@ public class Tidbits extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+
+        closeTidbitPopup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
             }
         });
     }

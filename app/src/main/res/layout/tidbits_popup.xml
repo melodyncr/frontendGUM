@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/outline">
 
     <EditText
         android:id="@+id/newTidbitText"
-        android:layout_width="wrap_content"
+        android:layout_width="282dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="106dp"
-        android:layout_marginLeft="106dp"
-        android:layout_marginTop="94dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="66dp"
+        android:layout_marginLeft="66dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginRight="66dp"
+        android:background="@color/white"
         android:ems="10"
         android:gravity="center"
         android:hint="Enter new Tidbit"
-        android:inputType="textPersonName" />
+        android:inputType="textMultiLine" />
 
     <Button
         android:id="@+id/addNewTidbitBtn"
@@ -27,8 +33,24 @@
         android:layout_below="@+id/newTidbitText"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="140dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="133dp"
         android:layout_marginLeft="140dp"
         android:layout_marginTop="28dp"
+        android:layout_marginEnd="133dp"
+        android:layout_marginRight="133dp"
         android:text="Add Tidbit" />
+
+    <ImageButton
+        android:id="@+id/closeTidbitPopup"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginRight="47dp"
+        app:srcCompat="@android:drawable/ic_delete" />
 </RelativeLayout>
