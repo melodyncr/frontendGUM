@@ -46,6 +46,7 @@ public class LandingPage extends AppCompatActivity {
     public static final String W_SURVEY_COUNT = "w_survey_count";
     public static final String W_SURVEY_Q = "w_survey_q";
     public static final String W_SURVEY_QC = "w_survey_qc";
+    public static String fitnessLevel = "";
     public ArrayList<String> workoutList = new ArrayList<>();
     DocumentReference docRef;
     private boolean isAdmin = false;
@@ -66,7 +67,7 @@ public class LandingPage extends AppCompatActivity {
 
         // Start Exercise
         Button startExerciseBtn = findViewById(R.id.startActivityBtn);
-
+        Button viewVideos = findViewById(R.id.videosBtn);
         TextView displayedPoints = findViewById(R.id.pointDisplay);
 //        TextView displayedUsername = findViewById(R.id.usernameDisplay);
 
@@ -133,6 +134,14 @@ public class LandingPage extends AppCompatActivity {
             }
         });
 
+        viewVideos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingPage.this, VideoDemonstrations.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     // Intent Factory
@@ -167,10 +176,13 @@ public class LandingPage extends AppCompatActivity {
                             Map.Entry pair = (Map.Entry)it.next();
                             Log.d(TAG, pair.getKey() + " = " + pair.getValue());
                             if(pair.getKey().toString().equals("Schedule")){ workoutList = (ArrayList<String>) document.get("Schedule"); }
+                            if(pair.getKey().toString().equals("FitnessLvl")){ fitnessLevel = (String) document.get("FitnessLvl");}
+
                             it.remove(); // avoids a ConcurrentModificationException
                         }
                         setNotifications(workoutList);
                         Log.d(TAG, "workout list: " + workoutList.toString());
+                        Log.d(TAG, "Fitness Level: " + workoutList.toString());
                     }
                 } else {
                     Log.d(TAG, "ERROR: ", task.getException());
