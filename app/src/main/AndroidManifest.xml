@@ -60,6 +60,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LandingPage" />
         </activity>
+        <activity android:name=".VideoDemonstrations">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LandingPage" />
+        </activity>
         <activity android:name=".SurveyResponse" />
         <activity android:name=".DetermineQuestionType" />
         <activity android:name=".SurveyMultiC" />

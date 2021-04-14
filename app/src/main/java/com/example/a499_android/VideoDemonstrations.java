@@ -15,34 +15,30 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class IntroVideo extends AppCompatActivity {
+public class VideoDemonstrations extends AppCompatActivity {
     RecyclerView recyclerView;
-    ArrayList<String> video = new ArrayList<>();
-    ArrayList<String> description = new ArrayList<>();
-
+    ArrayList<String> video_list = new ArrayList<>();
+    ArrayList<String> description_list = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference videosDoc;
     Timer timer;
-    public String TAG = "Intro Video";
+    public String TAG = "Video Demo";
     String delay;
-    @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.intro_video);
-
-        videosDoc = db.collection("Videos").document("IntroVideo");
+        setContentView(R.layout.video_demonstration);
+        videosDoc = db.collection("Videos").document(LandingPage.fitnessLevel);
         init_firebase();
-
-        // create timer for activity completion (add visual timer later)
     }
-    void init_firebase(){
+
+    void init_firebase() {
         videosDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -52,33 +48,19 @@ public class IntroVideo extends AppCompatActivity {
                         Map<String, Object> data = document.getData();
                         Iterator it = data.entrySet().iterator();
                         while (it.hasNext()) {
-                            Map.Entry pair = (Map.Entry)it.next();
-                            if(pair.getKey().toString().equals("intro_video")){ video = (ArrayList<String>) document.get("intro_video"); }
-                            if(pair.getKey().toString().equals("description")){ description = (ArrayList<String>) document.get("description"); }
-
-                            if(pair.getKey().toString().equals("delay")){ delay = (String) document.get("delay");}
+                            Map.Entry pair = (Map.Entry) it.next();
+                            if (pair.getKey().toString().equals("videos_list")) { video_list = (ArrayList<String>) document.get("videos_list");}
+                            if (pair.getKey().toString().equals("video_description")){description_list = (ArrayList<String>) document.get("video_description");}
                             it.remove(); // avoids a ConcurrentModificationException
                         }
-                        recyclerView = (RecyclerView) findViewById(R.id.videosListRecyclerView);
+                        recyclerView = (RecyclerView) findViewById(R.id.videosListRecyclerView_Lvl);
                         recyclerView.setHasFixedSize(true);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(IntroVideo.this));
-                        Log.d(TAG, video.toString());
-                        Log.d(TAG, description.toString());
-
-                        VideoAdapter videosAdapter = new VideoAdapter(video,description);
+                        Log.d(TAG, video_list.toString() + "\n" + description_list.toString());
+                        recyclerView.setLayoutManager(new LinearLayoutManager(VideoDemonstrations.this));
+                        VideoAdapter videosAdapter = new VideoAdapter(video_list,description_list);
                         recyclerView.setAdapter(videosAdapter);
-                        Log.d(TAG,  "delay" + delay);
+                        Log.d(TAG, "delay" + delay);
 
-                        timer = new Timer();
-                        int delay_int = Integer.parseInt(delay);
-                        timer.schedule(new TimerTask()  {
-                            @Override
-                            public void run()   {   // switch activity intent after timer expires
-                                Intent intent = new Intent(IntroVideo.this, DetermineQuestionType.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }, delay_int);// one minute delay
                     } else {
                         Log.d(TAG, "No such document");
                     }
@@ -89,5 +71,4 @@ public class IntroVideo extends AppCompatActivity {
         });
         //return weeklyQuestionsList;
     }
-
 }
