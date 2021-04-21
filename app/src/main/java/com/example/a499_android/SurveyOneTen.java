@@ -45,7 +45,7 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
         String[] numbers;
         String seven_or_ten = weeklyQuestionsList.get(question_count).substring(15,19);
         Log.d(TAG, seven_or_ten);
-        if(seven_or_ten == "1-10"){
+        if(seven_or_ten.equals("1-10")){
             numbers = new String[]{"Select a Level","1", "2", "3","4","5","6","7","8","9","10"};
         }else{
             numbers = new String[]{"Select a Level","1", "2", "3","4","5","6","7"};
