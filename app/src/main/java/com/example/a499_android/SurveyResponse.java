@@ -48,7 +48,10 @@ public class SurveyResponse extends AppCompatActivity {
                         Intent intent;
                         if (weeklyQuestionsList.get(question_count).charAt(0) == 'R') {
                             intent = new Intent(SurveyResponse.this, SurveyResponse.class);
-                        } else {
+                        } else if(weeklyQuestionsList.get(question_count).charAt(0) == 'O'){
+                            intent = new Intent(SurveyResponse.this, SurveyOneTen.class);
+                        }
+                        else {
                             intent = new Intent(SurveyResponse.this, SurveyMultiC.class);
                         }
                         startActivity(intent);
@@ -79,7 +82,10 @@ public class SurveyResponse extends AppCompatActivity {
                     Intent intent;
                     if(weeklyQuestionsList.get(question_count).charAt(0) == 'R'){
                         intent = new Intent(SurveyResponse.this, SurveyResponse.class);
-                    }else{
+                    } else if(weeklyQuestionsList.get(question_count).charAt(0) == 'O'){
+                        intent = new Intent(SurveyResponse.this, SurveyOneTen.class);
+                    }
+                    else{
                         intent = new Intent(SurveyResponse.this, SurveyMultiC.class);
                     }
                     startActivity(intent);

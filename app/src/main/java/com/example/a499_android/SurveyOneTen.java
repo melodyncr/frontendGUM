@@ -43,9 +43,9 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
 
         spinner.setOnItemSelectedListener(this);
         String[] numbers;
-        String seven_or_ten = weeklyQuestionsList.get(question_count).substring(15,19);
+        String seven_or_ten = weeklyQuestionsList.get(question_count).substring(1,3);
         Log.d(TAG, seven_or_ten);
-        if(seven_or_ten.equals("1-10")){
+        if(seven_or_ten.equals("10")){
             numbers = new String[]{"Select a Level","1", "2", "3","4","5","6","7","8","9","10"};
         }else{
             numbers = new String[]{"Select a Level","1", "2", "3","4","5","6","7"};
@@ -141,7 +141,7 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
         submitBtn = findViewById(R.id.submitBtn);
         finishLaterBtn = findViewById(R.id.finishLaterBtn);
         typeSurvey.setText(""+DetermineQuestionType.T_TYPE_SURVEY);
-        String question = weeklyQuestionsList.get(question_count).substring(1);
+        String question = weeklyQuestionsList.get(question_count).substring(3);
         questionText.setText(question);
         if(question_count >= weeklyQuestionsList.size()-1){
             submitBtn.setText("Submit Survey");

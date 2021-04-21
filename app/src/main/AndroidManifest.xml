@@ -16,6 +16,36 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".AdminLanding" />
         </activity>
+        <activity android:name=".ViewResponseO">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
+        <activity android:name=".AddSurveyQuestions">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
+        <activity android:name=".AddSurveyQuestionsCount">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
+        <activity android:name=".AddSurveyQuestionsMC">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
+        <activity android:name=".PreviewNewSurvey">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
+        <activity android:name=".ViewResponseUser">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
         <activity android:name=".AdminMsgList">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

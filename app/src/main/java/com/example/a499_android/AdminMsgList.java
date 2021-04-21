@@ -31,17 +31,19 @@ import java.util.Map;
 
 public class AdminMsgList extends AppCompatActivity {
 
-    RecyclerView recyclerView;
     ArrayList<String> usersList = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference usersDoc;
     public String TAG = "Admin Landing";
     public static String userNameSelected = "";
     public static boolean fromAdmin = false;
+    Button finishBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.users_list_msg);
+        finishBtn = findViewById(R.id.backBtnUserList);
+        finishBtn.setVisibility(View.INVISIBLE);
 
         usersDoc = db.collection("Users_List").document("List");
         init_firebase();
@@ -72,6 +74,15 @@ public class AdminMsgList extends AppCompatActivity {
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());
                 }
+            }
+        });
+        if(ViewResponseR.select_question){
+            finishBtn.setVisibility(View.VISIBLE);
+        }
+        finishBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
         //return weeklyQuestionsList;
@@ -111,9 +122,13 @@ public class AdminMsgList extends AppCompatActivity {
                 public void onClick(View v) {
                     fromAdmin = true;
                     userNameSelected = f;
-                    Intent intent = new Intent(AdminMsgList.this, MessageAdmin.class);
+                    Intent intent;
+                    if(ViewResponseR.select_question){
+                        intent = new Intent(AdminMsgList.this, ViewResponseUser.class);
+                    }else {
+                        intent = new Intent(AdminMsgList.this, MessageAdmin.class);
+                    }
                     startActivity(intent);
-                    Snackbar.make(findViewById(android.R.id.content),f + "selected!", Snackbar.LENGTH_LONG).show();
                 }
             });
         }

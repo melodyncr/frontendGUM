@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sand">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+        android:id="@+id/addQuestion"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Please Follow Instructions carefully"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/view1"
+            app:layout_constraintTop_toBottomOf="@+id/addQuestion"/>
+
+        <TextView
+            android:id="@+id/typeQuestion"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Please Select the type of Question"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/view2"
+            app:layout_constraintTop_toBottomOf="@+id/typeQuestion"/>
+
+        <RadioGroup
+            android:id="@+id/radioQuestionsGroupA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2">
+            <RadioButton
+                android:id="@+id/question1A"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Response" />
+            <RadioButton
+                android:id="@+id/question2A"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Multiple Choice" />
+            <RadioButton
+                android:id="@+id/question3A"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="On a scale of 1-10"/>
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/view3"
+            app:layout_constraintTop_toBottomOf="@+id/radioQuestionsGroupA"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter the question text here."
+            android:id="@+id/addQuestionEditTxt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/view4"
+            app:layout_constraintTop_toBottomOf="@+id/addQuestionEditTxt"/>
+
+        <LinearLayout
+            android:id="@+id/secondBoxA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view4">
+
+            <Button
+                android:id="@+id/submitBtnA"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="Next Question"
+                android:theme="@style/timePickerTeal" />
+
+
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

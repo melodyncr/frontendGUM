@@ -9,16 +9,31 @@
     android:paddingBottom="16dp"
     tools:context=".ViewResponses">
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barchart"
-        android:layout_width="396dp"
-        android:layout_height="400dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/questionTextR"
+        android:text="" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="125dp"
+        android:id="@+id/findUserResponseBtn"
+        android:layout_below="@id/questionTextR"
+        android:text="Find User" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/view_1"
+        android:layout_below="@id/findUserResponseBtn"/>
     <Button
         android:id="@+id/backBtnChartR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/barchart"
+        android:layout_below="@id/view_1"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="90dp"
         android:text="Back" />
@@ -27,7 +42,7 @@
         android:id="@+id/nextBtnChartR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/barchart"
+        android:layout_below="@id/view_1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="90dp"
         android:text="Next" />
@@ -38,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/nextBtnChartR"
         android:gravity="center"
-        android:text="This Question is a response, no Analytics hit next or previous." />
+        android:text="This Question is a response, no Analytics. To see resposnes from users click the find user button." />
 
     <TextView
         android:id="@+id/responseTextR"
@@ -47,6 +62,7 @@
         android:layout_below="@id/noMCTxt"
         android:text=""
         android:gravity="center"/>
+
 
 
 

@@ -138,7 +138,7 @@ public class LandingPage extends AppCompatActivity {
         viewVideos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LandingPage.this, SurveyOneTen.class);
+                Intent intent = new Intent(LandingPage.this, VideoDemonstrations.class);
                 startActivity(intent);
             }
         });
