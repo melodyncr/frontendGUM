@@ -67,6 +67,9 @@ public class SurveyMultiC extends AppCompatActivity {
                         Intent intent;
                         if (weeklyQuestionsList.get(question_count).charAt(0) == 'M') {
                             intent = new Intent(SurveyMultiC.this, SurveyMultiC.class);
+                        }
+                        else if (weeklyQuestionsList.get(question_count).charAt(0) == 'O') {
+                            intent = new Intent(SurveyMultiC.this, SurveyOneTen.class);
                         } else {
                             intent = new Intent(SurveyMultiC.this, SurveyResponse.class);
                         }
@@ -89,7 +92,11 @@ public class SurveyMultiC extends AppCompatActivity {
                     Intent intent;
                     if (weeklyQuestionsList.get(question_count).charAt(0) == 'M') {
                         intent = new Intent(SurveyMultiC.this, SurveyMultiC.class);
-                    } else {
+                    }
+                    else if (weeklyQuestionsList.get(question_count).charAt(0) == 'O') {
+                        intent = new Intent(SurveyMultiC.this, SurveyOneTen.class);
+                    }
+                    else {
                         intent = new Intent(SurveyMultiC.this, SurveyResponse.class);
                     }
                     startActivity(intent);

@@ -18,6 +18,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pointDisplay" />
 
+
+    <Button
+        android:id="@+id/messageAdmin"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:text="Message Mark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
     <Button
         android:id="@+id/changeAvatarBtn"
         android:layout_width="280dp"

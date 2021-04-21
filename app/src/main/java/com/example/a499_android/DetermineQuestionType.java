@@ -93,10 +93,13 @@ public class DetermineQuestionType extends AppCompatActivity {
                         }
                         Log.d(TAG,  getResponseList.toString() +"response list!!!!!");
                         Log.d(TAG, fitnessLevelScoreList.toString() + "\n" + choicesList.toString() + "\n"+ fitnessLevelScoreList.toString() + levelList.toString() +"\n" + getResponseList.toString());
-                        boolean multiChoiceQ = determineQuestion(weeklyQuestionsList.get(0).charAt(0));
+                        int multiChoiceQ = determineQuestion(weeklyQuestionsList.get(0).charAt(0));
                         Intent intent;
-                        if(multiChoiceQ){
+                        if(multiChoiceQ == 0){
                             intent = new Intent(DetermineQuestionType.this, SurveyMultiC.class);
+                        }else if(multiChoiceQ ==1){
+                            intent = new Intent(DetermineQuestionType.this, SurveyOneTen.class);
+
                         }else{
                             intent = new Intent(DetermineQuestionType.this, SurveyResponse.class);
                         }
@@ -112,11 +115,13 @@ public class DetermineQuestionType extends AppCompatActivity {
         //return weeklyQuestionsList;
     }
 
-    public static boolean determineQuestion(char type){
+    public static int determineQuestion(char type){
         if(type == 'M'){
-            return true;
+            return 0;
+        }else if(type == 'O'){
+            return 1;
         }else{
-            return false;
+            return -1;
         }
     }
     public boolean first_or_weekly(boolean f_or_w){

@@ -12,13 +12,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import static com.example.a499_android.DetermineQuestionType.levelList;
@@ -29,7 +34,7 @@ public class UploadSurvey extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final String TAG = "Select Schedule";
     public static String F_S_USERNAME = loggedUserName;
-
+    private ArrayList<String> userList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +45,56 @@ public class UploadSurvey extends AppCompatActivity {
         Object updateCountObj = getResponseList;
         DocumentReference docRef = db.collection("Surveys").document(DetermineQuestionType.SURVEYQ);
         DocumentReference docDetermineLevel = db.collection("Surveys").document(DetermineQuestionType.SURVEYR);
+        DocumentReference userDoc = db.collection("Users_List").document("List");
+        CollectionReference collectionReference = db.collection("Messages");
+
+
         Log.d(TAG, response_list_obj.toString()  + "    " + updateCountObj.toString());
         docDetermineLevel.update(loggedUserName, response_list_obj);
         docRef.update(DetermineQuestionType.SURVEY_COUNT, updateCountObj);
 
         if(CreateAccount.first_survey){
+            // Create document of messages to new User to Mark
+            Map<String, Object> newUser = new HashMap<>();
+            List<String> msg = new ArrayList<String>(){{
+                add("Hello, this message box is a place where you can interact with Mark if you have any questions regarding GUM!");
+            }};
+            newUser.put("messages", msg);
+            Log.d(TAG, String.valueOf(newUser));
+
+            collectionReference.document(loggedUserName.toLowerCase()).set(newUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+
+                }
+            });
+            //adds user in the list of users
+            userDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Map<String, Object> data = document.getData();
+                            Iterator it = data.entrySet().iterator();
+                            while (it.hasNext()) {
+                                Map.Entry pair = (Map.Entry)it.next();
+                                if(pair.getKey().toString().equals("user_names")){ userList = (ArrayList<String>) document.get("user_names"); }
+                                it.remove(); // avoids a ConcurrentModificationException
+                            }
+                            userList.add(loggedUserName);
+                            Log.d(TAG, userList.toString());
+                            Object obj = userList;
+                            userDoc.update("user_names",obj);
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
+
             int advance_lvl = Integer.parseInt(DetermineQuestionType.levelList.get(0));
             int intermediate_lvl = Integer.parseInt(DetermineQuestionType.levelList.get(1));
             String level = "";
