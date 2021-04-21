@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sand">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/previewSurveyText"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Survey Preview\n If you made a mistake, please use arrow on tool bar to restart process."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/view1"
+            app:layout_constraintTop_toBottomOf="@+id/previewSurveyText" />
+        <TextView
+            android:id="@+id/txt1"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Questions with responses if a MC question."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view1"
+            />
+
+        <TextView
+            android:id="@+id/previewSurvey"
+            android:textSize="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="preview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt1"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/view2"
+            app:layout_constraintTop_toBottomOf="@+id/previewSurvey" />
+
+        <LinearLayout
+            android:id="@+id/secondBoxFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view2">
+
+            <Button
+                android:id="@+id/submitBtnAS"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="Confirm Survey"
+                android:theme="@style/timePickerTeal" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

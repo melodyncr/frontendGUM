@@ -29,6 +29,7 @@ public class SelectASurvey extends AppCompatActivity {
     public static String field_name_response = "";
     public static String field_name_questions = "";
     public static String field_name_questions_list= "";
+    public static String document_response = "";
     public static boolean past_survey = false;
 
     public String TAG = "Select A Survey";
@@ -62,11 +63,13 @@ public class SelectASurvey extends AppCompatActivity {
             field_name_response = "f_survey_count";
             field_name_questions = "f_survey_q";
             field_name_questions_list = "f_survey_qc";
+            document_response = "FSurveyR";
         }else{
             document_responses_str = "WSurveyQ";
             field_name_response = "w_survey_count";
             field_name_questions = "w_survey_q";
             field_name_questions_list = "w_survey_qc";
+            document_response = "WSurveyR";
         }
         Intent intent = new Intent(SelectASurvey.this, GetResponseListQuery.class);
         startActivity(intent);

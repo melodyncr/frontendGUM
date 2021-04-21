@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sand">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <TextView
+            android:id="@+id/notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="NOTICE\nCreating this Weekly Survey will move the current survey to the archive of past surveys"
+            android:gravity="center"
+            android:fontFamily="@font/artifika"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+
+
+        <ImageView
+            android:id="@+id/gumImageSurvey"
+            android:layout_width="194dp"
+            android:layout_height="155dp"
+            android:layout_marginStart="108dp"
+            android:layout_marginLeft="108dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/logo_sand"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notice" />
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Before starting please have a document where you already have the questions written out incase of error. You will not be able to go back and fourth when creating a survey.If you do make a mistake, use the arrow on the tool bar to restart the process.\n\nHow many questions will your survey contain?"
+            android:gravity="center"
+            android:fontFamily="@font/artifika"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gumImageSurvey"/>
+
+        <View
+            android:id="@+id/blankView1"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/questionText"/>
+
+        <EditText
+            android:id="@+id/numOfQuestions"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="156dp"
+            android:layout_marginLeft="156dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:hint="Enter count"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/blankView1" />
+
+        <View
+            android:id="@+id/blankView2"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/numOfQuestions"/>
+
+
+        <Button
+            android:id="@+id/beginSurveyBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="132dp"
+            android:layout_marginLeft="132dp"
+            android:text="Begin Survey"
+            android:theme="@style/timePickerTeal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/blankView2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

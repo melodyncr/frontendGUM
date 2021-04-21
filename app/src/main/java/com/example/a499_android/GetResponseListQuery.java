@@ -62,7 +62,16 @@ public class GetResponseListQuery  extends AppCompatActivity {
                             it.remove(); // avoids a ConcurrentModificationException
                         }
                         Log.d(TAG, listSelected_responses.toString() + "\n " + listSelected_questions.toString() + " \n " + listSelected_questions_c.toString());
-                        Intent intent = new Intent(GetResponseListQuery.this, ViewResponses.class);
+                        char first_response = listSelected_questions.get(0).charAt(0);
+                        Intent intent;
+                        Log.d(TAG, first_response+"");
+                        if(first_response == 'O'){
+                            intent = new Intent(GetResponseListQuery.this, ViewResponseO.class);
+                        }else if(first_response == 'R'){
+                            intent = new Intent(GetResponseListQuery.this, ViewResponseR.class);
+                        }else{
+                            intent = new Intent(GetResponseListQuery.this, ViewResponses.class);
+                        }
                         startActivity(intent);
                     } else {
                         Log.d(TAG, "No such document");

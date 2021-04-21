@@ -8,12 +8,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class AdminLanding extends AppCompatActivity {
 
-    Button addEditTidbits, viewResponsesBtn;
-
+    Button addEditTidbits, viewResponsesBtn, addSurvey;
     ActionBar actionBar;
-
+    public static ArrayList<String> w_survey_count_list = new ArrayList<>();
+    public static ArrayList<String> w_survey_questions_list = new ArrayList<>();
+    public static ArrayList<String> w_survey_responses_list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +42,19 @@ public class AdminLanding extends AppCompatActivity {
             }
         });
 
+        addSurvey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminLanding.this, AddSurveyQuestionsCount.class ));
+            }
+        });
+
     }
 
     private void wiredUp() {
         addEditTidbits = findViewById(R.id.addEditTidbits);
         viewResponsesBtn = findViewById(R.id.viewResponsesBtn);
+        addSurvey = findViewById(R.id.addSurveyBtn);
     }
     private void clearLists(){
         LoadPreviousSurvey.w_survey_list_names.clear();
@@ -52,8 +64,9 @@ public class AdminLanding extends AppCompatActivity {
         SelectASurvey.survey_list_names.clear();
         SelectASurvey.past_survey= false;
         GetResponseListQuery.index_charts = 0;
-       // ViewResponses.questionsListC.clear();
-       // ViewResponses.responseList.clear();
-       // ViewResponses.questionsList.clear();
+        AddSurveyQuestionsCount.count =0;
+        w_survey_questions_list.clear();
+        w_survey_responses_list.clear();
+        w_survey_count_list.clear();
     }
 }

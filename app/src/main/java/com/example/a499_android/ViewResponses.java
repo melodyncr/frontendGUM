@@ -43,7 +43,6 @@ public class ViewResponses extends AppCompatActivity {
     ArrayList<TextView> txtViewList = new ArrayList<>();
     private Handler hdlr = new Handler();
     private int max_num = 0;
-    private int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +120,10 @@ public class ViewResponses extends AppCompatActivity {
                     Intent intent;
                     if(sub_str_check == 'R'){
                         intent = new Intent(ViewResponses.this, ViewResponseR.class);
-                    }else {
+                    }else if(sub_str_check == 'O'){
+                        intent = new Intent(ViewResponses.this, ViewResponseO.class);
+                    }
+                    else {
                         intent = new Intent(ViewResponses.this, ViewResponses.class);
                     }
                     startActivity(intent);
@@ -139,7 +141,10 @@ public class ViewResponses extends AppCompatActivity {
                     Intent intent;
                     if(sub_str_check == 'R'){
                         intent = new Intent(ViewResponses.this, ViewResponseR.class);
-                    }else {
+                    }else if(sub_str_check == 'O'){
+                        intent = new Intent(ViewResponses.this, ViewResponseO.class);
+                    }
+                    else {
                         intent = new Intent(ViewResponses.this, ViewResponses.class);
                     }
                     startActivity(intent);
@@ -173,7 +178,7 @@ public class ViewResponses extends AppCompatActivity {
         });
 
         for(int k =0; k < txtViewList.size();k++){
-            setPercentage(responseListInt.get(k),txtViewList.get(k));
+            setPercentage(responseListInt.get(k),txtViewList.get(k),0);
         }
     }
 
@@ -206,15 +211,16 @@ public class ViewResponses extends AppCompatActivity {
         return questionsList;
     }
 
-    private void setPercentage( int max_count, TextView txtView_temp){
+    private void setPercentage( int max_count, TextView txtView_temp,int zero){
         Log.d(TAG, max_count + " count and max " + max_num);
         new Thread(new Runnable() {
             public void run() {
-                while (i < max_count) {
-                    i+=1;
+                int z = zero;
+                while (z < max_count) {
+                    z++;
                     //double n = max_count;
                     double d = max_num;
-                    double p = (i/ d) * 100.0;
+                    double p = (z/d) * 100.0;
                     String percent_long = Double.toString(p);
                     String percent = percent_long.substring(0,3);
                     // Update the progress bar and display the current value in text view
