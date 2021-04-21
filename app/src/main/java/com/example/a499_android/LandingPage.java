@@ -50,9 +50,8 @@ public class LandingPage extends AppCompatActivity {
     public ArrayList<String> workoutList = new ArrayList<>();
     DocumentReference docRef;
     private boolean isAdmin = false;
-    int index;
+    private boolean is_admin = true;
     MenuItem toAdmin;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +63,7 @@ public class LandingPage extends AppCompatActivity {
         Button changeAvatar = findViewById(R.id.changeAvatarBtn);
         //Button logoutUser = findViewById(R.id.logoutBtn);
         Button startSurveyBtn = findViewById(R.id.startSurveyBtn);
-
+        Button msgAdmin = findViewById(R.id.messageAdmin);
         // Start Exercise
         Button startExerciseBtn = findViewById(R.id.startActivityBtn);
         Button viewVideos = findViewById(R.id.videosBtn);
@@ -90,6 +89,8 @@ public class LandingPage extends AppCompatActivity {
                     displayedPoints.setText(document.getData().get("Points").toString());
                     actionBar.setTitle("Welcome, " + uName);
                     if (document.getData().get("IsAdmin") == null) {
+                        Log.d(TAG, "welcome user my nameodsfjhklfddf;jfdk");
+                        is_admin = false;
                         isAdmin = true;
                         invalidateOptionsMenu();
                     }
@@ -137,8 +138,22 @@ public class LandingPage extends AppCompatActivity {
         viewVideos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LandingPage.this, VideoDemonstrations.class);
+                Intent intent = new Intent(LandingPage.this, SurveyOneTen.class);
                 startActivity(intent);
+            }
+        });
+
+        msgAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(is_admin){
+                    Log.d(TAG, "admin");
+                    Intent intent = new Intent(LandingPage.this, AdminMsgList.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(LandingPage.this, MessageAdmin.class);
+                    startActivity(intent);
+                }
             }
         });
 
