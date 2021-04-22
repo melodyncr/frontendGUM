@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,14 +19,20 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 public class UpdateSchedule extends AppCompatActivity {
     private final String TAG = "Update Schedule";
     Button updateTimeBtn, wBtn1, wBtn2, wBtn3, wBtn4, wBtn5, wBtn6;
-    TextView currentTime, updateTime;
+    Button selectedTimeButton;
     TimePicker picker;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     ArrayList<String> times_list  = new ArrayList<>();
@@ -35,6 +42,8 @@ public class UpdateSchedule extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_schedule);
         setButtons();
+
+        updateTimeBtn.setVisibility(View.INVISIBLE);
 
         DocumentReference docRef = db.collection("Users").document(LoginActivity.loggedUserName);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -52,6 +61,14 @@ public class UpdateSchedule extends AppCompatActivity {
                             if(pair.getKey().toString().equals("Schedule")){ times_list = (ArrayList<String>) document.get("Schedule"); }
                             it.remove(); // avoids a ConcurrentModificationException
                         }
+
+                        wBtn1.setText(times_list.get(0));
+                        wBtn2.setText(times_list.get(1));
+                        wBtn3.setText(times_list.get(2));
+                        wBtn4.setText(times_list.get(3));
+                        wBtn5.setText(times_list.get(4));
+                        wBtn6.setText(times_list.get(5));
+
                     } else {
                         Log.d(TAG, "No such document");
                     }
@@ -67,7 +84,8 @@ public class UpdateSchedule extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 try {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
-                        currentTime.setText(times_list.get(0));
+                        selectedTimeButton = wBtn1;
+                        updateTimeBtn.setVisibility(View.VISIBLE);
                         wBtn1.setBackgroundColor(getResources().getColor(R.color.orange));
                         wBtn2.setBackgroundColor(getResources().getColor(R.color.logo_orange));
                         wBtn3.setBackgroundColor(getResources().getColor(R.color.logo_orange));
@@ -89,7 +107,8 @@ public class UpdateSchedule extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 try {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
-                        currentTime.setText(times_list.get(1));
+                        selectedTimeButton = wBtn2;
+                        updateTimeBtn.setVisibility(View.VISIBLE);
                         wBtn2.setBackgroundColor(getResources().getColor(R.color.orange));
                         wBtn1.setBackgroundColor(getResources().getColor(R.color.logo_orange));
                         wBtn3.setBackgroundColor(getResources().getColor(R.color.logo_orange));
@@ -112,7 +131,8 @@ public class UpdateSchedule extends AppCompatActivity {
 
                 try {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
-                        currentTime.setText(times_list.get(2));
+                        selectedTimeButton = wBtn3;
+                        updateTimeBtn.setVisibility(View.VISIBLE);
                         wBtn3.setBackgroundColor(getResources().getColor(R.color.orange));
                         wBtn2.setBackgroundColor(getResources().getColor(R.color.logo_orange));
                         wBtn1.setBackgroundColor(getResources().getColor(R.color.logo_orange));
@@ -135,7 +155,8 @@ public class UpdateSchedule extends AppCompatActivity {
 
                 try {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
-                        currentTime.setText(times_list.get(3));
+                        selectedTimeButton = wBtn4;
+                        updateTimeBtn.setVisibility(View.VISIBLE);
                         wBtn4.setBackgroundColor(getResources().getColor(R.color.orange));
                         wBtn2.setBackgroundColor(getResources().getColor(R.color.logo_orange));
                         wBtn3.setBackgroundColor(getResources().getColor(R.color.logo_orange));
@@ -158,7 +179,8 @@ public class UpdateSchedule extends AppCompatActivity {
 
                 try {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
-                        currentTime.setText(times_list.get(4));
+                        selectedTimeButton = wBtn5;
+                        updateTimeBtn.setVisibility(View.VISIBLE);
                         wBtn5.setBackgroundColor(getResources().getColor(R.color.orange));
                         wBtn2.setBackgroundColor(getResources().getColor(R.color.logo_orange));
                         wBtn3.setBackgroundColor(getResources().getColor(R.color.logo_orange));
@@ -181,7 +203,8 @@ public class UpdateSchedule extends AppCompatActivity {
 
                 try {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
-                        currentTime.setText(times_list.get(5));
+                        selectedTimeButton = wBtn6;
+                        updateTimeBtn.setVisibility(View.VISIBLE);
                         wBtn6.setBackgroundColor(getResources().getColor(R.color.orange));
                         wBtn2.setBackgroundColor(getResources().getColor(R.color.logo_orange));
                         wBtn3.setBackgroundColor(getResources().getColor(R.color.logo_orange));
@@ -202,11 +225,12 @@ public class UpdateSchedule extends AppCompatActivity {
         updateTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    int hour, minute;
+                    int mil_hour, hour, minute;
+                    String am_pm;
+                    boolean less_than_10 = false;
                     String min_less_than_ten="";
                     String time = "";
-                    boolean less_than_10 = false;
-                    String am_pm;
+
                     if (Build.VERSION.SDK_INT >= 23) {
                         hour = picker.getHour();
                         minute = picker.getMinute();
@@ -236,14 +260,99 @@ public class UpdateSchedule extends AppCompatActivity {
                     }else {
                          time = "" + hour + ":" + minute + " " + am_pm;
                     }
+                boolean validTime = verifyTime(time);
+                if(!validTime){
+                    Toast.makeText(UpdateSchedule.this, "Times must be spaced out by at least 1 hour!", Toast.LENGTH_SHORT).show();
+                }else {
                     times_list.set(index_to_update, time);
-                    Log.d(TAG, times_list.get(index_to_update));
+
+                    Collections.sort(times_list, new Comparator<String>() {
+                        @Override   // override sort method to compare time strings as dates to consider am/pm
+                        public int compare(String o1, String o2) {
+                            try {
+                                return new SimpleDateFormat("hh:mm a").parse(o1).compareTo(new SimpleDateFormat("hh:mm a").parse(o2));
+                            } catch (ParseException e) {
+                                return 0;
+                            }
+                        }
+                    });
+
                     Object schedule_obj = times_list;
-                    docRef.update("Schedule", schedule_obj );
-                    updateTime.setText("" + time);
+                    docRef.update("Schedule", schedule_obj);
+
+                    wBtn1.setText(times_list.get(0));
+                    wBtn2.setText(times_list.get(1));
+                    wBtn3.setText(times_list.get(2));
+                    wBtn4.setText(times_list.get(3));
+                    wBtn5.setText(times_list.get(4));
+                    wBtn6.setText(times_list.get(5));
+                }
             }
         });
     }
+
+    public boolean verifyTime(String time){
+        int hour, curr_hour;
+        int mins, curr_mins;
+        String am_pm, curr_am_pm;
+
+        if (time.length() < 8)  {   // set current selected hour
+            hour = Integer.parseInt(time.substring(0, 1));
+            mins = Integer.parseInt(time.substring(2, 4));
+            am_pm = time.substring(5);
+        } else {
+            hour = Integer.parseInt(time.substring(0, 2));
+            mins = Integer.parseInt(time.substring(3, 5));
+            am_pm = time.substring(6);
+        }
+
+        for(int i = 0; i < 6; i++){
+            if(i == index_to_update){
+                continue;
+            }else{
+                String currTime = times_list.get(i);
+                if (currTime.length() < 8)  {   // set current selected hour
+                    curr_hour = Integer.parseInt(currTime.substring(0, 1));
+                    curr_mins = Integer.parseInt(currTime.substring(2, 4));
+                    curr_am_pm = currTime.substring(5);
+                } else {
+                    curr_hour = Integer.parseInt(currTime.substring(0, 2));
+                    curr_mins = Integer.parseInt(currTime.substring(3, 5));
+                    curr_am_pm = currTime.substring(6);
+                }
+
+                   if( !compareTimes(hour, mins, am_pm, curr_hour, curr_mins, curr_am_pm) ){
+                       return false;
+                   }
+            }
+        }
+        return true;
+    }
+
+    boolean compareTimes(int hour, int mins, String am_pm, int curr_hour, int curr_mins, String curr_am_pm){
+        if( (Math.abs(hour - curr_hour)) > 1 )   {
+            return true;
+        }else if(Math.abs(hour - curr_hour) == 1){
+            if( (am_pm.equals("AM") && curr_am_pm.equals("PM")) || (am_pm.equals("PM") && curr_am_pm.equals("AM")) ) {  // if over 12 hours apart
+                return true;
+            }
+            else if(hour > curr_hour){
+                if(mins - curr_mins >= 0) {
+                    return true;
+                }
+            }else{
+                if(curr_mins - mins >= 0){
+                    return true;
+                }
+            }
+        }else if(hour == curr_hour){
+            if( (am_pm.equals("AM") && curr_am_pm.equals("PM")) || (am_pm.equals("PM") && curr_am_pm.equals("AM")) ) {  // if over 12 hours apart
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void setButtons(){
         updateTimeBtn = findViewById(R.id.updateTimeBtn);
         picker = findViewById(R.id.updateTimePicker);
@@ -253,8 +362,6 @@ public class UpdateSchedule extends AppCompatActivity {
         wBtn4 = findViewById(R.id.workout4_btn);
         wBtn5 = findViewById(R.id.workout5_btn);
         wBtn6 = findViewById(R.id.workout6_btn);
-        currentTime = findViewById(R.id.current_time);
-        updateTime = findViewById(R.id.selected_time);
     }
 
 }
