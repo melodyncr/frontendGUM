@@ -19,4 +19,9 @@
     <color name="lime_green">#0fe35d</color>
     <color name="logo_orange">#e87b39</color>
 
+    <color name="logo_main_blue">#004aad</color>
+    <color name="logo_main_black">#000000</color>
+    <color name="logo_main_yellow">#ffde59</color>
+    <color name="logo_main_red">#ff5757</color>
+
 </resources>

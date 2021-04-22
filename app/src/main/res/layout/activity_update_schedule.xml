@@ -110,58 +110,28 @@
                 android:theme="@style/timePickerTeal" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/current_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="Current Time:"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/thirdBox" />
-
         <TimePicker
             android:id="@+id/updateTimePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="76dp"
-            android:layout_marginLeft="76dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="56dp"
             android:background="@color/black"
             android:theme="@style/timePickerTeal"
             android:timePickerMode="spinner"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/current_time" />
-
-
-        <TextView
-            android:id="@+id/selected_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="New Time:"
-            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/updateTimePicker" />
-
+            app:layout_constraintTop_toBottomOf="@+id/thirdBox" />
 
         <Button
             android:id="@+id/updateTimeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="136dp"
-            android:layout_marginLeft="136dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
             android:text="Update Time"
             android:theme="@style/timePickerTeal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/selected_time" />
+            app:layout_constraintTop_toBottomOf="@+id/updateTimePicker" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
