@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/sand"
     tools:context=".MainActivity">
 
     <TextView
@@ -43,7 +42,7 @@
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_sand" />
+        app:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/textView9"

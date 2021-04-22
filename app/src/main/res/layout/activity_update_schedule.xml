@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/sand"
     tools:context=".UpdateSchedule">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,22 +55,19 @@
                 android:id="@+id/workout1_btn"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
-                android:text="Workout 1"
-                android:theme="@style/timePickerTeal" />
+                android:text="Workout 1" />
 
             <Button
                 android:id="@+id/workout2_btn"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
-                android:text="Workout 2"
-                android:theme="@style/timePickerTeal" />
+                android:text="Workout 2" />
 
             <Button
                 android:id="@+id/workout3_btn"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
-                android:text="Workout 3"
-                android:theme="@style/timePickerTeal" />
+                android:text="Workout 3" />
         </LinearLayout>
 
 
@@ -92,22 +88,19 @@
                 android:id="@+id/workout4_btn"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
-                android:text="Workout 4"
-                android:theme="@style/timePickerTeal" />
+                android:text="Workout 4" />
 
             <Button
                 android:id="@+id/workout5_btn"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
-                android:text="Workout 5"
-                android:theme="@style/timePickerTeal" />
+                android:text="Workout 5" />
 
             <Button
                 android:id="@+id/workout6_btn"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
-                android:text="Workout 6"
-                android:theme="@style/timePickerTeal" />
+                android:text="Workout 6" />
         </LinearLayout>
 
         <TimePicker
@@ -128,7 +121,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Update Time"
-            android:theme="@style/timePickerTeal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/updateTimePicker" />

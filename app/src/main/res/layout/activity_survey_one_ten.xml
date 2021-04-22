@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/sand">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -29,7 +28,7 @@
             android:layout_marginStart="108dp"
             android:layout_marginLeft="108dp"
             android:layout_marginTop="12dp"
-            android:src="@drawable/logo_sand"
+            android:src="@drawable/logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/typeSurvey" />
 
@@ -86,14 +85,12 @@
                 android:id="@+id/submitBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/timePickerTeal"
                 android:text="Submit Response"
                 />
             <Button
                 android:id="@+id/previousBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/timePickerTeal"
                 android:text="Previous Question"
                 />
 
@@ -114,7 +111,6 @@
             android:layout_marginStart="132dp"
             android:layout_marginLeft="132dp"
             android:text="Finish Later"
-            android:theme="@style/timePickerTeal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/blankView3" />
 
