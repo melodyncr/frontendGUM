@@ -6,6 +6,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,12 +19,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.example.a499_android.utility.SaveSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +37,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -51,23 +62,25 @@ public class LandingPage extends AppCompatActivity {
     DocumentReference docRef;
     private boolean isAdmin = false;
     private boolean is_admin = true;
+    TextView messageMark;
     MenuItem toAdmin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_landing_page);
+        setContentView(R.layout.activity_landing_page2);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Welcome...");
 //        actionBar.setDisplayShowTitleEnabled(false);
-        Button editSchedule = findViewById(R.id.editScheduleBtn);
-        Button changeAvatar = findViewById(R.id.changeAvatarBtn);
-        //Button logoutUser = findViewById(R.id.logoutBtn);
-        Button startSurveyBtn = findViewById(R.id.startSurveyBtn);
-        Button msgAdmin = findViewById(R.id.messageAdmin);
+        CardView editSchedule = findViewById(R.id.editScheduleBtn);
+        CardView changeAvatar = findViewById(R.id.viewShopBtn);
+        CardView startSurveyBtn = findViewById(R.id.startSurveyBtnC);
+        CardView msgAdmin = findViewById(R.id.messageMarkBtn);
         // Start Exercise
-        Button startExerciseBtn = findViewById(R.id.startActivityBtn);
-        Button viewVideos = findViewById(R.id.videosBtn);
+        CardView startExerciseBtn = findViewById(R.id.startWorkoutBtn);
+        CardView viewVideos = findViewById(R.id.videoDemosBtn);
         TextView displayedPoints = findViewById(R.id.pointDisplay);
+        ImageView profile_image = findViewById(R.id.avatarPicture);
+        messageMark = findViewById(R.id.messageMarktxt);
 //        TextView displayedUsername = findViewById(R.id.usernameDisplay);
 
         // NOTE: user info read from db will be hardcoded until login activity is done
@@ -78,21 +91,30 @@ public class LandingPage extends AppCompatActivity {
         //This originally used currentUserName
         DocumentReference userNameRef = db.collection("Users").document(uName);
         docRef = db.collection("Users").document(uName);
-
         // Read User Info
         getUserInfo(new FirestoreCallback() {
             @Override
             public void onSuccess(DocumentSnapshot document) {
                 if (document.exists()) {
                     Log.d(TAG, "Found User Data");
-                    Toast.makeText(LandingPage.this, "Successfully Found User Data", Toast.LENGTH_SHORT).show();
                     displayedPoints.setText(document.getData().get("Points").toString());
+                    //set image when loaded in
+                    String profile_path_total = document.getData().get("AvatarUrl").toString();
+                    //removes .png from string to find in path
+                    int size_profile = profile_path_total.length();
+                    int stop = size_profile - 4;
+                    String profile_path_name = profile_path_total.substring(0,stop);
+                    Context context = LandingPage.this;
+                    int resourceId =getResourceId(profile_path_name, "drawable", context.getPackageName(),context);
+                    profile_image.setImageResource(resourceId);
+
                     actionBar.setTitle("Welcome, " + uName);
                     if (document.getData().get("IsAdmin") == null) {
-                        Log.d(TAG, "welcome user my nameodsfjhklfddf;jfdk");
                         is_admin = false;
                         isAdmin = true;
                         invalidateOptionsMenu();
+                    }else{
+                        messageMark.setText("Message Users");
                     }
                 } else {
                     Toast.makeText(LandingPage.this, "Unable to Load User Data", Toast.LENGTH_SHORT).show();
@@ -301,6 +323,17 @@ public class LandingPage extends AppCompatActivity {
 
 
     }
+
+    public static int getResourceId(String pVariableName, String pResourcename, String pPackageName,Context context)
+    {
+        try {
+            return context.getResources().getIdentifier(pVariableName, pResourcename, pPackageName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     int setHourOrMin(String time_str, boolean hour_or_min){
         int time;
         int start = time_str.length()-2;
