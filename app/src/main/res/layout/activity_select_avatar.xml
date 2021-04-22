@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/sand"
+
     android:id="@+id/relative"
     tools:context=".SelectAvatar">
 
@@ -43,7 +43,7 @@
                 android:layout_marginTop="4dp"
                 app:layout_constraintStart_toEndOf="@+id/example1"
                 app:layout_constraintTop_toTopOf="@+id/example1"
-                app:srcCompat="@drawable/gum_" />
+                app:srcCompat="@drawable/logo_no_text" />
 
             <ImageButton
                 android:id="@+id/example3"

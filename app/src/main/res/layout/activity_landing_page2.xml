@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/sand"
     android:weightSum="10"
     tools:context=".LandingPage">
 
@@ -24,7 +23,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/logo_sand" />
+        android:src="@drawable/logo" />
 
     <LinearLayout
         android:layout_gravity="center_horizontal|center_vertical"
@@ -66,7 +65,7 @@
         android:layout_below="@+id/topView"
         android:background="@drawable/border_points"
         android:layout_marginLeft="300dp"
-        android:src="@drawable/gum_" />
+        android:src="@drawable/logo_no_text" />
 
 
     <TextView
