@@ -32,5 +32,25 @@
         <item name="background">@color/black</item>
     </style>
 
+    <style name="workout_button_easy">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+        <item name="colorPrimary">@color/lime_green</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+    <style name="workout_button_medium">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+        <item name="colorPrimary">@color/soft_yellow</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+    <style name="workout_button_hard">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+        <item name="colorPrimary">@color/logo_red</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+    <style name="recycler_popup_close">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+        <item name="colorPrimary">@color/orange</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
 
 </resources>

@@ -2,20 +2,33 @@ package com.example.a499_android;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.a499_android.utility.PopupRecyclerViewAdapter;
+
+import java.util.ArrayList;
 
 public class SelectWorkout extends AppCompatActivity{
 
-    public static String selectedWorkout = "";
+    public static String selectedWorkout = "none";
+//    ArrayList<String> data = new ArrayList<>();
+    String data[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,83 +36,67 @@ public class SelectWorkout extends AppCompatActivity{
         setContentView(R.layout.activity_select_workout);
         ActionBar actionBar = getSupportActionBar();
 
-        // Easy Spinner
-        Spinner spinner1 = (Spinner) findViewById(R.id.spinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
-                R.array.easy_workouts, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner1.setAdapter(adapter1);
-
-        // Medium Spinner
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-                R.array.medium_workouts, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner2.setAdapter(adapter2);
-
-        // Hard Spinner
-        Spinner spinner3 = (Spinner) findViewById(R.id.spinner3);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
-                R.array.hard_workouts, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner3.setAdapter(adapter3);
+        Resources res = getResources();
 
         Button startBtn = findViewById(R.id.start_workout);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SelectWorkout.this, StartExercise.class);
-                startActivity(intent);
+                if(selectedWorkout.equals("none")){
+                    Toast.makeText(SelectWorkout.this, "Please Select an Exercise", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(SelectWorkout.this, StartExercise.class);
+                    startActivity(intent);
+                }
             }
         });
-
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Button easyBtn = findViewById(R.id.easy_button);
+        easyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected (AdapterView < ? > parent, View view,int position, long id){
-                // On selecting a spinner item
-                String item = parent.getItemAtPosition(position).toString();
-                selectedWorkout = item;
-                // Showing selected spinner item
-//                Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-            }
-            public void onNothingSelected (AdapterView < ? > arg0){
-                // TODO Auto-generated method stub
+            public void onClick(View v) {
+                data = res.getStringArray(R.array.easy_workouts);
+                showPopup();
             }
         });
-
-        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Button mediumBtn = findViewById(R.id.medium_button);
+        mediumBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected (AdapterView < ? > parent, View view,int position, long id){
-                // On selecting a spinner item
-                String item = parent.getItemAtPosition(position).toString();
-                selectedWorkout = item;
-            }
-            public void onNothingSelected (AdapterView < ? > arg0){
-                // TODO Auto-generated method stub
+            public void onClick(View v) {
+                data = res.getStringArray(R.array.medium_workouts);
+                showPopup();
             }
         });
-
-        spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Button hardBtn = findViewById(R.id.hard_button);
+        hardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected (AdapterView < ? > parent, View view,int position, long id){
-                // On selecting a spinner item
-                String item = parent.getItemAtPosition(position).toString();
-                selectedWorkout = item;
-            }
-            public void onNothingSelected (AdapterView < ? > arg0){
-                // TODO Auto-generated method stub
-            }
+            public void onClick(View v) {
+                data = res.getStringArray(R.array.hard_workouts);
+                showPopup();
+             }
         });
 
     } // End of onCreate()
+
+    public void showPopup(){
+        final View popupView = LayoutInflater.from(SelectWorkout.this).inflate(R.layout.recycler_popup_window, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        Button btn = (Button) popupView.findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+
+        RecyclerView recyclerView = (RecyclerView) popupView.findViewById(R.id.rv_recycler_view2);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        PopupRecyclerViewAdapter adapter = new PopupRecyclerViewAdapter(SelectWorkout.this, data, popupWindow);
+        recyclerView.setAdapter(adapter);
+
+        popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+    }
 
 }

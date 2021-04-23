@@ -60,6 +60,7 @@ public class FinishedExerciseActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SelectWorkout.selectedWorkout = "none";
                 Intent intent = new Intent(FinishedExerciseActivity.this, LandingPage.class);
                 startActivity(intent);
             }
