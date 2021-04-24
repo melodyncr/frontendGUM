@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class AddSurveyQuestionsMC  extends AppCompatActivity {
-    Button addAnswer, nextQuestion;
+    Button addAnswer, nextQuestion,clearList;
     EditText answersText;
     TextView list_answers;
     String TAG = "Add Survey MC";
@@ -24,6 +24,7 @@ public class AddSurveyQuestionsMC  extends AppCompatActivity {
         setContentView(R.layout.add_survey_mc_question);
         addAnswer = findViewById(R.id.addResponseBtn);
         nextQuestion = findViewById(R.id.submitBtnA);
+        clearList = findViewById(R.id.clearListResponseBtn);
         answersText = findViewById(R.id.addAnswersEditTxt);
         list_answers = findViewById(R.id.listAnswers);
         ArrayList<String> answersList = new ArrayList<>();
@@ -33,15 +34,28 @@ public class AddSurveyQuestionsMC  extends AppCompatActivity {
                 if(answersText.getText().toString().equals("")){
                     Toast.makeText(AddSurveyQuestionsMC.this, "Add some text!", Toast.LENGTH_SHORT).show();
                 }else {
-                    if (answersList.size() < 4) {
-                        answersList.add(answersText.getText().toString());
-                        String text = "";
-                        for (String s : answersList) {
-                            text = text + s + " \n";
+                    //check if the string if formatted correctly
+                    String check_comma = answersText.getText().toString();
+                    boolean no_comma = true;
+                    for(int i =0; i < check_comma.length(); i++){
+                        if(check_comma.charAt(i) == ','){
+                            no_comma = false;
+                            i = check_comma.length();
                         }
-                        list_answers.setText(text);
+                    }
+                    if(no_comma) {
+                        if (answersList.size() < 4) {
+                            answersList.add(answersText.getText().toString());
+                            String text = "";
+                            for (String s : answersList) {
+                                text = text + s + " \n";
+                            }
+                            list_answers.setText(text);
+                        } else {
+                            Toast.makeText(AddSurveyQuestionsMC.this, "List is full!", Toast.LENGTH_SHORT).show();
+                        }
                     }else{
-                        Toast.makeText(AddSurveyQuestionsMC.this, "List is full!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddSurveyQuestionsMC.this, "There is a comma, please remove comma.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -82,6 +96,15 @@ public class AddSurveyQuestionsMC  extends AppCompatActivity {
 
                     }
                 }
+            }
+        });
+
+        //clears list
+        clearList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                answersList.clear();
+                list_answers.setText("");
             }
         });
 

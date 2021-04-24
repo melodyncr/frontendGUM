@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="If you selected Multiple Choice, Please enter your answers. You may only add up to four choices and atleast need two choices."
+            android:text="If you selected Multiple Choice, Please enter your answers. You may only add up to four choices and atleast need two choices.\n Do NOT add commas to any response. Adding the comma will mess with the format of the question."
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -39,6 +39,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addAnswersEditTxt" />
 
+        <Button
+            android:id="@+id/clearListResponseBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="132dp"
+            android:layout_marginLeft="132dp"
+            android:layout_marginTop="20dp"
+            android:text="Clear Answers"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addResponseBtn" />
+
         <TextView
             android:id="@+id/listAnswers"
             android:layout_width="match_parent"
@@ -46,7 +57,7 @@
             android:gravity="center"
             android:text=""
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addResponseBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/clearListResponseBtn" />
 
         <LinearLayout
             android:id="@+id/secondBoxA"

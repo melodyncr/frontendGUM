@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class AdminLanding extends AppCompatActivity {
 
-    Button addEditTidbits, viewResponsesBtn, addSurvey;
+    Button addEditTidbits, viewResponsesBtn, addSurveyBtn,addVideosBtn;
     ActionBar actionBar;
     public static ArrayList<String> w_survey_count_list = new ArrayList<>();
     public static ArrayList<String> w_survey_questions_list = new ArrayList<>();
@@ -42,10 +42,18 @@ public class AdminLanding extends AppCompatActivity {
             }
         });
 
-        addSurvey.setOnClickListener(new View.OnClickListener() {
+        addSurveyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AdminLanding.this, AddSurveyQuestionsCount.class ));
+            }
+        });
+
+        addVideosBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminLanding.this, AddVideos.class ));
+
             }
         });
 
@@ -54,7 +62,8 @@ public class AdminLanding extends AppCompatActivity {
     private void wiredUp() {
         addEditTidbits = findViewById(R.id.addEditTidbits);
         viewResponsesBtn = findViewById(R.id.viewResponsesBtn);
-        addSurvey = findViewById(R.id.addSurveyBtn);
+        addSurveyBtn = findViewById(R.id.addSurveyBtn);
+        addVideosBtn = findViewById(R.id.addVideosBtn);
     }
     private void clearLists(){
         LoadPreviousSurvey.w_survey_list_names.clear();
