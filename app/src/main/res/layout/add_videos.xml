@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/addQuestion"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Please Follow Instructions carefully"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/view1"
+            app:layout_constraintTop_toBottomOf="@+id/addQuestion"/>
+
+        <TextView
+            android:id="@+id/typeQuestion"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Please select the category the new video will be inserted in. Enter a breif description, then finally enter a 11 digit unique ID to the video. There is an example below it's the last 11 characters of any video on Youtube."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/view2"
+            app:layout_constraintTop_toBottomOf="@+id/typeQuestion"/>
+
+        <RadioGroup
+            android:id="@+id/radioQuestionsGroupV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2">
+            <RadioButton
+                android:id="@+id/question1V"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Beginner" />
+            <RadioButton
+                android:id="@+id/question2V"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Intermediate" />
+            <RadioButton
+                android:id="@+id/question3V"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Advance"/>
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/view3"
+            app:layout_constraintTop_toBottomOf="@+id/radioQuestionsGroupV"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter a brief description/title of the video."
+            android:id="@+id/addVideoDescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/view4"
+            app:layout_constraintTop_toBottomOf="@+id/addVideoDescription"/>
+
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter the  11 character ID of the video."
+            android:id="@+id/addVideoCode"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/view5"
+            app:layout_constraintTop_toBottomOf="@+id/addVideoCode"/>
+
+
+        <LinearLayout
+            android:id="@+id/secondBoxA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view5">
+
+            <ImageView
+                android:id="@+id/exampleCode"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:src="@drawable/idexample"
+                app:layout_constraintStart_toStartOf="@id/view4"
+                app:layout_constraintBottom_toBottomOf="@id/view4" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/thirdBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/secondBoxA">
+
+            <Button
+                android:id="@+id/uploadVideo"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/view5"
+                android:text="Add Video" />
+
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

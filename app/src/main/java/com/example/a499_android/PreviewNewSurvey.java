@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,7 +52,8 @@ public class PreviewNewSurvey extends AppCompatActivity {
         confirmSurvey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 wSurveyQDoc = db.collection("Surveys").document("WSurveyQ");
+                Toast.makeText(PreviewNewSurvey.this, "Survey is uploading...", Toast.LENGTH_SHORT).show();
+                wSurveyQDoc = db.collection("Surveys").document("WSurveyQ");
                  wSurveyRDoc = db.collection("Surveys").document("WSurveyR");
                  pastWSurveyQDoc = db.collection("Surveys").document("PastWSurveyQ");
                  pastWSurveyRDoc = db.collection("Surveys").document("PastWSurveyR");
@@ -145,7 +147,7 @@ public class PreviewNewSurvey extends AppCompatActivity {
                 addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "WSurveyR successfully written!");
+                        Toast.makeText(PreviewNewSurvey.this, "Survey Has been Successfully Uploaded.", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(PreviewNewSurvey.this, AdminLanding.class));
                     }
                 });

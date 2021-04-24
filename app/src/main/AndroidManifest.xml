@@ -41,6 +41,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".AdminLanding" />
         </activity>
+        <activity android:name=".AddVideos">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminLanding" />
+        </activity>
         <activity android:name=".ViewResponseUser">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -84,6 +89,7 @@
 
         <activity android:name=".StartExercise" />
         <activity android:name=".CreateAccount" />
+        <activity android:name=".Agreement" />
         <activity android:name=".SelectSchedule" />
         <activity android:name=".UpdateSchedule" />
         <activity android:name=".LandingPage" />
