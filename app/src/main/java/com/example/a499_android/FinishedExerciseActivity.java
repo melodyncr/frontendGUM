@@ -2,6 +2,7 @@ package com.example.a499_android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +13,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a499_android.utility.SaveSharedPreference;
+import com.example.a499_android.utility.TidbitsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import static com.example.a499_android.LoginActivity.loggedUserName;
@@ -27,6 +33,9 @@ import static com.example.a499_android.LoginActivity.loggedUserName;
 public class FinishedExerciseActivity extends AppCompatActivity {
     DocumentReference docRef;
     private final String TAG = "Workout Complete";
+    CollectionReference tidbits;
+    List<String> tidBitsList;
+    List<String> tidbitsIdList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +64,33 @@ public class FinishedExerciseActivity extends AppCompatActivity {
                 }
             }
         }, userNameRef);
+
+
+
+        TextView tidbit = findViewById(R.id.tidbit);
+        tidbits = db.collection("Tidbits");
+
+        getTidbits(new FirestoreCallback2() {
+            @Override
+            public void onSuccess(List<String> tbIds, List<String> tidbits) {
+                if(tidbits.size() >= 0) {
+                    tidBitsList = tidbits;
+                    tidbitsIdList = tbIds;
+                    Log.d("In onCreate, IDs: ", String.valueOf(tidbitsIdList));
+                    Log.d("In onCreate, Values: ", String.valueOf(tidBitsList));
+
+                    // define the range
+                    int max = tidBitsList.size()-1;
+                    int min = 1;
+                    int range = max - min + 1;
+                    int rand = (int)(Math.random() * range) + min;
+                    tidbit.setText(tidBitsList.get(rand));
+
+                } else {
+                    Log.d(TAG, "Something happened!");
+                }
+            }
+        });
 
         Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +122,30 @@ public class FinishedExerciseActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void getTidbits(FinishedExerciseActivity.FirestoreCallback2 firestoreCallback) {
+        tidbits.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                List<String> listOfTidbits = new ArrayList<String>();
+                List<String> listOfIds = new ArrayList<String>();
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String tidbitVal = document.getString("Tidbit");
+                        listOfIds.add(document.getId());
+                        listOfTidbits.add(tidbitVal);
+                    }
+                    firestoreCallback.onSuccess(listOfIds, listOfTidbits);
+                } else {
+                    Log.d(TAG, "=====================");
+                }
+            }
+        });
+    }
+
+    private interface FirestoreCallback2 {
+        void onSuccess(List<String> tidbits, List<String> tbIdList);
     }
 
     private interface FirestoreCallback {
