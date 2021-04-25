@@ -12,8 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Here are some videos based on your level."
+        android:text="Use the spinner to view videos based the category you picked."
         />
+    <Spinner
+        android:id="@+id/spinnerVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/videosListRecyclerView_Lvl"

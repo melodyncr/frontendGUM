@@ -1,6 +1,7 @@
 package com.example.a499_android;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,8 +33,10 @@ import java.util.Map;
 public class AdminMsgList extends AppCompatActivity {
 
     ArrayList<String> usersList = new ArrayList<>();
+    ArrayList<String> priorityList = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference usersDoc;
+    TextView priorityText;
     public String TAG = "Admin Landing";
     public static String userNameSelected = "";
     public static boolean fromAdmin = false;
@@ -44,7 +47,10 @@ public class AdminMsgList extends AppCompatActivity {
         setContentView(R.layout.users_list_msg);
         finishBtn = findViewById(R.id.backBtnUserList);
         finishBtn.setVisibility(View.INVISIBLE);
-
+        priorityText = findViewById(R.id.priorityList);
+        if(ViewResponseR.select_question){
+            priorityText.setVisibility(View.INVISIBLE);
+        }
         usersDoc = db.collection("Users_List").document("List");
         init_firebase();
 
@@ -62,12 +68,23 @@ public class AdminMsgList extends AppCompatActivity {
                         while (it.hasNext()) {
                             Map.Entry pair = (Map.Entry)it.next();
                             if(pair.getKey().toString().equals("user_names")){ usersList = (ArrayList<String>) document.get("user_names"); }
+                            if(pair.getKey().toString().equals("priority_list")){ priorityList = (ArrayList<String>) document.get("priority_list"); }
                             it.remove(); // avoids a ConcurrentModificationException
                         }
                         RecyclerView rv = findViewById(R.id.users_list_recycler_view);
                         rv.setLayoutManager(new LinearLayoutManager(AdminMsgList.this));
                         rv.setAdapter(new Adapter());
-
+                        if (priorityList.size() == 0) {
+                            priorityText.setText("Priority List is empty");
+                        }else {
+                            String priority_str = "";
+                            int i = 0;
+                            for (String s : priorityList) {
+                                priority_str = priority_str + priorityList.get(i) + "\n";
+                                i++;
+                            }
+                            priorityText.setText("Priority List \n" + priority_str);
+                        }
                     } else {
                         Log.d(TAG, "No such document");
                     }
@@ -116,7 +133,6 @@ public class AdminMsgList extends AppCompatActivity {
         public void bind(String f) {
             TextView item = itemView.findViewById(R.id.message_id);
             item.setText(f);
-
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

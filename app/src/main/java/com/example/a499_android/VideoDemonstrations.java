@@ -3,6 +3,10 @@ package com.example.a499_android;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,24 +25,34 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class VideoDemonstrations extends AppCompatActivity {
+public class VideoDemonstrations extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     RecyclerView recyclerView;
     ArrayList<String> video_list = new ArrayList<>();
     ArrayList<String> description_list = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference videosDoc;
-    Timer timer;
+    Spinner spinner;
+    public String categoryStr = "";
     public String TAG = "Video Demo";
     String delay;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_demonstration);
+        spinner = findViewById(R.id.spinnerVideo);
+        recyclerView = (RecyclerView) findViewById(R.id.videosListRecyclerView_Lvl);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(VideoDemonstrations.this));
         videosDoc = db.collection("Videos").document(LandingPage.fitnessLevel);
-        init_firebase();
+        query_for_levels();
+        spinner.setOnItemSelectedListener(this);
+        String[] levels = new String[]{"Select a Category","Beginner", "Intermediate","Advance"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, levels);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 
-    void init_firebase() {
+    void query_for_levels() {
         videosDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -53,10 +67,7 @@ public class VideoDemonstrations extends AppCompatActivity {
                             if (pair.getKey().toString().equals("video_description")){description_list = (ArrayList<String>) document.get("video_description");}
                             it.remove(); // avoids a ConcurrentModificationException
                         }
-                        recyclerView = (RecyclerView) findViewById(R.id.videosListRecyclerView_Lvl);
-                        recyclerView.setHasFixedSize(true);
                         Log.d(TAG, video_list.toString() + "\n" + description_list.toString());
-                        recyclerView.setLayoutManager(new LinearLayoutManager(VideoDemonstrations.this));
                         VideoAdapter videosAdapter = new VideoAdapter(video_list,description_list);
                         recyclerView.setAdapter(videosAdapter);
                         Log.d(TAG, "delay" + delay);
@@ -70,5 +81,20 @@ public class VideoDemonstrations extends AppCompatActivity {
             }
         });
         //return weeklyQuestionsList;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // On selecting a spinner item
+        categoryStr = parent.getItemAtPosition(position).toString();
+        if(categoryStr.equals("Select a Category")){
+            //do nothing, no query is executed.
+        }else {
+            videosDoc = db.collection("Videos").document(categoryStr);
+            query_for_levels();
+        }
+    }
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
     }
 }

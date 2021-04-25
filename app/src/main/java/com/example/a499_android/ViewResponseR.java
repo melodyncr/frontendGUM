@@ -78,14 +78,16 @@ public class ViewResponseR extends AppCompatActivity {
         findUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(SelectASurvey.document_response.equals("")){
-                    Snackbar.make(findViewById(android.R.id.content),"This only works for current Surveys!", Snackbar.LENGTH_LONG).show();
-                }else{
-                    select_question = true;
-                    questionSelected = questionsList.get(GetResponseListQuery.index_charts).substring(1);
-                    Intent intent = new Intent(ViewResponseR.this, AdminMsgList.class);
-                    startActivity(intent);
-                }
+
+                    if (SelectASurvey.document_response.equals("")) {
+                        Snackbar.make(findViewById(android.R.id.content), "This only works for current Surveys!", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        select_question = true;
+                        questionSelected = questionsList.get(GetResponseListQuery.index_charts).substring(1);
+                        Intent intent = new Intent(ViewResponseR.this, AdminMsgList.class);
+                        startActivity(intent);
+                    }
+
             }
         });
 

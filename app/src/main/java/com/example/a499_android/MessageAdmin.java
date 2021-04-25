@@ -30,8 +30,10 @@ import java.util.TimerTask;
 public class MessageAdmin extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<String> messageList = new ArrayList<>();
+    ArrayList<String> priorityList = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference messageDoc;
+    DocumentReference usersList;
     public String TAG = "Message Admin";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,8 @@ public class MessageAdmin extends AppCompatActivity {
         }else {
             messageDoc = db.collection("Messages").document(LoginActivity.loggedUserName);
         }
-        init_firebase();
+        usersList = db.collection("Users_List").document("List");
+        query1();
         Button sendBtn = findViewById(R.id.sendMsgBtn);
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +62,7 @@ public class MessageAdmin extends AppCompatActivity {
                     message = message + "\n" + "Sent at " + date.toString();
                     messageList.add(message);
                     Object obj = messageList;
+                    query2();
                     messageDoc.update("messages", obj).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -72,7 +76,7 @@ public class MessageAdmin extends AppCompatActivity {
         });
         // create timer for activity completion (add visual timer later)
     }
-    void init_firebase(){
+    void query1(){
         messageDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -91,7 +95,7 @@ public class MessageAdmin extends AppCompatActivity {
                         recyclerView.setLayoutManager(new LinearLayoutManager(MessageAdmin.this));
                         MessageAdapter messageAdapter = new MessageAdapter(messageList);
                         recyclerView.setAdapter(messageAdapter);
-
+                        if(AdminMsgList.fromAdmin) { query2(); }
                     } else {
                         Log.d(TAG, "No such document");
                     }
@@ -101,6 +105,59 @@ public class MessageAdmin extends AppCompatActivity {
             }
         });
         //return weeklyQuestionsList;
+    }
+
+
+
+    void query2() {
+        usersList.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        Iterator it = data.entrySet().iterator();
+                        while (it.hasNext()) {
+                            Map.Entry pair = (Map.Entry) it.next();
+                            if (pair.getKey().toString().equals("priority_list")) { priorityList = (ArrayList<String>) document.get("priority_list"); }
+                            it.remove(); // avoids a ConcurrentModificationException
+                        }
+                        if(AdminMsgList.fromAdmin) {
+                            Log.d(TAG, priorityList.toString() + "Before");
+                            for (int i = 0; i < priorityList.size(); i++) {
+                                if (AdminMsgList.userNameSelected.equals(priorityList.get(i))) {
+                                    priorityList.remove(i);
+                                }
+                            }
+                            Object priorityListObj = priorityList;
+                            usersList.update("priority_list", priorityListObj);
+                            Log.d(TAG, priorityList.toString() + "After");
+                        }else{
+                            boolean add_to_list = true;
+                            Log.d(TAG, priorityList.toString() + "before loggin in");
+                            for (int i = 0; i < priorityList.size(); i++) {
+                                if (LoginActivity.loggedUserName.equals(priorityList.get(i))) {
+                                    i =priorityList.size();
+                                    add_to_list = false;
+                                }
+                            }
+                            if(add_to_list){
+                                priorityList.add(LoginActivity.loggedUserName);
+                                Object priorityListObj = priorityList;
+                                usersList.update("priority_list", priorityListObj);
+                            }
+                            Log.d(TAG, priorityList.toString() + "After");
+                        }
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
     }
 
 
