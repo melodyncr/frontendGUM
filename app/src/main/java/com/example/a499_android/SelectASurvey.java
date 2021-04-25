@@ -110,6 +110,7 @@ public class SelectASurvey extends AppCompatActivity {
                     document_questions_str = "PastWSurveyQ";
                     document_questions_answers = "PastWSurveyQL";
                     field_name_response = f;
+                    document_response = "";
                     past_survey = true;
                     Intent intent = new Intent(SelectASurvey.this, GetResponseListQuery.class);
                     startActivity(intent);

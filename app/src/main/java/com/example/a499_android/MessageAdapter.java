@@ -19,7 +19,7 @@ import java.util.Date;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ItemHolder>{
 
-    public String TAG = "VideoAdapter";
+    public String TAG = "Message Adapter";
     ArrayList<String> messagesList;
     public MessageAdapter(){
 
@@ -36,7 +36,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ItemHold
 
     @Override
     public void onBindViewHolder(ItemHolder holder, int position){
-        Log.d(TAG, messagesList.get(position));
         holder.bind(messagesList.get(position));
     }
 

@@ -168,6 +168,7 @@ public class LandingPage extends AppCompatActivity {
         msgAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AdminMsgList.fromAdmin = false;// used to make sure when login from admin to regular user, it does not do other queries.
                 if(is_admin){
                     Log.d(TAG, "admin");
                     Intent intent = new Intent(LandingPage.this, AdminMsgList.class);
