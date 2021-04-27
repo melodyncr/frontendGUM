@@ -3,7 +3,10 @@
     package="com.example.a499_android">
 
     <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true"/>
+    <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="true"/>
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -117,7 +120,11 @@
         <activity android:name=".UploadSurvey" />
         <activity android:name=".SurveyOneTen" />
         <receiver android:name=".NotificationReceiver" />
-
+        <activity android:name=".StartExerciseM">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LandingPage" />
+        </activity>
         <activity android:name=".SelectWorkout" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -126,6 +133,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
 
         <meta-data
             android:name="preloaded_fonts"
