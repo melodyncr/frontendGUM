@@ -36,12 +36,15 @@ public class SelectAvatar extends AppCompatActivity {
     private PopupWindow confirmTxt;
     private LayoutInflater layoutInflater;
     private ImageButton ex1, ex2, ex3, ex4;
+    // TextViews for unlocked or locked avatars
+    private TextView tv1, tv2, tv3, tv4;
     private Button backButton, yesBuyBtn, noBuyBtn;
     private TextView ptsView, confirmQuestion;
     List<String> unlockedAvatars;
     private long fitnessPts; // fitness points
     DocumentReference userDocRef;
     ActionBar actionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +68,24 @@ public class SelectAvatar extends AppCompatActivity {
         readData(new FirestoreCallback() {
             @Override
             public void onSuccess(DocumentSnapshot document) {
-                if(document.exists()) {
+                if (document.exists()) {
                     unlockedAvatars = (List<String>) document.getData().get("UnlockedAvatars");
+                    if (unlockedAvatars.contains("dead.png")) {
+                        tv1.setText("Unlocked");
+                    }
+                    if (unlockedAvatars.contains("blackbkg.jpg")) {
+                        tv2.setText("Unlocked");
+                    }
+                    if (unlockedAvatars.contains("bluebkg.jpg")) {
+                        tv3.setText("Unlocked");
+                    } else {
+                        tv3.setText("Locked");
+                    }
+                    if (unlockedAvatars.contains("greenbkg.jpg")) {
+                        tv4.setText("Unlocked");
+                    } else {
+                        tv4.setText("Locked");
+                    }
                     Log.d("Unlocked Avatars", String.valueOf(unlockedAvatars));
                     fitnessPts = (long) document.getData().get("Points");
                     Log.d("Longevity Points", String.valueOf(fitnessPts));
@@ -100,10 +119,11 @@ public class SelectAvatar extends AppCompatActivity {
         ex2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (isUnlocked("blackbkg.jpg")) {
                     setImage("blackbkg.jpg");
                 } else {
-                    onButtonShowPopupWindowClick(view, "blackbkg.jpg",0);
+                    onButtonShowPopupWindowClick(view, "blackbkg.jpg", 30);
                 }
             }
         });
@@ -147,15 +167,15 @@ public class SelectAvatar extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(SelectAvatar.this,
-                    "Image set",
-                    Toast.LENGTH_SHORT).show();
+                        "Image set",
+                        Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(SelectAvatar.this,
-                    "Something went wrong",
-                    Toast.LENGTH_SHORT).show();
+                        "Something went wrong",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -186,6 +206,10 @@ public class SelectAvatar extends AppCompatActivity {
         ex2 = findViewById(R.id.example2);
         ex3 = findViewById(R.id.example3);
         ex4 = findViewById(R.id.example4);
+        tv1 = findViewById(R.id.tv1);
+        tv2 = findViewById(R.id.tv2);
+        tv3 = findViewById(R.id.tv3);
+        tv4 = findViewById(R.id.tv4);
         ptsView = findViewById(R.id.selectAvatarPts);
     }
 
