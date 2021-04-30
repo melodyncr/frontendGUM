@@ -35,7 +35,7 @@ public class SelectAvatar extends AppCompatActivity {
     public static final String TAG = "Select Avatar: ";
     private PopupWindow confirmTxt;
     private LayoutInflater layoutInflater;
-    private ImageButton ex1, ex2, ex3;
+    private ImageButton ex1, ex2, ex3, ex4;
     private Button backButton, yesBuyBtn, noBuyBtn;
     private TextView ptsView, confirmQuestion;
     List<String> unlockedAvatars;
@@ -93,17 +93,17 @@ public class SelectAvatar extends AppCompatActivity {
         ex1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setImage("dead.png");
+                setImage("whitebkg.jpg");
             }
         });
 
         ex2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isUnlocked("gum_.png")) {
-                    setImage("gum_.png");
+                if (isUnlocked("blackbkg.jpg")) {
+                    setImage("blackbkg.jpg");
                 } else {
-                    onButtonShowPopupWindowClick(view, "gum_.png",500);
+                    onButtonShowPopupWindowClick(view, "blackbkg.jpg",0);
                 }
             }
         });
@@ -111,10 +111,21 @@ public class SelectAvatar extends AppCompatActivity {
         ex3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isUnlocked("thinkingemoji.png")) {
-                    setImage("thinkingemoji.png");
+                if (isUnlocked("greenbkg.jpg")) {
+                    setImage("greenbkg.jpg");
                 } else {
-                    onButtonShowPopupWindowClick(view, "thinkingemoji.png", 1000);
+                    onButtonShowPopupWindowClick(view, "greenbkg.jpg", 30);
+                }
+            }
+        });
+
+        ex4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isUnlocked("bluebkg.jpg")) {
+                    setImage("bluebkg.jpg");
+                } else {
+                    onButtonShowPopupWindowClick(view, "bluebkg.jpg", 30);
                 }
             }
         });
@@ -174,6 +185,7 @@ public class SelectAvatar extends AppCompatActivity {
         ex1 = findViewById(R.id.example1);
         ex2 = findViewById(R.id.example2);
         ex3 = findViewById(R.id.example3);
+        ex4 = findViewById(R.id.example4);
         ptsView = findViewById(R.id.selectAvatarPts);
     }
 

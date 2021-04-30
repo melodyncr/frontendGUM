@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
     android:id="@+id/relative"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
     tools:context=".SelectAvatar">
 
     <HorizontalScrollView
@@ -30,9 +29,11 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/whitebkg"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/dead" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/example2"
@@ -41,9 +42,11 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="4dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/blackbkg"
                 app:layout_constraintStart_toEndOf="@+id/example1"
-                app:layout_constraintTop_toTopOf="@+id/example1"
-                app:srcCompat="@drawable/logo_no_text" />
+                app:layout_constraintTop_toTopOf="@+id/example1" />
 
             <ImageButton
                 android:id="@+id/example3"
@@ -52,9 +55,24 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="4dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/bluebkg"
                 app:layout_constraintStart_toEndOf="@+id/example2"
-                app:layout_constraintTop_toTopOf="@+id/example2"
-                app:srcCompat="@drawable/thinkingemoji" />
+                app:layout_constraintTop_toTopOf="@+id/example2" />
+
+            <ImageButton
+                android:id="@+id/example4"
+                android:layout_width="330dp"
+                android:layout_height="320dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="4dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/greenbkg"
+                app:layout_constraintStart_toEndOf="@+id/example3"
+                app:layout_constraintTop_toTopOf="@+id/example3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </HorizontalScrollView>
