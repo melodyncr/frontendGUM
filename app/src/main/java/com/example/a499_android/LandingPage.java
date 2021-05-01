@@ -6,19 +6,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,19 +20,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.res.ResourcesCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.example.a499_android.utility.SaveSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -85,6 +75,9 @@ public class LandingPage extends AppCompatActivity {
 
         // NOTE: user info read from db will be hardcoded until login activity is done
         String uName = SaveSharedPreference.getUserName(LandingPage.this);
+
+//        createNotificationChannel();
+
         // Access a Cloud Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -233,7 +226,19 @@ public class LandingPage extends AppCompatActivity {
         void onSuccess(DocumentSnapshot document);
     }
 
-    void setNotifications(ArrayList<String> list){
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("GUM", "GUM", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Channel for GUM");
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    public void setNotifications(ArrayList<String> list){
+        createNotificationChannel();
+
         Calendar calendar = Calendar.getInstance();
         Calendar calendar2 = Calendar.getInstance();
         Calendar calendar3 = Calendar.getInstance();
@@ -245,6 +250,8 @@ public class LandingPage extends AppCompatActivity {
 
         int h1,h2,h3,h4,h5,h6;
         int min1,min2,min3,min4,min5,min6;
+        long hours24InMilis = 1000 * 60 * 60 * 24;
+
         //set all hours and minutes convert them to military time
         h1= setHourOrMin(list.get(0),true);
         h2= setHourOrMin(list.get(1),true);
@@ -287,42 +294,40 @@ public class LandingPage extends AppCompatActivity {
         Log.d(TAG, "Time 5 and 6." + calendar5.getTime()  + calendar6.getTime());
 
         Intent intent = new Intent(LandingPage.this, NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(LandingPage.this, 100,intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(LandingPage.this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), hours24InMilis, pendingIntent);
 
         Intent intent2 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent2 = PendingIntent.getBroadcast(LandingPage.this, 200,intent2, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager2 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager2.set(AlarmManager.RTC_WAKEUP, calendar2.getTimeInMillis(), pendingIntent2);
+        alarmManager2.setRepeating(AlarmManager.RTC_WAKEUP, calendar2.getTimeInMillis(), hours24InMilis, pendingIntent2);
 
         Intent intent3 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent3 = PendingIntent.getBroadcast(LandingPage.this, 300,intent3, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager3 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager3.set(AlarmManager.RTC_WAKEUP, calendar3.getTimeInMillis(), pendingIntent3);
+        alarmManager3.setRepeating(AlarmManager.RTC_WAKEUP, calendar3.getTimeInMillis(), hours24InMilis, pendingIntent3);
 
         Intent intent4 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent4 = PendingIntent.getBroadcast(LandingPage.this, 400,intent4, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager4 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager4.set(AlarmManager.RTC_WAKEUP, calendar4.getTimeInMillis(), pendingIntent4);
+        alarmManager4.setRepeating(AlarmManager.RTC_WAKEUP, calendar4.getTimeInMillis(), hours24InMilis, pendingIntent4);
 
         Intent intent5 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent5 = PendingIntent.getBroadcast(LandingPage.this, 500,intent5, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager5 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager5.set(AlarmManager.RTC_WAKEUP, calendar5.getTimeInMillis(), pendingIntent5);
+        alarmManager5.setRepeating(AlarmManager.RTC_WAKEUP, calendar5.getTimeInMillis(), hours24InMilis, pendingIntent5);
 
         Intent intent6 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent6 = PendingIntent.getBroadcast(LandingPage.this, 600,intent6, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager6 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager6.set(AlarmManager.RTC_WAKEUP, calendar6.getTimeInMillis(), pendingIntent6);
-
-
+        alarmManager6.setRepeating(AlarmManager.RTC_WAKEUP, calendar6.getTimeInMillis(), hours24InMilis, pendingIntent6);
     }
 
     public static int getResourceId(String pVariableName, String pResourcename, String pPackageName,Context context)

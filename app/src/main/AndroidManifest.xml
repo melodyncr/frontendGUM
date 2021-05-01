@@ -120,6 +120,7 @@
         <activity android:name=".UploadSurvey" />
         <activity android:name=".SurveyOneTen" />
         <receiver android:name=".NotificationReceiver" />
+
         <activity android:name=".StartExerciseM">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
