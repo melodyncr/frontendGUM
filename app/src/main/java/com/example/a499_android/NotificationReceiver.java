@@ -21,16 +21,16 @@ public class NotificationReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Intent repeating_intent = new Intent(context, LandingPage.class);
         repeating_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        Log.d(TAG, "starting receiver.. time" + Calendar.getInstance().getTime());
+        Log.d(TAG, "starting receiver.. time: " + Calendar.getInstance().getTime());
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,100,repeating_intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,0, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"notifyLemubit")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"GUM")
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(android.R.drawable.arrow_up_float)
-                .setContentText(username + ", you have a workout to complete!")
+                .setSmallIcon(R.drawable.logo_no_text)
+                .setContentText("Time to Get Up and Move")
                 .setAutoCancel(true);
-        notificationManager.notify(100,builder.build());
+        notificationManager.notify(200, builder.build());
 
 
     }
