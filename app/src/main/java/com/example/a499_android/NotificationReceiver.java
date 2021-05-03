@@ -1,5 +1,6 @@
 package com.example.a499_android;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -14,6 +15,7 @@ import java.util.Calendar;
 
 public class NotificationReceiver extends BroadcastReceiver {
     public String TAG = "Notification Receiver";
+
     @Override
     public void onReceive(Context context, Intent intent){
     String username = LoginActivity.loggedUserName;
@@ -30,8 +32,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.logo_no_text)
                 .setContentText("Time to Get Up and Move")
                 .setAutoCancel(true);
-        notificationManager.notify(200, builder.build());
-
+        notificationManager.notify(UpdateSchedule.notificationID, builder.build());
 
     }
 }
