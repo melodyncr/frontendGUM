@@ -1,6 +1,7 @@
 package com.example.a499_android;
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -21,7 +22,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import com.example.a499_android.utility.SaveSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -76,7 +76,7 @@ public class LandingPage extends AppCompatActivity {
         // NOTE: user info read from db will be hardcoded until login activity is done
         String uName = SaveSharedPreference.getUserName(LandingPage.this);
 
-//        createNotificationChannel();
+        makeNotificationChannel();
 
         // Access a Cloud Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -211,7 +211,9 @@ public class LandingPage extends AppCompatActivity {
 
                             it.remove(); // avoids a ConcurrentModificationException
                         }
-                        setNotifications(workoutList);
+
+//                        setNotifications(workoutList);
+
                         Log.d(TAG, "workout list: " + workoutList.toString());
                         Log.d(TAG, "Fitness Level: " + workoutList.toString());
                     }
@@ -226,7 +228,7 @@ public class LandingPage extends AppCompatActivity {
         void onSuccess(DocumentSnapshot document);
     }
 
-    private void createNotificationChannel() {
+    private void makeNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("GUM", "GUM", NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription("Channel for GUM");
@@ -237,7 +239,6 @@ public class LandingPage extends AppCompatActivity {
     }
 
     public void setNotifications(ArrayList<String> list){
-        createNotificationChannel();
 
         Calendar calendar = Calendar.getInstance();
         Calendar calendar2 = Calendar.getInstance();

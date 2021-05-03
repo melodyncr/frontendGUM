@@ -1,5 +1,9 @@
 package com.example.a499_android;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -18,6 +22,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,6 +49,7 @@ public class SelectSchedule extends AppCompatActivity {
         btnSelectTime=(Button)findViewById(R.id.selectTimeBtn);
         btnUpdateSchedule= findViewById(R.id.confirmSchedule);
 
+        makeNotificationChannel();
 
         DocumentReference docRef = db.collection("Users").document(UploadSurvey.F_S_USERNAME);
 
@@ -56,6 +62,8 @@ public class SelectSchedule extends AppCompatActivity {
                     Log.d(TAG, new_schedule.toString());
                     Object schedule_obj = new_schedule;
                     docRef.update("Schedule", schedule_obj );
+
+                    setNotifications(timeList_string);
 
                     Toast.makeText(SelectSchedule.this, "Schedule is  Updated! Now please login!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SelectSchedule.this, LoginActivity.class);
@@ -161,15 +169,150 @@ public class SelectSchedule extends AppCompatActivity {
         Log.d(TAG, "Previous time"+ pre_hour + ": " + pre_min);
         Log.d(TAG, "Current time"+ hour + ": " + minute );
 
-        if(hour - pre_hour > 1){
+        if(Math.abs(hour - pre_hour) > 1){
             return true;
-        }else if(hour - pre_hour == 1){
+        }else if(Math.abs(hour - pre_hour) == 1){
             if(minute - pre_min < 0) {
                 return false;
                 } else {
                     return true;
                 }
         }else{ return false; }
+    }
+
+    private void makeNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("GUM", "GUM", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Channel for GUM");
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    public void setNotifications(ArrayList<String> list){
+
+        Calendar calendar = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+        Calendar calendar3 = Calendar.getInstance();
+        Calendar calendar4 = Calendar.getInstance();
+        Calendar calendar5 = Calendar.getInstance();
+        Calendar calendar6 = Calendar.getInstance();
+
+        //Log.d(TAG,list.get(0) + " time 1");
+
+        int h1,h2,h3,h4,h5,h6;
+        int min1,min2,min3,min4,min5,min6;
+        long hours24InMilis = 1000 * 60 * 60 * 24;
+
+        //set all hours and minutes convert them to military time
+        h1= setHourOrMin(list.get(0),true);
+        h2= setHourOrMin(list.get(1),true);
+        h3= setHourOrMin(list.get(2),true);
+        h4= setHourOrMin(list.get(3),true);
+        h5= setHourOrMin(list.get(4),true);
+        h6= setHourOrMin(list.get(5),true);
+        min1 = setHourOrMin(list.get(0), false);
+        min2 = setHourOrMin(list.get(1), false);
+        min3 = setHourOrMin(list.get(2), false);
+        min4 = setHourOrMin(list.get(3), false);
+        min5 = setHourOrMin(list.get(4), false);
+        min6 = setHourOrMin(list.get(5), false);
+
+        calendar.set(Calendar.HOUR_OF_DAY,h1);
+        calendar.set(Calendar.MINUTE,min1);
+        calendar.set(Calendar.SECOND,0);
+
+        calendar2.set(Calendar.HOUR_OF_DAY,h2);
+        calendar2.set(Calendar.MINUTE,min2);
+        calendar2.set(Calendar.SECOND,0);
+
+        calendar3.set(Calendar.HOUR_OF_DAY,h3);
+        calendar3.set(Calendar.MINUTE,min3);
+        calendar3.set(Calendar.SECOND,0);
+
+
+        calendar4.set(Calendar.HOUR_OF_DAY,h4);
+        calendar4.set(Calendar.MINUTE,min4);
+
+        calendar5.set(Calendar.HOUR_OF_DAY,h5);
+        calendar5.set(Calendar.MINUTE,min5);
+
+        calendar6.set(Calendar.HOUR_OF_DAY,h6);
+        calendar6.set(Calendar.MINUTE,min6);
+
+
+        Log.d(TAG, "\nTime 1 and 2." + calendar.getTime()  + calendar2.getTime());
+        Log.d(TAG, "Time 3 and 4." + calendar3.getTime()  + calendar4.getTime());
+        Log.d(TAG, "Time 5 and 6." + calendar5.getTime()  + calendar6.getTime());
+
+        UpdateSchedule.notificationID = 100;
+        Intent intent = new Intent(SelectSchedule.this, NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(SelectSchedule.this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), hours24InMilis, pendingIntent);
+
+        UpdateSchedule.notificationID = 200;
+        Intent intent2 = new Intent(SelectSchedule.this, NotificationReceiver.class);
+        PendingIntent pendingIntent2 = PendingIntent.getBroadcast(SelectSchedule.this, 200,intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager2 = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager2.setRepeating(AlarmManager.RTC_WAKEUP, calendar2.getTimeInMillis(), hours24InMilis, pendingIntent2);
+
+        UpdateSchedule.notificationID = 300;
+        Intent intent3 = new Intent(SelectSchedule.this, NotificationReceiver.class);
+        PendingIntent pendingIntent3 = PendingIntent.getBroadcast(SelectSchedule.this, 300,intent3, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager3 = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager3.setRepeating(AlarmManager.RTC_WAKEUP, calendar3.getTimeInMillis(), hours24InMilis, pendingIntent3);
+
+        UpdateSchedule.notificationID = 400;
+        Intent intent4 = new Intent(SelectSchedule.this, NotificationReceiver.class);
+        PendingIntent pendingIntent4 = PendingIntent.getBroadcast(SelectSchedule.this, 400,intent4, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager4 = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager4.setRepeating(AlarmManager.RTC_WAKEUP, calendar4.getTimeInMillis(), hours24InMilis, pendingIntent4);
+
+        UpdateSchedule.notificationID = 500;
+        Intent intent5 = new Intent(SelectSchedule.this, NotificationReceiver.class);
+        PendingIntent pendingIntent5 = PendingIntent.getBroadcast(SelectSchedule.this, 500,intent5, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager5 = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager5.setRepeating(AlarmManager.RTC_WAKEUP, calendar5.getTimeInMillis(), hours24InMilis, pendingIntent5);
+
+        UpdateSchedule.notificationID = 600;
+        Intent intent6 = new Intent(SelectSchedule.this, NotificationReceiver.class);
+        PendingIntent pendingIntent6 = PendingIntent.getBroadcast(SelectSchedule.this, 600,intent6, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager6 = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager6.setRepeating(AlarmManager.RTC_WAKEUP, calendar6.getTimeInMillis(), hours24InMilis, pendingIntent6);
+    }
+
+    int setHourOrMin(String time_str, boolean hour_or_min){
+        int time;
+        int start = time_str.length()-2;
+        String am_or_pm = time_str.substring(start);
+        if(hour_or_min){//this is an hour
+            if(time_str.charAt(1) == ':'){
+                time = Integer.parseInt(time_str.substring(0,1));
+            }else{
+                time = Integer.parseInt(time_str.substring(0,2));
+            }
+            if(am_or_pm.equals("PM") && time != 12){
+                time = time + 12;
+            }
+            if (am_or_pm.equals("AM") && time == 12) {
+                time = time - 12;
+            }
+        }else{
+            if(time_str.charAt(1) == ':'){
+                time = Integer.parseInt(time_str.substring(2,4));
+            }else{
+                time = Integer.parseInt(time_str.substring(3,5));
+            }
+        }
+        return time;
     }
 
     // Intent Factory
