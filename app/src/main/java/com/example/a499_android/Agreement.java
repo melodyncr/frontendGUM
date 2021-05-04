@@ -20,21 +20,16 @@ public class Agreement extends AppCompatActivity {
         checkBox = findViewById(R.id.checkBox);
         proceedBtn = findViewById(R.id.proceedBtn);
     }
-
     public void Check(View v)
     {
         // Concatenation of the checked options in if
-        String msg = "";
-        // isChecked() is used to check whether
-        // the CheckBox is in true state or not.
+        // Check is used to check whether the person has agreed to the terms above or not
         if(checkBox.isChecked()) {
             is_checked = true;
             startActivity(new Intent(Agreement.this, CreateAccount.class));
         }else {
-            Toast.makeText(this, msg + "Check agreement to proceed.",
+            Toast.makeText(this, "Check agreement to proceed.",
                     Toast.LENGTH_LONG).show();
         }
-        // Toast is created to display the
-        // message using show() method.
     }
 }

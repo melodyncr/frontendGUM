@@ -22,7 +22,7 @@ public class SurveyResponse extends AppCompatActivity {
     public static String TAG = "Weekly Survey";
     TextView typeSurvey, questionText;
     EditText responseText;
-    Button backBtn, submitBtn, finishLaterBtn;
+    Button backBtn, submitBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,15 +60,6 @@ public class SurveyResponse extends AppCompatActivity {
             }
         });
 
-        finishLaterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                weeklyQuestionsList.clear();
-                responseList.clear();
-                Intent intent = new Intent(SurveyResponse.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,16 +85,13 @@ public class SurveyResponse extends AppCompatActivity {
             }
         });
     }
-
-
-
+    
     void setObjects(){
         typeSurvey = findViewById(R.id.typeSurvey);
         questionText = findViewById(R.id.questionText);
         responseText = findViewById(R.id.responseText);
         backBtn = findViewById(R.id.previousBtn);
         submitBtn = findViewById(R.id.submitBtn);
-        finishLaterBtn = findViewById(R.id.finishLaterBtn);
         typeSurvey.setText(""+DetermineQuestionType.T_TYPE_SURVEY);
         String question = weeklyQuestionsList.get(question_count).substring(1);
         questionText.setText(question);

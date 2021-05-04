@@ -107,4 +107,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void toSignUp(View view) {
+        finish();
+    }
 }
