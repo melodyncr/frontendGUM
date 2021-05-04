@@ -9,5 +9,4 @@
         <item name="android:amPmTextColor">#9c27b0</item>
         <item name="background">@color/lime_green</item>
     </style>
-
 </resources>

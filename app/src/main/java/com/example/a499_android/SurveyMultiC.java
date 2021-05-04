@@ -27,7 +27,7 @@ public class SurveyMultiC extends AppCompatActivity {
     TextView typeSurvey, questionText;
     RadioGroup radioGroup;
     RadioButton b1, b2, b3, b4;
-    Button finishLtrBtn, submitBtn, previousBtn;
+    Button  submitBtn, previousBtn;
     public String TAG = "SubmitMC";
 
     @Override
@@ -103,16 +103,6 @@ public class SurveyMultiC extends AppCompatActivity {
                 }
             }
         });
-
-        finishLtrBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                weeklyQuestionsList.clear();
-                responseList.clear();
-                Intent intent = new Intent(SurveyMultiC.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     void setChoices(String choices) {
@@ -131,7 +121,6 @@ public class SurveyMultiC extends AppCompatActivity {
         typeSurvey = findViewById(R.id.typeSurvey);
         questionText = findViewById(R.id.questionText);
         radioGroup = findViewById(R.id.radioQuestionsGroup);
-        finishLtrBtn = findViewById(R.id.finishLaterBtn);
         submitBtn = findViewById(R.id.submitBtn);
         previousBtn = findViewById(R.id.previousBtn);
         typeSurvey.setText(""+DetermineQuestionType.T_TYPE_SURVEY);

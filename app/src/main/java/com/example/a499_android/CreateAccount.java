@@ -1,6 +1,7 @@
 package com.example.a499_android;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,8 +39,8 @@ public class CreateAccount extends AppCompatActivity {
     public static boolean first_survey = false;
 
 
-    private TextView usernameField, passwordField;
-    private Button createAccountBtn, createAccToMain;
+    private TextView usernameField, passwordField,redPassword, redUser;
+    private Button createAccountBtn;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference users = db.collection("Users");
     DocumentReference userDocRef;
@@ -51,13 +52,6 @@ public class CreateAccount extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         wiredUp();
 
-        createAccToMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent backToMainIntent = new Intent(CreateAccount.this, MainActivity.class);
-                startActivity(backToMainIntent);
-            }
-        });
 
         createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,16 +136,17 @@ public class CreateAccount extends AppCompatActivity {
         usernameField = findViewById(R.id.newUsernameText);
         passwordField = findViewById(R.id.newPasswordText);
         createAccountBtn = findViewById(R.id.createAccountBtn);
-        createAccToMain = findViewById(R.id.createAccToMain);
+        redPassword = findViewById(R.id.redTextPassword);
+        redUser = findViewById(R.id.redTextUser);
     }
 
     private boolean checkUsernameLength(String enteredUsername) {
         if (enteredUsername.length() < 5) {
-            Toast.makeText(CreateAccount.this, "This username is too short",
-                    Toast.LENGTH_SHORT)
-                    .show();
+            redUser.setText("Username is not 5 characters long.");
             return false;
         }
+        redUser.setText("Username is valid");
+        redUser.setTextColor(Color.GREEN);
         return true;
     }
 
@@ -182,15 +177,20 @@ public class CreateAccount extends AppCompatActivity {
 
     private boolean checkPasswordValidity(String enteredPassword) {
         if (enteredPassword.length() < 5) {
-            Toast.makeText(CreateAccount.this, "This password is too short",
-                    Toast.LENGTH_SHORT)
-                    .show();
+            redPassword.setText("Password is not 5 characters long.");
             return false;
         }
+        redPassword.setTextColor(Color.GREEN);
+        redPassword.setText("Password is valid");
         return true;
     }
 
     private interface FirestoreCallback {
         void onSuccess(DocumentSnapshot document);
     }
+
+    public void backToSignUp(View view) {
+        startActivity(new Intent(CreateAccount.this, MainActivity.class));
+    }
+
 }

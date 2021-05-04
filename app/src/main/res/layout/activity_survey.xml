@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".SurveyResponse">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
 
         <TextView
             android:id="@+id/typeSurvey"
@@ -17,8 +16,8 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:text="Loading Survey"
+            android:textColor="@color/black"
             android:gravity="center"
-            android:fontFamily="@font/artifika"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
 
@@ -39,9 +38,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
             android:text=""
             android:gravity="center"
-            android:fontFamily="@font/artifika"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gumImageSurvey"/>
 
@@ -58,8 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:background="@color/white"
             android:hint="Enter your response"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +69,7 @@
         <View
             android:id="@+id/blankView2"
             android:layout_width="100dp"
-            android:layout_height="40dp"
+            android:layout_height="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/responseText"/>
@@ -78,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:paddingLeft="0dp"
             android:paddingRight="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -88,13 +89,16 @@
                 android:id="@+id/submitBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submit Response"
+                android:text="Next Question"
+                android:background="@drawable/rounded_corners"
                 />
             <Button
                 android:id="@+id/previousBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Previous Question"
+                android:background="@drawable/rounded_corners"
                 />
 
         </LinearLayout>
@@ -106,16 +110,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/secondBox"/>
-
-        <Button
-            android:id="@+id/finishLaterBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="132dp"
-            android:layout_marginLeft="132dp"
-            android:text="Finish Later"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/blankView3" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -47,7 +48,7 @@ public class MessageAdmin extends AppCompatActivity {
         }
         usersList = db.collection("Users_List").document("List");
         query1();
-        Button sendBtn = findViewById(R.id.sendMsgBtn);
+        ImageView sendBtn = findViewById(R.id.sendMsgbtn);
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

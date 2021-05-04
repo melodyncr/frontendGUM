@@ -28,7 +28,7 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
 
     public static String TAG = "Weekly Survey";
     TextView typeSurvey, questionText;
-    Button backBtn, submitBtn, finishLaterBtn;
+    Button backBtn, submitBtn;
     public String item = "";
     ArrayList<String> tempChoiceList = new ArrayList<>();
 
@@ -88,15 +88,6 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        finishLaterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                weeklyQuestionsList.clear();
-                responseList.clear();
-                Intent intent = new Intent(SurveyOneTen.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,7 +130,6 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
         questionText = findViewById(R.id.questionText);
         backBtn = findViewById(R.id.previousBtn);
         submitBtn = findViewById(R.id.submitBtn);
-        finishLaterBtn = findViewById(R.id.finishLaterBtn);
         typeSurvey.setText(""+DetermineQuestionType.T_TYPE_SURVEY);
         String question = weeklyQuestionsList.get(question_count).substring(3);
         questionText.setText(question);

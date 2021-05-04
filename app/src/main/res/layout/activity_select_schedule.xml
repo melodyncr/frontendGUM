@@ -1,58 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
+    tools:context=".SelectSchedule">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/message"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:fontFamily="@font/comfortaa_bold"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
         android:textSize="20dp"
-        android:text="Select six time slots for your schedule."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/black"
+        android:text="Now that you've enrolled, please select six time slots for your exercise schedule." />
 
     <TimePicker
         android:id="@+id/timePicker1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:background="@color/black"
+        android:layout_marginStart="58dp"
+        android:background="@drawable/rounded_corners"
         android:theme="@style/timePickerTeal"
         android:timePickerMode="spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@id/message"/>
 
     <LinearLayout
         android:id="@+id/thirdBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.659"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/timePicker1">
+        android:layout_below="@id/timePicker1">
 
         <Button
             android:id="@+id/selectTimeBtn"
             android:layout_width="120dp"
+            android:background="@drawable/rounded_corners"
             android:layout_height="60dp"
             android:onClick="showTimePickerDialog"
-            android:text="@string/pick_time"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.202"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/pick_time" />
 
         <View
             android:layout_width="8dp"
@@ -61,13 +53,10 @@
         <Button
             android:id="@+id/clearSchedule"
             android:layout_width="120dp"
+            android:background="@drawable/rounded_corners"
             android:layout_height="60dp"
             android:onClick="showTimePickerDialog"
-            android:text="clear List"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.202"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="clear List" />
         <View
             android:layout_width="8dp"
             android:layout_height="match_parent" />
@@ -75,26 +64,22 @@
         <Button
             android:id="@+id/confirmSchedule"
             android:layout_width="120dp"
+            android:background="@drawable/rounded_corners"
             android:layout_height="60dp"
-            android:text="Update Schedule"
-            android:textSize="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.835"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="Upload Schedule"
+            android:textSize="12dp" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/schedule_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="372dp"
-        android:background="@color/black"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="115dp"
+        android:text=""
+        android:background="@drawable/border_points"
         android:textColor="@color/teal_700"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@id/thirdBox"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

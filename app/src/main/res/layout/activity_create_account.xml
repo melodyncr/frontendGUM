@@ -1,57 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
     tools:context=".CreateAccount">
 
-    <EditText
-        android:id="@+id/newUsernameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/username"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/newPasswordText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newUsernameText" />
 
-    <Button
-        android:id="@+id/createAccountBtn"
+    <ImageView
+        android:id="@+id/logoImg"
+        android:layout_width="404dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:id="@+id/linearId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoImg"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="Welcome Friend!\n Please make sure your username and  password are at least 5 characters long. "
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:layout_below="@id/imageView6"/>
+
+        <EditText
+                android:id="@+id/newUsernameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:hint="@string/username"
+                android:background="@color/white"
+                android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/redTextUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaa_bold"
+            android:layout_gravity="center"
+            android:textColor="@color/logo_red"
+            android:text=""
+            />
+
+            <EditText
+                android:id="@+id/newPasswordText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_gravity="center"
+                android:hint="Password"
+                android:background="@color/white"
+                android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/redTextPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaa_bold"
+            android:layout_gravity="center"
+            android:textColor="@color/logo_red"
+            android:text=""
+            />
+
+            <Button
+                android:id="@+id/createAccountBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/createAccText" />
+
+    </LinearLayout>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/comfortaa_bold"
         android:layout_marginTop="60dp"
-        android:text="@string/createAccText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPasswordText" />
+        android:text="Already have an Account?"
+        android:layout_marginLeft="40dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_below="@id/linearId"/>
 
-    <Button
-        android:id="@+id/createAccToMain"
+    <TextView
+        android:id="@+id/signUpBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/Back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_gravity="center"
+        android:fontFamily="@font/comfortaa_bold"
+        android:onClick="backToSignUp"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="290dp"
+        android:text="Sign Up."
+        android:textColor="@color/logo_green"
+        android:textSize="18sp"
+        android:layout_below="@id/linearId"/>
+</RelativeLayout>

@@ -14,8 +14,11 @@
         android:layout_width="400dp"
         android:layout_height="40dp"
         android:gravity="center"
-        android:text="Please Watch this video before proceeding ..."
+        android:textColor="@color/black"
+        android:text="Please watch this video before proceeding."
         />
+
+    <!-- Recycler View is used to display video -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/videosListRecyclerView"

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".SurveyOneTen">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,8 +16,8 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:text="Loading Survey"
+            android:textColor="@color/black"
             android:gravity="center"
-            android:fontFamily="@font/artifika"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
 
@@ -38,8 +39,8 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:text=""
+            android:textColor="@color/black"
             android:gravity="center"
-            android:fontFamily="@font/artifika"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gumImageSurvey"/>
 
@@ -51,15 +52,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/questionText"/>
 
-
         <Spinner
             android:id="@+id/spinner1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
+            style="@style/Widget.AppCompat.Spinner"
+            android:layout_width="300dp"
+            android:layout_height="?attr/dropdownListPreferredItemHeight"
+            android:layout_margin="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/spinner_bg"
+            android:dropDownWidth="300dp"
+            android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
+            android:paddingRight="14dp"
+            android:popupBackground="@android:color/white"
+            android:popupElevation="3dp"
+            android:stateListAnimator="@drawable/spinner_sla"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/blankView1" />
-
 
 
         <View
@@ -75,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:paddingLeft="0dp"
             android:paddingRight="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,15 +96,17 @@
                 android:id="@+id/submitBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submit Response"
+                android:text="Next Question"
+                android:background="@drawable/rounded_corners"
                 />
             <Button
+                android:layout_marginTop="10dp"
                 android:id="@+id/previousBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Previous Question"
+                android:background="@drawable/rounded_corners"
                 />
-
         </LinearLayout>
 
         <View
@@ -104,15 +117,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/secondBox"/>
 
-        <Button
-            android:id="@+id/finishLaterBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="132dp"
-            android:layout_marginLeft="132dp"
-            android:text="Finish Later"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/blankView3" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

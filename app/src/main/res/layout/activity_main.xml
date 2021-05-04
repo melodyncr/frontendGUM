@@ -1,60 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
     tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/toLoginBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/comfortaa_bold"
-        android:onClick="toLogin"
-        android:text="@string/loginText"
-        android:textColor="@color/orange"
-        android:textSize="26sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toCreateAccountBtn" />
-
-    <Button
-        android:id="@+id/toCreateAccountBtn"
-        android:layout_width="220dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/rounded_corners"
-        android:fontFamily="@font/comfortaa_bold"
-        android:text="@string/sign_up"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="404dp"
         android:layout_height="263dp"
         android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        android:src="@drawable/logo"/>
 
     <TextView
         android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:fontFamily="@font/comfortaa_bold"
+        android:layout_below="@id/imageView3"
+        android:text="@string/begin_your_journey_to_better_health_now"
+        android:textColor="@color/black" />
+    <Button
+        android:id="@+id/toCreateAccountBtn"
+        android:layout_width="220dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="80dp"
+        android:background="@drawable/rounded_corners"
+        android:fontFamily="@font/comfortaa_bold"
+        android:layout_below="@id/textView9"
+        android:text="@string/sign_up"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
         android:fontFamily="@font/comfortaa_bold"
-        android:text="@string/begin_your_journey_to_better_health_now"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="40dp"
+        android:text="Already have an account? "
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        android:textSize="18sp"
+        android:layout_below="@id/toCreateAccountBtn"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/toLoginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/comfortaa_bold"
+        android:onClick="toLogin"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="290dp"
+        android:text="@string/loginText"
+        android:textColor="@color/logo_green"
+        android:textSize="18sp"
+        android:layout_below="@id/toCreateAccountBtn"/>
+
+</RelativeLayout>
