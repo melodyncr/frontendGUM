@@ -302,7 +302,7 @@ public class UpdateSchedule extends AppCompatActivity {
                     wBtn5.setText(times_list.get(4));
                     wBtn6.setText(times_list.get(5));
 
-                    setNotifications(times_list);
+                    updateNotification(times_list);
                 }
             }
         });
@@ -381,9 +381,9 @@ public class UpdateSchedule extends AppCompatActivity {
         wBtn6 = findViewById(R.id.workout6_btn);
     }
 
-    public void setNotifications(ArrayList<String> list){
-        int h1,h2,h3,h4,h5,h6;
-        int min1,min2,min3,min4,min5,min6;
+    public void updateNotification(ArrayList<String> list){
+        int h1;
+        int min1;
         long hours24InMilis = 1000 * 60 * 60 * 24;
 
         //set all hours and minutes convert them to military time
@@ -393,10 +393,10 @@ public class UpdateSchedule extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY,h1);
         calendar.set(Calendar.MINUTE,min1);
-        calendar.set(Calendar.SECOND,0);
+//        calendar.set(Calendar.SECOND,0);
 
         Intent intent = new Intent(UpdateSchedule.this, NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(UpdateSchedule.this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(UpdateSchedule.this, notificationID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), hours24InMilis, pendingIntent);
