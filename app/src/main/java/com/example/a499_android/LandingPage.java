@@ -294,36 +294,42 @@ public class LandingPage extends AppCompatActivity {
         Log.d(TAG, "Time 3 and 4." + calendar3.getTime()  + calendar4.getTime());
         Log.d(TAG, "Time 5 and 6." + calendar5.getTime()  + calendar6.getTime());
 
+        UpdateSchedule.notificationID = 100;
         Intent intent = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(LandingPage.this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), hours24InMilis, pendingIntent);
 
+        UpdateSchedule.notificationID = 200;
         Intent intent2 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent2 = PendingIntent.getBroadcast(LandingPage.this, 200,intent2, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager2 = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager2.setRepeating(AlarmManager.RTC_WAKEUP, calendar2.getTimeInMillis(), hours24InMilis, pendingIntent2);
 
+        UpdateSchedule.notificationID = 300;
         Intent intent3 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent3 = PendingIntent.getBroadcast(LandingPage.this, 300,intent3, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager3 = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager3.setRepeating(AlarmManager.RTC_WAKEUP, calendar3.getTimeInMillis(), hours24InMilis, pendingIntent3);
 
+        UpdateSchedule.notificationID = 400;
         Intent intent4 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent4 = PendingIntent.getBroadcast(LandingPage.this, 400,intent4, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager4 = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager4.setRepeating(AlarmManager.RTC_WAKEUP, calendar4.getTimeInMillis(), hours24InMilis, pendingIntent4);
 
+        UpdateSchedule.notificationID = 500;
         Intent intent5 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent5 = PendingIntent.getBroadcast(LandingPage.this, 500,intent5, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager5 = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager5.setRepeating(AlarmManager.RTC_WAKEUP, calendar5.getTimeInMillis(), hours24InMilis, pendingIntent5);
 
+        UpdateSchedule.notificationID = 600;
         Intent intent6 = new Intent(LandingPage.this, NotificationReceiver.class);
         PendingIntent pendingIntent6 = PendingIntent.getBroadcast(LandingPage.this, 600,intent6, PendingIntent.FLAG_UPDATE_CURRENT);
 
