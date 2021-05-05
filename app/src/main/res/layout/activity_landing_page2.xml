@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/topView"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="2dp"
         android:text="Longevity Points"
         android:textColor="@color/black"
         android:textSize="12dp" />
@@ -116,7 +116,7 @@
                     android:layout_width="80dp"
                     android:layout_height="100dp"/>
                 <TextView
-                    android:text="View Shop"
+                    android:text="Unlock Avatars!"
                     android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -152,7 +152,7 @@
                 android:layout_width="80dp"
                 android:layout_height="100dp"/>
             <TextView
-                android:text="Start Workout!"
+                android:text="Start Moving!"
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="14sp"

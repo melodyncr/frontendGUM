@@ -8,12 +8,14 @@
 
     <TextView
         android:id="@+id/introVideoTxt_lvl"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:gravity="center"
         android:textColor="@color/black"
-        android:text="Use the spinner to view videos based the category you picked."
+        android:text="Use the dropdown to view videos based the category you choose.\nTo watch in full screen, tap the title on the video."
         />
 
     <Spinner
@@ -36,6 +38,6 @@
         android:layout_marginTop="10dp"
         android:id="@+id/videosListRecyclerView_Lvl"
         android:layout_width="400dp"
-        android:layout_height="500dp" />
+        android:layout_height="550dp" />
 
 </LinearLayout>

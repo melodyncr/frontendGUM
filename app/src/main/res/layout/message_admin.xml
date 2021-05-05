@@ -25,7 +25,7 @@
         android:id="@+id/messages_recycler_view"
         android:layout_width="380dp"
         android:layout_marginTop="10dp"
-        android:layout_height="400dp"
+        android:layout_height="600dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/edit_text_corners"

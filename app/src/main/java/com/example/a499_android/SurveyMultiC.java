@@ -39,12 +39,6 @@ public class SurveyMultiC extends AppCompatActivity {
         setObjects();
         radioGroup.clearCheck();
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton radioButton = (RadioButton) group.findViewById(checkedId);
-            }
-        });
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override

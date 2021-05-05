@@ -16,12 +16,13 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Please Follow Instructions carefully"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="20dp"
             android:id="@+id/view1"
             app:layout_constraintTop_toBottomOf="@+id/addQuestion"/>
 
@@ -31,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="@color/black"
             android:text="Please select the category the new video will be inserted in. Enter a breif description, then finally enter a 11 digit unique ID to the video. There is an example below it's the last 11 characters of any video on Youtube."
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view1" />
@@ -75,7 +77,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter a brief description/title of the video."
+            android:background="@drawable/edit_text_corners"
             android:id="@+id/addVideoDescription"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view3" />
 
@@ -86,11 +91,13 @@
             app:layout_constraintTop_toBottomOf="@+id/addVideoDescription"/>
 
 
-
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter the  11 character ID of the video."
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:hint="Enter the  11 character ID."
+            android:background="@drawable/edit_text_corners"
             android:id="@+id/addVideoCode"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view4" />

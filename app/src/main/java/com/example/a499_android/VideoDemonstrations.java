@@ -71,7 +71,6 @@ public class VideoDemonstrations extends AppCompatActivity implements AdapterVie
                         VideoAdapter videosAdapter = new VideoAdapter(video_list,description_list);
                         recyclerView.setAdapter(videosAdapter);
                         Log.d(TAG, "delay" + delay);
-
                     } else {
                         Log.d(TAG, "No such document");
                     }

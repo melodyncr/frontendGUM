@@ -14,6 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.499_android">
+        <!-- these activites are for admin users only -->
+
         <activity android:name=".ViewResponseR">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -90,15 +92,21 @@
                 android:value=".AdminLanding" />
         </activity>
 
+        <!-- these activities do not require the tool bar as they're part of the login in process or queries -->
+
         <activity android:name=".StartExercise" />
         <activity android:name=".CreateAccount" />
-        <activity android:name=".Agreement" />
+        <activity android:name=".Agreement"/>
         <activity android:name=".SelectSchedule" />
-        <activity android:name=".UpdateSchedule" />
         <activity android:name=".LandingPage" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".IntroVideo"/>
         <activity android:name=".FinishedExerciseActivity" />
+        <activity android:name=".DetermineQuestionType" />
+        <activity android:name=".UploadSurvey" />
+        <receiver android:name=".NotificationReceiver" />
+
+        <!-- these activities's tool bar is only for regular users -->
         <activity android:name=".SelectAvatar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -114,12 +122,31 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LandingPage" />
         </activity>
-        <activity android:name=".SurveyResponse" />
-        <activity android:name=".DetermineQuestionType" />
-        <activity android:name=".SurveyMultiC" />
-        <activity android:name=".UploadSurvey" />
-        <activity android:name=".SurveyOneTen" />
-        <receiver android:name=".NotificationReceiver" />
+        <activity android:name=".SurveyResponse">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LandingPage" />
+        </activity>
+        <activity android:name=".SurveyMultiC">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LandingPage" />
+        </activity>
+        <activity android:name=".SurveyOneTen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LandingPage" />
+        </activity>
+        <activity android:name=".UpdateSchedule">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LandingPage" />
+        </activity>
+        <activity android:name=".ChangeLevel">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LandingPage" />
+        </activity>
 
         <activity android:name=".StartExerciseM">
             <meta-data

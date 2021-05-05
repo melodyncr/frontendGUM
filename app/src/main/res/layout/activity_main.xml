@@ -32,6 +32,7 @@
         android:layout_height="75dp"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="80dp"
+
         android:background="@drawable/rounded_corners"
         android:fontFamily="@font/comfortaa_bold"
         android:layout_below="@id/textView9"
@@ -45,7 +46,7 @@
         android:layout_marginLeft="40dp"
         android:text="Already have an account? "
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:layout_below="@id/toCreateAccountBtn"/>
 
     <TextView

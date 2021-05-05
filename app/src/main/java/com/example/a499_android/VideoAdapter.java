@@ -17,11 +17,10 @@ import org.w3c.dom.Text;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHolder> {
+public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHolder>{
 
 
     public String TAG = "VideoAdapter";
-
     ArrayList<String> videosList;
     ArrayList<String> descriptionList;
     public VideoAdapter(){

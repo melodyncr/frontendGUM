@@ -66,7 +66,6 @@ public class UpdateSchedule extends AppCompatActivity {
                         Iterator it = data.entrySet().iterator();
                         while (it.hasNext()) {
                             Map.Entry pair = (Map.Entry)it.next();
-                            Log.d(TAG, pair.getKey() + " = " + pair.getValue());
                             if(pair.getKey().toString().equals("Schedule")){ times_list = (ArrayList<String>) document.get("Schedule"); }
                             it.remove(); // avoids a ConcurrentModificationException
                         }

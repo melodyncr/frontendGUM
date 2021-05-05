@@ -13,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/questionTextR"
+        android:textColor="@color/black"
+        android:background="@drawable/border_points"
         android:text="" />
 
     <Button
@@ -53,7 +55,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/nextBtnChartR"
         android:gravity="center"
-        android:text="This Question is a response, no Analytics. To see resposnes from users click the find user button." />
+        android:textColor="@color/black"
+        android:background="@drawable/border_points"
+        android:text="This Question is a response, no Analytics. To see the responses from a user, click the find user button." />
 
     <TextView
         android:id="@+id/responseTextR"
