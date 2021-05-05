@@ -22,12 +22,15 @@ public class LoadPreviousSurvey extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public String TAG = "Load Previous Survey";
     public static ArrayList<String> w_survey_list_names = new ArrayList<>();
-    DocumentReference wSurveyTotal;
+    public static ArrayList<String> previous_times_list = new ArrayList<>();
+
+    DocumentReference wSurveyTotal, times;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load_responses);
         wSurveyTotal = db.collection("Surveys").document("PastWSurveyR");
+        times = db.collection("Surveys").document("PastSurveyTimes");
         getWSurvey();
     }
 
@@ -46,6 +49,33 @@ public class LoadPreviousSurvey extends AppCompatActivity {
                             it.remove(); // avoids a ConcurrentModificationException
                         }
                         Log.d(TAG, w_survey_list_names.toString());
+                        getTimes();
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+        //return surveyList;
+    }
+    void getTimes(){
+        times.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        Log.d(TAG,data.toString());
+                        Iterator it = data.entrySet().iterator();
+                        while (it.hasNext()) {
+                            Map.Entry pair = (Map.Entry)it.next();
+                            if(pair.getKey().toString().equals("times")){ previous_times_list = (ArrayList<String>) document.get("times"); }
+                            it.remove(); // avoids a ConcurrentModificationException
+                        }
+                        Log.d(TAG, previous_times_list.toString());
                         Intent intent = new Intent(LoadPreviousSurvey.this, SelectASurvey.class);
                         startActivity(intent);
                     } else {
@@ -56,6 +86,6 @@ public class LoadPreviousSurvey extends AppCompatActivity {
                 }
             }
         });
-        //return surveyList;
+        //return timesList;
     }
 }

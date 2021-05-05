@@ -15,6 +15,7 @@
             android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:gravity="center"
             android:text="If you selected Multiple Choice, Please enter your answers. You may only add up to four choices and atleast need two choices.\n Do NOT add commas to any response. Adding the comma will mess with the format of the question."
             app:layout_constraintStart_toStartOf="parent"
@@ -23,32 +24,15 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:hint="Enter the answer text here."
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/edit_text_corners"
             android:id="@+id/addAnswersEditTxt"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/multipleChoiceInstructions" />
 
-        <Button
-            android:id="@+id/addResponseBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="132dp"
-            android:layout_marginLeft="132dp"
-            android:layout_marginTop="20dp"
-            android:text="Add Answer"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addAnswersEditTxt" />
-
-        <Button
-            android:id="@+id/clearListResponseBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="132dp"
-            android:layout_marginLeft="132dp"
-            android:layout_marginTop="20dp"
-            android:text="Clear Answers"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addResponseBtn" />
 
         <TextView
             android:id="@+id/listAnswers"
@@ -56,8 +40,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text=""
+            android:textColor="@color/black"
+            android:textSize="15dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/clearListResponseBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/addAnswersEditTxt" />
 
         <LinearLayout
             android:id="@+id/secondBoxA"
@@ -70,14 +56,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/listAnswers">
-
-        <Button
-            android:id="@+id/submitBtnA"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:text="Next Question" />
+            <Button
+                android:id="@+id/addResponseBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Answer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addAnswersEditTxt" />
+            <Button
+                android:id="@+id/submitBtnA"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:text="Next Question" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/clearListResponseBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="120dp"
+            android:text="Clear Answers"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/secondBoxA" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

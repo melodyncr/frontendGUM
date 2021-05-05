@@ -13,13 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/questionTextScale"
-        android:text="Text"
+        android:background="@drawable/border_points"
+        android:text="From this scale, People have chose people voted for."
+        android:textColor="@color/black"
         android:gravity="center"
         />
 
     <TextView
         android:id="@+id/textView1O"
-        android:text="Empty"
+        android:text="0%\n 1"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/questionTextScale"
@@ -28,7 +31,8 @@
 
     <TextView
         android:id="@+id/textView2O"
-        android:text="Empty"
+        android:text="0%\n 2"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/questionTextScale"
@@ -37,7 +41,8 @@
 
     <TextView
         android:id="@+id/textView3O"
-        android:text="Empty"
+        android:text="0%\n 3"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/questionTextScale"
@@ -46,7 +51,8 @@
 
     <TextView
         android:id="@+id/textView4O"
-        android:text="Empty"
+        android:text="0%\n 4"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/questionTextScale"
@@ -63,7 +69,8 @@
 
     <TextView
         android:id="@+id/textView5O"
-        android:text="Empty"
+        android:text="0%\n 4"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/view_1"
@@ -72,7 +79,8 @@
 
     <TextView
         android:id="@+id/textView6O"
-        android:text="Empty"
+        android:text="0%\n 6"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/view_1"
@@ -81,7 +89,8 @@
 
     <TextView
         android:id="@+id/textView7O"
-        android:text="Empty"
+        android:text="0%\n 7"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/view_1"
@@ -90,7 +99,8 @@
 
     <TextView
         android:id="@+id/textView8O"
-        android:text="Empty"
+        android:text="0%\n 8"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/view_1"
@@ -108,7 +118,8 @@
 
     <TextView
         android:id="@+id/textView9O"
-        android:text="Empty"
+        android:text="0%\n 9"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/view_2"
@@ -117,7 +128,8 @@
 
     <TextView
         android:id="@+id/textView10O"
-        android:text="Empty"
+        android:text="0%\n 10"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/view_2"
@@ -157,6 +169,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/backBtnChartO"
+        android:textColor="@color/black"
+        android:background="@drawable/border_points"
         android:text=""
         android:gravity="center"/>
 

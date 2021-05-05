@@ -20,6 +20,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -32,6 +34,7 @@ public class PreviewNewSurvey extends AppCompatActivity {
     DocumentReference pastWSurveyQDoc;
     DocumentReference pastWSurveyRDoc;
     DocumentReference pastWSurveyQLDoc;
+    DocumentReference times;
     Button confirmSurvey;
     String TAG = "Preview New Survey";
     private ArrayList<String> w_count = AdminLanding.w_survey_count_list;
@@ -40,6 +43,8 @@ public class PreviewNewSurvey extends AppCompatActivity {
     private ArrayList<String> past_w_survey_count = new ArrayList<>();
     private ArrayList<String> past_w_survey_q = new ArrayList<>();
     private ArrayList<String> past_w_survey_qc = new ArrayList<>();
+    private ArrayList<String> times_list = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +63,7 @@ public class PreviewNewSurvey extends AppCompatActivity {
                  pastWSurveyQDoc = db.collection("Surveys").document("PastWSurveyQ");
                  pastWSurveyRDoc = db.collection("Surveys").document("PastWSurveyR");
                  pastWSurveyQLDoc = db.collection("Surveys").document("PastWSurveyQL");
+                 times = db.collection("Surveys").document("PastSurveyTimes");
                  start_queries();
             }
         });
@@ -147,10 +153,43 @@ public class PreviewNewSurvey extends AppCompatActivity {
                 addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(PreviewNewSurvey.this, "Survey Has been Successfully Uploaded.", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(PreviewNewSurvey.this, AdminLanding.class));
+                        start_time_query();
                     }
                 });
     }
-
+    void start_time_query(){
+        times.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        Iterator it = data.entrySet().iterator();
+                        while (it.hasNext()) {
+                            Map.Entry pair = (Map.Entry)it.next();
+                            times_list.add(pair.getValue().toString());
+                            it.remove(); // avoids a ConcurrentModificationException
+                        }
+                        Date date = Calendar.getInstance().getTime();
+                        date.getTime();
+                        times_list.add(date.toString());
+                        Object times_obj = times_list;
+                        times.update("times", times_obj).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(PreviewNewSurvey.this, "Survey Has been Successfully Uploaded.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(PreviewNewSurvey.this, AdminLanding.class);
+                                startActivity(intent);
+                            }
+                        });
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+    }
 }

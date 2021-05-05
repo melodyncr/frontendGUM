@@ -2,6 +2,7 @@ package com.example.a499_android;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 public class AdminLanding extends AppCompatActivity {
 
-    Button addEditTidbits, viewResponsesBtn, addSurveyBtn,addVideosBtn;
+    CardView addEditTidbits, viewResponsesBtn, addSurveyBtn,addVideosBtn;
     ActionBar actionBar;
     public static ArrayList<String> w_survey_count_list = new ArrayList<>();
     public static ArrayList<String> w_survey_questions_list = new ArrayList<>();
@@ -67,6 +68,7 @@ public class AdminLanding extends AppCompatActivity {
     }
     private void clearLists(){
         LoadPreviousSurvey.w_survey_list_names.clear();
+        LoadPreviousSurvey.previous_times_list.clear();
         GetResponseListQuery.listSelected_questions.clear();
         GetResponseListQuery.listSelected_questions_c.clear();
         GetResponseListQuery.listSelected_responses.clear();

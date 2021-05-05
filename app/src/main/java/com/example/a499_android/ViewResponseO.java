@@ -42,7 +42,7 @@ public class ViewResponseO extends AppCompatActivity {
         txtView8 = findViewById(R.id.textView8O);
         txtView9 = findViewById(R.id.textView9O);
         txtView10 = findViewById(R.id.textView10O);
-        String sub_str = questionsList.get(GetResponseListQuery.index_charts).substring(1);
+        String sub_str = questionsList.get(GetResponseListQuery.index_charts).substring(3);
         responseTxt = findViewById(R.id.responseTextO);
         responseTxt.setText(sub_str);
         txtView8.setVisibility(View.INVISIBLE);

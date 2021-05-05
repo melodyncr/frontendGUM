@@ -12,6 +12,7 @@ tools:context=".ViewResponses">
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barchart"
         android:layout_width="396dp"
+        android:background="@drawable/border_points"
         android:layout_height="400dp" />
 
     <Button
@@ -72,7 +73,8 @@ tools:context=".ViewResponses">
 
     <TextView
         android:id="@+id/textView1P"
-        android:text="Empty"
+        android:text="0%"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/question1Btn"
@@ -81,7 +83,8 @@ tools:context=".ViewResponses">
 
     <TextView
         android:id="@+id/textView2P"
-        android:text="Empty"
+        android:text="0%"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/question2Btn"
@@ -90,7 +93,8 @@ tools:context=".ViewResponses">
 
     <TextView
         android:id="@+id/textView3P"
-        android:text="Empty"
+        android:text="0%"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/question3Btn"
@@ -99,7 +103,8 @@ tools:context=".ViewResponses">
 
     <TextView
         android:id="@+id/textView4P"
-        android:text="Empty"
+        android:text="0%"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/question4Btn"

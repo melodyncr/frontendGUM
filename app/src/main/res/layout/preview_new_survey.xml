@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="@color/black"
             android:text="Survey Preview\n If you made a mistake, please use arrow on tool bar to restart process."
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -29,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Questions with responses if a MC question."
+            android:textColor="@color/black"
+            android:text="Questions with responses if a MC question.\n(Answers separated by comma)"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view1"
             />
@@ -41,6 +43,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="preview"
+            android:textColor="@color/black"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/border_points"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt1"/>
 
