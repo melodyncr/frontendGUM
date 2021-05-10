@@ -32,7 +32,7 @@ public class CreateAccount extends AppCompatActivity {
 
     public static final String FSURVEYQ = "FSurveyQ";
     public static final String FSURVEYR = "FSurveyR";
-    public static final String TYPE_SURVEY = "First Survey";
+    public static final String TYPE_SURVEY = "Onboarding Survey";
     public static final String F_SURVEY_COUNT = "f_survey_count";
     public static final String F_SURVEY_Q = "f_survey_q";
     public static final String F_SURVEY_QC = "f_survey_qc";

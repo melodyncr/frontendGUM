@@ -61,7 +61,7 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
             public void onClick(View v) {
 
                 if(item.equals("Select a Level")){
-                    Toast.makeText(SurveyOneTen.this, "Please enter some text", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SurveyOneTen.this, "Please select a level.", Toast.LENGTH_SHORT).show();
                 }else {
                     if (question_count >= weeklyQuestionsList.size() - 1) {
                         responseList.add(item);
@@ -130,7 +130,14 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
         questionText = findViewById(R.id.questionText);
         backBtn = findViewById(R.id.previousBtn);
         submitBtn = findViewById(R.id.submitBtn);
-        typeSurvey.setText(""+DetermineQuestionType.T_TYPE_SURVEY);
+        if(question_count ==0 && CreateAccount.first_survey){
+            typeSurvey.setText("Thank you so much for helping us gather information on how the GUM program is working for you. This is not a test, there are no right or wrong answers.");
+        }else if(question_count ==0){
+            typeSurvey.setText("Thank you so much for continuing to help us gather information on how well the GUM program works for you. There are no right or wrong answers.");
+        }
+        else{
+            typeSurvey.setText("" + DetermineQuestionType.T_TYPE_SURVEY);
+        }
         String question = weeklyQuestionsList.get(question_count).substring(3);
         questionText.setText(question);
         if(question_count >= weeklyQuestionsList.size()-1){

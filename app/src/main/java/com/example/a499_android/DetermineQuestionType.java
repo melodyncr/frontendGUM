@@ -91,8 +91,6 @@ public class DetermineQuestionType extends AppCompatActivity {
                             if(pair.getKey().toString().equals(SURVEY_COUNT)){ getResponseList = (ArrayList<String>) document.get(SURVEY_COUNT); }
                             it.remove(); // avoids a ConcurrentModificationException
                         }
-                        Log.d(TAG,  getResponseList.toString() +"response list!!!!!");
-                        Log.d(TAG, fitnessLevelScoreList.toString() + "\n" + choicesList.toString() + "\n"+ fitnessLevelScoreList.toString() + levelList.toString() +"\n" + getResponseList.toString());
                         int multiChoiceQ = determineQuestion(weeklyQuestionsList.get(0).charAt(0));
                         Intent intent;
                         if(multiChoiceQ == 0){

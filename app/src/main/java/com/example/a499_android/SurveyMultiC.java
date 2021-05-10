@@ -117,7 +117,14 @@ public class SurveyMultiC extends AppCompatActivity {
         radioGroup = findViewById(R.id.radioQuestionsGroup);
         submitBtn = findViewById(R.id.submitBtn);
         previousBtn = findViewById(R.id.previousBtn);
-        typeSurvey.setText(""+DetermineQuestionType.T_TYPE_SURVEY);
+        if(question_count ==0 && CreateAccount.first_survey){
+            typeSurvey.setText("Thank you so much for helping us gather information on how the GUM program is working for you. This is not a test, there are no right or wrong answers.");
+        }else if(question_count ==0){
+            typeSurvey.setText("Thank you so much for continuing to help us gather information on how well the GUM program works for you. There are no right or wrong answers.");
+        }
+        else{
+            typeSurvey.setText("" + DetermineQuestionType.T_TYPE_SURVEY);
+        }
         b1 = findViewById(R.id.question1);
         b2 = findViewById(R.id.question2);
         b3 = findViewById(R.id.question3);

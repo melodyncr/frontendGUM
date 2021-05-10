@@ -17,7 +17,7 @@
         android:layout_marginTop="15dp"
         android:textSize="20dp"
         android:textColor="@color/black"
-        android:text="Now that you've enrolled, please select six time slots for your exercise schedule." />
+        android:text="Great! Now that you've enrolled, please select six time slots for your exercise schedule. Please note times may be delayed by a few minutes due for technical reasons." />
 
     <TimePicker
         android:id="@+id/timePicker1"

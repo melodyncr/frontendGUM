@@ -165,10 +165,11 @@ public class PreviewNewSurvey extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Map<String, Object> data = document.getData();
+                        Log.d(TAG, data.toString());
                         Iterator it = data.entrySet().iterator();
                         while (it.hasNext()) {
                             Map.Entry pair = (Map.Entry)it.next();
-                            times_list.add(pair.getValue().toString());
+                            if(pair.getKey().toString().equals("times")){ times_list = (ArrayList<String>) document.get("times"); }
                             it.remove(); // avoids a ConcurrentModificationException
                         }
                         Date date = Calendar.getInstance().getTime();

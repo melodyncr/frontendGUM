@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,11 +26,13 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.a499_android.utility.SaveSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -134,9 +137,46 @@ public class LandingPage extends AppCompatActivity {
         startSurveyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(LandingPage.this, DetermineQuestionType.class);
-                startActivity(intent);
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                DocumentReference usersList =  db.collection("Surveys").document("WSurveyUsers");
+                usersList.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        ArrayList<String> list = new ArrayList<>();
+                        boolean check_users_comp = true;
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Map<String, Object> data = document.getData();
+                                Log.d(TAG,data.toString() + " times size " + data.size());
+                                Iterator it = data.entrySet().iterator();
+                                while (it.hasNext()) {
+                                    Map.Entry pair = (Map.Entry) it.next();
+                                    if (pair.getKey().toString().equals("users_finished")) {
+                                        list = (ArrayList<String>) document.get("users_finished");
+                                    }
+                                    it.remove(); // avoids a ConcurrentModificationException
+                                }
+                                for(int i =0; i< list.size(); i++){
+                                    if(list.get(i).equals(loggedUserName)){
+                                        check_users_comp= false;
+                                        i = list.size();
+                                    }
+                                }
+                                if(check_users_comp){
+                                    Intent intent = new Intent(LandingPage.this, DetermineQuestionType.class);
+                                    startActivity(intent);
+                                }else{
+                                    Toast.makeText(LandingPage.this, "Looks like you've already completed the survey, please check again sometime next week.", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Log.d(TAG, "No such document");
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
             }
         });
 
@@ -287,9 +327,13 @@ public class LandingPage extends AppCompatActivity {
             case R.id.settings_item:
                 startActivity(new Intent(LandingPage.this, ChangeLevel.class));
                 break;
+            case R.id.gum_website:
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://gum-website.herokuapp.com/"));
+                startActivity(i);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
 }

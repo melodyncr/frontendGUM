@@ -1,10 +1,12 @@
 package com.example.a499_android;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -61,13 +64,28 @@ public class SelectSchedule extends AppCompatActivity {
                     ArrayList<String> new_schedule = returnSchedule(timeList_string);
                     Log.d(TAG, new_schedule.toString());
                     Object schedule_obj = new_schedule;
-                    docRef.update("Schedule", schedule_obj );
+                    docRef.update("Schedule", schedule_obj ).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            setNotifications(timeList_string);
 
-                    setNotifications(timeList_string);
-
-                    Toast.makeText(SelectSchedule.this, "Schedule is  Updated! Now please login!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SelectSchedule.this, LoginActivity.class);
-                    startActivity(intent);
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(SelectSchedule.this);
+                            builder1.setMessage("If you haven't already once you're logged in, check out the GUM Website. It is located using the toolbar on the top right.");
+                            builder1.setCancelable(true);
+                            builder1.setPositiveButton(
+                                    "Got it!",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                            Toast.makeText(SelectSchedule.this, "Schedule is  Updated! Now please login!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(SelectSchedule.this, LoginActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+                        }
+                    });
                 }else{
                     Toast.makeText(SelectSchedule.this, "Schedule is not full", Toast.LENGTH_SHORT).show();
                 }

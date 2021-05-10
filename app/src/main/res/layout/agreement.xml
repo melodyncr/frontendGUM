@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="18sp"
-            android:text="The purpose of this DISCLAIMER AND NOTICE is to make you aware of the potential risks connected with activity in any exercise, physical fitness or training program. It is also to help you make an informed decision as to whether or not you should participate in Get Up and Move! and the activities associated with it. "
+            android:text="The purpose of this DISCLAIMER AND NOTICE is to make you aware of the potential risks connected with activity in any exercise, physical fitness or training program. It is also to help you make an informed decision as to whether or not you should participate in “Get Up and Move” and the activities associated with it."
             />
         <View
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="18sp"
-            android:text="DISCLAIMER OF LIABILITY. Injuries of all types can occur when participating in exercise, physical fitness and training programs, hence Get Up and Move! strongly encourages all users to obtain a comprehensive physical examination by a licensed physician BEFORE undertaking any exercise or training demonstrated on this website, and/or any of videos, MP4s, MP3s and training materials offered on this website. If you choose to participate in any of the Get Up and Move! program or any associated program, you fully assume the risk of any resulting injury.  "
+            android:text="DISCLAIMER OF LIABILITY. Injuries of all types can occur when participating in exercise, physical fitness and training programs, hence “Get Up and Move” strongly encourages all users to obtain a comprehensive physical examination by a licensed physician BEFORE undertaking any exercise or training demonstrated on this website, and/or any of videos, MP4s, MP3s and training materials offered on this website. If you choose to participate in any of the “Get Up and Move” programs or any associated program, you fully assume the risk of any resulting injury.  "
             />
         <View
             android:layout_width="match_parent"
@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="GET UP AND MOVE! DISCLAIMS ANY LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES AND ASSUMES NO LIABILITY OR RESPONSIBILITY FOR ANY LOSS, INJURY OR DAMAGE SUFFERED BY ANY PERSON AS A RESULT OF THE USE OR MISUSE OF ANY INFORMATION, VIDEOS, MPSs OR TRAINING MATERIALS MADE AVAILABLE ON THIS WEBSITE."
+            android:text="“GET UP AND MOVE” DISCLAIMS ANY LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES AND ASSUMES NO LIABILITY OR RESPONSIBILITY FOR ANY LOSS, INJURY OR DAMAGE SUFFERED BY ANY PERSON AS A RESULT OF THE USE OR MISUSE OF ANY INFORMATION, VIDEOS, MPSs OR TRAINING MATERIALS MADE AVAILABLE ON THIS WEBSITE.”"
             android:gravity="center"/>
         <View
             android:layout_width="match_parent"
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="18sp"
-            android:text="In consideration of performing or participating in these types of activities, you hereby agree to indemnify and hold harmless Mark C. Angel and other associated with developing the Get Up and Move! program, and its officers, directors, and agents, and their respective successors and assigns, against any loss, liability, damage, cause of action, cost, or expense of any nature whatsoever, including without limitation reasonable attorneys’ fees and other legal costs, even if said injuries or losses are the direct result of our negligence."
+            android:text="In consideration of performing or participating in these types of activities, you hereby agree to indemnify and hold harmless Mark C. Angel and others associated with developing the “Get Up and Move” program, and its officers, directors, agents, and their respective successors and assignees, against any loss, liability, damage, cause of action, cost, or expense of any nature whatsoever, including without limitation reasonable attorneys’ fees and other legal costs, even if said injuries or losses are the direct result of our negligence."
             />
         <View
             android:layout_width="match_parent"
@@ -93,6 +93,14 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="18sp"
+            android:text="USE THIS PROGRAM AND ALL INFORMATION CONTAINED WITHIN IT AT YOUR OWN RISK"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
             android:text="Check the box below to assure you have agree'd with everything listed above."
             />
         <View
@@ -103,13 +111,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/checkBox"
             android:background="@color/white"
-            android:text="I agree with the terms above"
+            android:text="I agree with the terms above and am aware of any possible risks that can happen during the use of the GUM App."
             android:textSize="18sp"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/proceedBtn"
             android:onClick="Check"
+            android:background="@drawable/rounded_corners"
             android:text="Continue"/>
     </LinearLayout>
 

@@ -44,7 +44,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_gravity="center"
                 android:hint="@string/username"
-                android:background="@color/white"
+                android:background="@drawable/edit_text_corners"
                 android:inputType="textPersonName" />
 
         <TextView
@@ -64,7 +64,7 @@
                 android:ems="10"
                 android:layout_gravity="center"
                 android:hint="Password"
-                android:background="@color/white"
+                android:background="@drawable/edit_text_corners"
                 android:inputType="textPassword" />
 
         <TextView

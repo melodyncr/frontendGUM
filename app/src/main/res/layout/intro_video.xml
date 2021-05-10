@@ -12,10 +12,11 @@
     <TextView
         android:id="@+id/introVideoTxt"
         android:layout_width="400dp"
-        android:layout_height="40dp"
+        android:textSize="16dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/black"
-        android:text="Please watch this video before proceeding."
+        android:text="Please watch this brief introduction video on Get Up And Move before proceeding. \n Once the video is complete you be directed to begin the on boarding survey.\n Also to enlarge the video, please click on the title of the video. "
         />
 
     <!-- Recycler View is used to display video -->

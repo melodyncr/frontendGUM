@@ -61,8 +61,8 @@
             android:textSize="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            android:background="@color/white"
             android:hint="Enter your response"
+            android:background="@drawable/edit_text_corners"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/blankView1" />
 

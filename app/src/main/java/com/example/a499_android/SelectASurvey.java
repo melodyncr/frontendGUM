@@ -40,7 +40,6 @@ public class SelectASurvey extends AppCompatActivity {
         fSurveyBtn = findViewById(R.id.firstSurveyBtn);
         wSurveyBtn = findViewById(R.id.weeklySurveyBtn);
 
-
         fSurveyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +101,7 @@ public class SelectASurvey extends AppCompatActivity {
 
         public void bind(String f, int position) {
             TextView item = itemView.findViewById(R.id.item_id);
-            item.setText(f + "\n" +LoadPreviousSurvey.previous_times_list.get(position));
+            item.setText(f + "\n" + LoadPreviousSurvey.previous_times_list.get(position));
 
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
