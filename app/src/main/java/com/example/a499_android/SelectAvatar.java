@@ -35,9 +35,9 @@ public class SelectAvatar extends AppCompatActivity {
     public static final String TAG = "Select Avatar: ";
     private PopupWindow confirmTxt;
     private LayoutInflater layoutInflater;
-    private ImageButton ex1, ex2, ex3, ex4;
+    private ImageButton ex1, ex2, ex3;
     // TextViews for unlocked or locked avatars
-    private TextView tv1, tv2, tv3, tv4;
+    private TextView tv1, tv2, tv3;
     private Button backButton, yesBuyBtn, noBuyBtn;
     private TextView ptsView, confirmQuestion;
     List<String> unlockedAvatars;
@@ -70,21 +70,18 @@ public class SelectAvatar extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot document) {
                 if (document.exists()) {
                     unlockedAvatars = (List<String>) document.getData().get("UnlockedAvatars");
-                    if (unlockedAvatars.contains("dead.png")) {
-                        tv1.setText("Unlocked");
+                    if (unlockedAvatars.contains("orange_avatar.png")) {
+                        tv1.setText("Orange Avatar Unlocked");
                     }
-                    if (unlockedAvatars.contains("blackbkg.jpg")) {
-                        tv2.setText("Unlocked");
+                    if (unlockedAvatars.contains("green_avatar.png")) {
+                        tv2.setText("Green Avatar Unlocked");
+                    }else{
+                        tv2.setText("Green Avatar Locked");
                     }
-                    if (unlockedAvatars.contains("bluebkg.jpg")) {
-                        tv3.setText("Unlocked");
+                    if (unlockedAvatars.contains("dead.png")) {//will change later
+                        tv3.setText("Yellow Avatar Unlocked");
                     } else {
-                        tv3.setText("Locked");
-                    }
-                    if (unlockedAvatars.contains("greenbkg.jpg")) {
-                        tv4.setText("Unlocked");
-                    } else {
-                        tv4.setText("Locked");
+                        tv3.setText("Yellow Avatar Locked");
                     }
                     Log.d("Unlocked Avatars", String.valueOf(unlockedAvatars));
                     fitnessPts = (long) document.getData().get("Points");
@@ -112,7 +109,7 @@ public class SelectAvatar extends AppCompatActivity {
         ex1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setImage("whitebkg.jpg");
+                setImage("orange_avatar.png");
             }
         });
 
@@ -120,10 +117,10 @@ public class SelectAvatar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (isUnlocked("blackbkg.jpg")) {
-                    setImage("blackbkg.jpg");
+                if (isUnlocked("green_avatar.png")) {
+                    setImage("green_avatar.png");
                 } else {
-                    onButtonShowPopupWindowClick(view, "blackbkg.jpg", 30);
+                    onButtonShowPopupWindowClick(view, "green_avatar.png", 100);// the green avatar costs 100 points
                 }
             }
         });
@@ -131,33 +128,21 @@ public class SelectAvatar extends AppCompatActivity {
         ex3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isUnlocked("greenbkg.jpg")) {
-                    setImage("greenbkg.jpg");
+                if (isUnlocked("dead.png")) {
+                    setImage("dead.png");
                 } else {
-                    onButtonShowPopupWindowClick(view, "greenbkg.jpg", 30);
+                    onButtonShowPopupWindowClick(view, "dead.png", 300); // the yellow avatar costs 300 points
                 }
             }
         });
 
-        ex4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isUnlocked("bluebkg.jpg")) {
-                    setImage("bluebkg.jpg");
-                } else {
-                    onButtonShowPopupWindowClick(view, "bluebkg.jpg", 30);
-                }
-            }
-        });
     }
 
     private boolean isUnlocked(String avatarUrl) {
         if (unlockedAvatars.contains(avatarUrl)) {
             return true;
         } else {
-            Toast.makeText(SelectAvatar.this,
-                    "You have not unlocked this avatar",
-                    Toast.LENGTH_SHORT).show();
+            //Toast.makeText(SelectAvatar.this, "You have not unlocked this avatar", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -205,11 +190,9 @@ public class SelectAvatar extends AppCompatActivity {
         ex1 = findViewById(R.id.example1);
         ex2 = findViewById(R.id.example2);
         ex3 = findViewById(R.id.example3);
-        ex4 = findViewById(R.id.example4);
         tv1 = findViewById(R.id.tv1);
         tv2 = findViewById(R.id.tv2);
         tv3 = findViewById(R.id.tv3);
-        tv4 = findViewById(R.id.tv4);
         ptsView = findViewById(R.id.selectAvatarPts);
     }
 

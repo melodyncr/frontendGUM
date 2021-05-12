@@ -75,7 +75,7 @@ public class AdminMsgList extends AppCompatActivity {
                         rv.setLayoutManager(new LinearLayoutManager(AdminMsgList.this));
                         rv.setAdapter(new Adapter());
                         if (priorityList.size() == 0) {
-                            priorityText.setText("Priority List is empty");
+                            priorityText.setText("No Unread Messages");
                         }else {
                             String priority_str = "";
                             int i = 0;
@@ -83,7 +83,7 @@ public class AdminMsgList extends AppCompatActivity {
                                 priority_str = priority_str + priorityList.get(i) + "\n";
                                 i++;
                             }
-                            priorityText.setText("Priority List \n" + priority_str);
+                            priorityText.setText("Unread Messages \n" + priority_str);
                         }
                     } else {
                         Log.d(TAG, "No such document");

@@ -61,7 +61,9 @@ public class ChangeLevel extends AppCompatActivity {
             return false;
         } else {
             RadioButton radioButton = (RadioButton) radioGroup.findViewById(selectedId);
-            LandingPage.fitnessLevel = radioButton.getText().toString();
+            if(radioButton.getText().toString().equals("Easy")){ LandingPage.fitnessLevel = "Beginner"; }
+            if(radioButton.getText().toString().equals("Moderate")){ LandingPage.fitnessLevel = "Intermediate"; }
+            if(radioButton.getText().toString().equals("Vigorous")){ LandingPage.fitnessLevel = "Advance"; }
             return true;
         }
     }

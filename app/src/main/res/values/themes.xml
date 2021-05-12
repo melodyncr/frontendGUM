@@ -5,7 +5,7 @@
         <item name="android:colorBackground">@color/logo_blue</item>
         <item name="colorPrimary">@color/logo_green</item>
         <item name="android:fontFamily">@font/comfortaa_bold</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimaryVariant">@color/logo_black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/orange</item>
@@ -45,6 +45,12 @@
     <style name="workout_button_hard">
         <item name="android:fontFamily">@font/comfortaa_bold</item>
         <item name="colorPrimary">@color/logo_red</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+    <style name="workout_button_motion">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+        <item name="colorPrimary">@color/logo_black</item>
         <item name="android:textColorPrimary">@color/white</item>
     </style>
     <style name="recycler_popup_close">
