@@ -68,17 +68,17 @@
                 android:id="@+id/lvl1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Beginner" />
+                android:text="Easy" />
             <RadioButton
                 android:id="@+id/lvl2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Intermediate" />
+                android:text="Moderate" />
             <RadioButton
                 android:id="@+id/lvl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Advance" />
+                android:text="Vigorous" />
         </RadioGroup>
 
         <View

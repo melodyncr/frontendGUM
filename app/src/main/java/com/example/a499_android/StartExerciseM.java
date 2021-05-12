@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.a499_android.utility.ScalableVideoView;
 
 import java.text.SimpleDateFormat;
+import java.util.Random;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -34,7 +35,7 @@ public class StartExerciseM extends AppCompatActivity implements SensorEventList
     private boolean isMeterAvailable, notFirstTime = false;
     private float currentX, currentY, currentZ, lastX, lastY, lastZ;
     private float xDifference, yDifference, zDifference;
-    private float shakeThreshold = 0.3f;// the amount of motion needed to prevent audio clip to remind person to move
+    private float shakeThreshold = 0.2f;// the amount of motion needed to prevent audio clip to remind person to move
     private Vibrator vibrator;
     MediaPlayer move;
     ScalableVideoView videoView;
@@ -56,7 +57,8 @@ public class StartExerciseM extends AppCompatActivity implements SensorEventList
             isMeterAvailable = false;
         }
         //define media player
-        move = MediaPlayer.create(this, R.raw.move);
+        move = MediaPlayer.create(this, R.raw.move1);
+
 
         videoView = findViewById(R.id.scalableVideoViewM);
         // video files will later follow this naming format: "avatarName_workoutName.mp4"
@@ -79,7 +81,7 @@ public class StartExerciseM extends AppCompatActivity implements SensorEventList
 
         //        ------------------------- TIMER AND PROGRESS BAR -------------------------
 
-        long mMilliseconds = 20000; //length of all timers
+        long mMilliseconds = SelectWorkout.time_mil; //length of all timers
 
         //format time for countdown display
         SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -152,16 +154,50 @@ public class StartExerciseM extends AppCompatActivity implements SensorEventList
              if((xDifference > shakeThreshold && yDifference > shakeThreshold) ||
             (xDifference > shakeThreshold && zDifference > shakeThreshold) ||
                     (yDifference > shakeThreshold && zDifference > shakeThreshold)){
-                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                     movement.setText("Awesome Work!!");
-                     vibrator.vibrate(VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE));
-                 }else{
-                     //vibrator.vibrate(500);
+                     movement.setText("Great Work! Lets keep it up!");
+                     if(move.isPlaying()){
 
-                 }
+                     }else{
+                         Random rand = new Random();
+                         int num = rand.nextInt(3);
+                         if (num == 0) {
+                             stopPlaying();
+                             move = MediaPlayer.create(this, R.raw.good1);
+                             move.start();// move 1 will be triggered
+                         } else if (num == 1) {
+                             stopPlaying();
+                             move = MediaPlayer.create(this, R.raw.good2);
+                             move.start();
+                         } else {
+                             stopPlaying();
+                             move = MediaPlayer.create(this, R.raw.good3);
+                             move.start();
+                         }
+                     }
+                    // vibrator.vibrate(VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE));
              }else{
-                 move.start();
-                 movement.setText("Keep moving!!");
+                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                     movement.setText("Lets keep moving!");
+                     vibrator.vibrate(VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE));
+                 }
+                 Random rand = new Random();
+                 int num = rand.nextInt(3);
+                 if(move.isPlaying()){
+                 }else {
+                     if (num == 0) {
+                         stopPlaying();
+                         move = MediaPlayer.create(this, R.raw.move1);
+                         move.start();// move 1 will be triggered
+                     } else if (num == 1) {
+                         stopPlaying();
+                         move = MediaPlayer.create(this, R.raw.move2);
+                         move.start();
+                     } else {
+                         stopPlaying();
+                         move = MediaPlayer.create(this, R.raw.move3);
+                         move.start();
+                     }
+                 }
              }
         }
         lastX = currentX;
@@ -169,6 +205,14 @@ public class StartExerciseM extends AppCompatActivity implements SensorEventList
         lastZ = currentZ;
 
         notFirstTime = true;
+    }
+
+    private void stopPlaying() {
+        if (move != null) {
+            move.stop();
+            move.release();
+            move= null;
+        }
     }
 
     @Override

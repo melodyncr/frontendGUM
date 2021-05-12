@@ -91,9 +91,9 @@ public class CreateAccount extends AppCompatActivity {
                             newUser.put("Points", 0);
                             newUser.put("Score", 0);
                             newUser.put("FitnessLvl"," ");
-                            newUser.put("AvatarUrl", "dead.png");
+                            newUser.put("AvatarUrl", "orange_avatar.png");
                             List<String> listOfAvatars = new ArrayList<String>(){{
-                                add("dead.png");
+                                add("orange_avatar.png");
                             }};
                             newUser.put("UnlockedAvatars", listOfAvatars);
 

@@ -46,7 +46,7 @@ public class VideoDemonstrations extends AppCompatActivity implements AdapterVie
         videosDoc = db.collection("Videos").document(LandingPage.fitnessLevel);
         query_for_levels();
         spinner.setOnItemSelectedListener(this);
-        String[] levels = new String[]{"Select a Category","Beginner", "Intermediate","Advance"};
+        String[] levels = new String[]{"Select a Category","Easy", "Moderate","Vigorous"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, levels);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -89,6 +89,10 @@ public class VideoDemonstrations extends AppCompatActivity implements AdapterVie
         if(categoryStr.equals("Select a Category")){
             //do nothing, no query is executed.
         }else {
+            if(categoryStr.equals("Easy")){categoryStr = "Beginner";}
+            if(categoryStr.equals("Moderate")){categoryStr = "Intermediate";}
+            if(categoryStr.equals("Vigorous")){categoryStr = "Advance";}
+
             videosDoc = db.collection("Videos").document(categoryStr);
             query_for_levels();
         }
