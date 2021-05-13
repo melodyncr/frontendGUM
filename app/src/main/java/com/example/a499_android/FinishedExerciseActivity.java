@@ -36,6 +36,8 @@ public class FinishedExerciseActivity extends AppCompatActivity {
     CollectionReference tidbits;
     List<String> tidBitsList;
     List<String> tidbitsIdList;
+    private long pointTotal;
+    public static boolean fromNotification = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,8 @@ public class FinishedExerciseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_finished_exercise);
 
         TextView userPoints = findViewById(R.id.finishedExerciseTotalPts);
+        TextView earnedMessage = findViewById(R.id.textView4);
+        earnedMessage.setVisibility(View.INVISIBLE);
 
         // NOTE: user info read from db will be hardcoded until login activity is done
         String uName = SaveSharedPreference.getUserName(FinishedExerciseActivity.this);
@@ -58,7 +62,16 @@ public class FinishedExerciseActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot document) {
                 if (document.exists()) {
-                    userPoints.setText("Total Points: " + document.getData().get("Points").toString());
+                    if(fromNotification){
+                        //add points
+                        pointTotal = (long) document.getData().get("Points");
+                        pointTotal = pointTotal + 1;
+                        docRef.update("Points", pointTotal);
+                        userPoints.setText("Total Points: " + document.getData().get("Points").toString());
+                        earnedMessage.setText("You earned " + document.getData().get("Points").toString() + "point");
+                        earnedMessage.setVisibility(View.VISIBLE);
+                        fromNotification = false;
+                    } else{ userPoints.setText("Total Points: " + document.getData().get("Points").toString()); }
                 } else {
                     Toast.makeText(FinishedExerciseActivity.this, "Unable to Load User Data", Toast.LENGTH_SHORT).show();
                 }

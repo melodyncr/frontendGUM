@@ -34,5 +34,6 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setAutoCancel(true);
         notificationManager.notify(UpdateSchedule.notificationID, builder.build());
 
+        FinishedExerciseActivity.fromNotification = true;
     }
 }
