@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="easy_workouts">
-        <item>Session1</item>
+        <item>session1</item>
+        <item>session2</item>
+        <item>session3</item>
+        <item>session4</item>
+        <item>session5</item>
+        <item>session6</item>
         <item>bouncing</item>
         <item>counter_swing</item>
         <item>swaying</item>
-        <item>healing sounds</item>
-        <item>meditation</item>
-        <item>heaven and sky</item>
-        <item>lung exercise</item>
-        <item>kidney exercise</item>
-        <item>heart exercise</item>
-        <item>shaking</item>
         <item>praise_sun</item>
     </string-array>
 </resources>
