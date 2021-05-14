@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="medium_workouts">
-        <item>medium bouncing</item>
-        <item>medium_swinging</item>
+        <item>session1</item>
+        <item>session2</item>
+        <item>session3</item>
+        <item>session4</item>
     </string-array>
 </resources>

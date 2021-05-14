@@ -45,7 +45,7 @@
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     android:background="@color/logo_orange"
-                    android:src="@drawable/green_avatar"
+                    android:src="@drawable/nature"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,7 +75,7 @@
                     android:layout_marginTop="8dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/green_avatar"
+                    android:src="@drawable/alien"
                     android:background="@color/logo_green"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -108,7 +108,7 @@
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     android:background="@color/soft_yellow"
-                    android:src="@drawable/green_avatar"
+                    android:src="@drawable/galactic"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

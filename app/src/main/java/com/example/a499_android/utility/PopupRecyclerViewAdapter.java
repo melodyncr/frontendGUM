@@ -62,11 +62,11 @@ public class PopupRecyclerViewAdapter extends RecyclerView.Adapter<PopupRecycler
                     //save selected object
                     choice = data[getAdapterPosition()];
                     if(SelectWorkout.difficulty.equals("easy")){
-                        choice = choice + "_Gentle_" + LandingPage.avatarName;
+                        choice = choice + "_gentle_" + LandingPage.avatarName;
                     }else if(SelectWorkout.difficulty.equals("medium")){
-                        choice = choice + "_Moderate_" + LandingPage.avatarName;
+                        choice = choice + "_moderate_" + LandingPage.avatarName;
                     }else {
-                        choice = choice + "_Vigorous_" + LandingPage.avatarName;
+                        choice = choice + "_vigorous_" + LandingPage.avatarName;
                     }
                     SelectWorkout.selectedWorkout = choice;
                     popUp.dismiss();

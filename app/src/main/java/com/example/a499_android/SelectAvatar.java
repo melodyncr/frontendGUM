@@ -70,18 +70,18 @@ public class SelectAvatar extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot document) {
                 if (document.exists()) {
                     unlockedAvatars = (List<String>) document.getData().get("UnlockedAvatars");
-                    if (unlockedAvatars.contains("orange_avatar.png")) {
-                        tv1.setText("Orange Avatar Unlocked");
+                    if (unlockedAvatars.contains("nature.png")) {
+                        tv1.setText("Nature Avatar Unlocked");
                     }
-                    if (unlockedAvatars.contains("green_avatar.png")) {
-                        tv2.setText("Green Avatar Unlocked");
+                    if (unlockedAvatars.contains("alien.png")) {
+                        tv2.setText("Alien Avatar Unlocked");
                     }else{
-                        tv2.setText("Green Avatar Locked");
+                        tv2.setText("Alien Avatar Locked");
                     }
-                    if (unlockedAvatars.contains("dead.png")) {//will change later
-                        tv3.setText("Yellow Avatar Unlocked");
+                    if (unlockedAvatars.contains("galactic.png")) {//will change later
+                        tv3.setText("Galactic Avatar Unlocked");
                     } else {
-                        tv3.setText("Yellow Avatar Locked");
+                        tv3.setText("Galactic Avatar Locked");
                     }
                     Log.d("Unlocked Avatars", String.valueOf(unlockedAvatars));
                     fitnessPts = (long) document.getData().get("Points");
@@ -109,7 +109,7 @@ public class SelectAvatar extends AppCompatActivity {
         ex1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setImage("orange_avatar.png");
+                setImage("nature.png");
             }
         });
 
@@ -117,10 +117,10 @@ public class SelectAvatar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (isUnlocked("green_avatar.png")) {
-                    setImage("green_avatar.png");
+                if (isUnlocked("alien.png")) {
+                    setImage("alien.png");
                 } else {
-                    onButtonShowPopupWindowClick(view, "green_avatar.png", 100);// the green avatar costs 100 points
+                    onButtonShowPopupWindowClick(view, "alien.png", 100);// the green avatar costs 100 points
                 }
             }
         });
@@ -128,10 +128,10 @@ public class SelectAvatar extends AppCompatActivity {
         ex3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isUnlocked("dead.png")) {
-                    setImage("dead.png");
+                if (isUnlocked("galactic.png")) {
+                    setImage("galactic.png");
                 } else {
-                    onButtonShowPopupWindowClick(view, "dead.png", 300); // the yellow avatar costs 300 points
+                    onButtonShowPopupWindowClick(view, "galactic.png", 300); // the yellow avatar costs 300 points
                 }
             }
         });

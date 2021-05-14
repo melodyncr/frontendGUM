@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="hard_workouts">
-        <item>jumping</item>
-        <item>swinging</item>
-        <item>running</item>
+        <item>session1</item>
+        <item>session2</item>
+        <item>session3</item>
+        <item>session4</item>
     </string-array>
 </resources>
