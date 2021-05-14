@@ -24,15 +24,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a499_android.utility.PopupRecyclerViewAdapter;
 
+import java.util.HashMap;
+
 public class SelectWorkout extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     public static String selectedWorkout = "none";
-//    ArrayList<String> data = new ArrayList<>();
+    public static String difficulty = "none";
     String data[];
     public static boolean interval = false;
     Spinner spinner;
     public String level = "";
     public static long time_mil = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +89,7 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
         easyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                difficulty = "easy";
                 interval = false;
                 spinner.setVisibility(View.INVISIBLE);
                 data = res.getStringArray(R.array.easy_workouts);
@@ -96,6 +100,7 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
         mediumBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                difficulty = "medium";
                 interval = false;
                 spinner.setVisibility(View.INVISIBLE);
                 data = res.getStringArray(R.array.medium_workouts);
@@ -106,6 +111,7 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
         hardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                difficulty = "hard";
                 interval = false;
                 spinner.setVisibility(View.INVISIBLE);
                 data = res.getStringArray(R.array.hard_workouts);

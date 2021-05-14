@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a499_android.LandingPage;
 import com.example.a499_android.MessageAdapter;
 import com.example.a499_android.R;
 import com.example.a499_android.SelectWorkout;
@@ -60,6 +61,13 @@ public class PopupRecyclerViewAdapter extends RecyclerView.Adapter<PopupRecycler
                 public void onClick(View view) {
                     //save selected object
                     choice = data[getAdapterPosition()];
+                    if(SelectWorkout.difficulty.equals("easy")){
+                        choice = choice + "_Gentle_" + LandingPage.avatarName;
+                    }else if(SelectWorkout.difficulty.equals("medium")){
+                        choice = choice + "_Moderate_" + LandingPage.avatarName;
+                    }else {
+                        choice = choice + "_Vigorous_" + LandingPage.avatarName;
+                    }
                     SelectWorkout.selectedWorkout = choice;
                     popUp.dismiss();
                     Toast.makeText(mContext, choice, Toast.LENGTH_SHORT).show();
