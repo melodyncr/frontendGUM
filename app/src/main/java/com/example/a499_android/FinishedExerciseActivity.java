@@ -110,6 +110,7 @@ public class FinishedExerciseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SelectWorkout.selectedWorkout = "none";
+                SelectWorkout.difficulty = "none";
                 Intent intent = new Intent(FinishedExerciseActivity.this, LandingPage.class);
                 startActivity(intent);
             }

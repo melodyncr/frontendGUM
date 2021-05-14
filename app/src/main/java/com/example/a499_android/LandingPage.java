@@ -51,6 +51,8 @@ public class LandingPage extends AppCompatActivity {
     public static final String W_SURVEY_Q = "w_survey_q";
     public static final String W_SURVEY_QC = "w_survey_qc";
     public static String fitnessLevel = "";
+    public static String avatarName;
+    String profile_path_total;
     public ArrayList<String> workoutList = new ArrayList<>();
     DocumentReference docRef;
     private boolean isAdmin = false;
@@ -95,7 +97,8 @@ public class LandingPage extends AppCompatActivity {
                     Log.d(TAG, "Found User Data");
                     displayedPoints.setText(document.getData().get("Points").toString());
                     //set image when loaded in
-                    String profile_path_total = document.getData().get("AvatarUrl").toString();
+                    profile_path_total = document.getData().get("AvatarUrl").toString();
+                    avatarName = profile_path_total.substring(0, profile_path_total.length()-4);
                     //removes .png from string to find in path
                     int size_profile = profile_path_total.length();
                     int stop = size_profile - 4;
