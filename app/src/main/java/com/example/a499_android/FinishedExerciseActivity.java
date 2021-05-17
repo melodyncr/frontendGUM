@@ -65,10 +65,10 @@ public class FinishedExerciseActivity extends AppCompatActivity {
                     if(fromNotification){
                         //add points
                         pointTotal = (long) document.getData().get("Points");
-                        pointTotal = pointTotal + 1;
+                        pointTotal = pointTotal + 10;
                         docRef.update("Points", pointTotal);
                         userPoints.setText("Total Points: " + document.getData().get("Points").toString());
-                        earnedMessage.setText("You earned " + document.getData().get("Points").toString() + "point");
+                        earnedMessage.setText("You earned 10 points!");
                         earnedMessage.setVisibility(View.VISIBLE);
                         fromNotification = false;
                     } else{ userPoints.setText("Total Points: " + document.getData().get("Points").toString()); }
