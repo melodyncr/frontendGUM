@@ -7,6 +7,8 @@
     tools:context=".UpdateSchedule">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/gradient_list"
+        android:id="@+id/layout"
         android:layout_width="409dp"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
