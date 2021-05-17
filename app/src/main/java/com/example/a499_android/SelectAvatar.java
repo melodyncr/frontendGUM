@@ -238,6 +238,9 @@ public class SelectAvatar extends AppCompatActivity {
                     ptsView.setText(String.valueOf(fitnessPts));
                     //.setSubtitle("FP: " + String.valueOf(fitnessPts));
                     setImage(avatarUrl);
+                    if(avatarUrl.equals("alien.png")){
+                        tv2.setText("Alien Avatar Unlocked");
+                    }else{ tv3.setText("Galactic Avatar Unlocked"); }
                     popupWindow.dismiss();
                 }
             }

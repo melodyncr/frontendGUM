@@ -64,7 +64,7 @@ public class StartExercise extends AppCompatActivity {
 
 //        ------------------------- TIMER AND PROGRESS BAR -------------------------
 
-        long mMilliseconds = 10000; //length of all timers
+        long mMilliseconds = 20000; //length of all timers
 
         //format time for countdown display
         SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("HH:mm:ss");
