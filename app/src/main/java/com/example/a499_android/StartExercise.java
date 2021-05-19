@@ -1,10 +1,12 @@
 package com.example.a499_android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -34,6 +36,12 @@ public class StartExercise extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_exercise);
 
+        ConstraintLayout constraintLayout = findViewById(R.id.layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
+
 //        ------------------------- SET UP VIDEO VIEW -------------------------
 
         videoView = findViewById(R.id.scalableVideoView);
@@ -56,7 +64,7 @@ public class StartExercise extends AppCompatActivity {
 
 //        ------------------------- TIMER AND PROGRESS BAR -------------------------
 
-        long mMilliseconds = 10000; //length of all timers
+        long mMilliseconds = 20000; //length of all timers
 
         //format time for countdown display
         SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("HH:mm:ss");
