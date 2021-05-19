@@ -95,6 +95,7 @@ public class AdminLanding extends AppCompatActivity {
         GetResponseListQuery.listSelected_responses.clear();
         SelectASurvey.survey_list_names.clear();
         SelectASurvey.past_survey= false;
+        ViewResponseR.select_question= false;
         GetResponseListQuery.index_charts = 0;
         AddSurveyQuestionsCount.count =0;
         w_survey_questions_list.clear();
