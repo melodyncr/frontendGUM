@@ -67,7 +67,12 @@ public class SelectSchedule extends AppCompatActivity {
                     docRef.update("Schedule", schedule_obj ).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            setNotifications(timeList_string);
+//                            setNotifications(timeList_string);
+                            int code = 100;
+                            for(int i = 0; i < timeList_string.size(); i++){
+                                createNotification(timeList_string, i, code);
+                                code = code + 100;
+                            }
 
                             AlertDialog.Builder builder1 = new AlertDialog.Builder(SelectSchedule.this);
                             builder1.setMessage("If you haven't already once you're logged in, check out the GUM Website. It is located using the toolbar on the top right.");
@@ -208,104 +213,125 @@ public class SelectSchedule extends AppCompatActivity {
         }
     }
 
-    public void setNotifications(ArrayList<String> list){
-
-        Calendar calendar = Calendar.getInstance();
-        Calendar calendar2 = Calendar.getInstance();
-        Calendar calendar3 = Calendar.getInstance();
-        Calendar calendar4 = Calendar.getInstance();
-        Calendar calendar5 = Calendar.getInstance();
-        Calendar calendar6 = Calendar.getInstance();
-
-        //Log.d(TAG,list.get(0) + " time 1");
-
-        int h1,h2,h3,h4,h5,h6;
-        int min1,min2,min3,min4,min5,min6;
+    public void createNotification(ArrayList<String> list, int index, int notifID){
+        int h1;
+        int min1;
         long hours24InMilis = 1000 * 60 * 60 * 24;
+        UpdateSchedule.notificationID = notifID;
 
         //set all hours and minutes convert them to military time
-        h1= setHourOrMin(list.get(0),true);
-        h2= setHourOrMin(list.get(1),true);
-        h3= setHourOrMin(list.get(2),true);
-        h4= setHourOrMin(list.get(3),true);
-        h5= setHourOrMin(list.get(4),true);
-        h6= setHourOrMin(list.get(5),true);
-        min1 = setHourOrMin(list.get(0), false);
-        min2 = setHourOrMin(list.get(1), false);
-        min3 = setHourOrMin(list.get(2), false);
-        min4 = setHourOrMin(list.get(3), false);
-        min5 = setHourOrMin(list.get(4), false);
-        min6 = setHourOrMin(list.get(5), false);
+        h1= setHourOrMin(list.get(index),true);
+        min1 = setHourOrMin(list.get(index), false);
 
+        Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY,h1);
         calendar.set(Calendar.MINUTE,min1);
-        calendar.set(Calendar.SECOND,0);
 
-        calendar2.set(Calendar.HOUR_OF_DAY,h2);
-        calendar2.set(Calendar.MINUTE,min2);
-        calendar2.set(Calendar.SECOND,0);
-
-        calendar3.set(Calendar.HOUR_OF_DAY,h3);
-        calendar3.set(Calendar.MINUTE,min3);
-        calendar3.set(Calendar.SECOND,0);
-
-
-        calendar4.set(Calendar.HOUR_OF_DAY,h4);
-        calendar4.set(Calendar.MINUTE,min4);
-
-        calendar5.set(Calendar.HOUR_OF_DAY,h5);
-        calendar5.set(Calendar.MINUTE,min5);
-
-        calendar6.set(Calendar.HOUR_OF_DAY,h6);
-        calendar6.set(Calendar.MINUTE,min6);
-
-
-        Log.d(TAG, "\nTime 1 and 2." + calendar.getTime()  + calendar2.getTime());
-        Log.d(TAG, "Time 3 and 4." + calendar3.getTime()  + calendar4.getTime());
-        Log.d(TAG, "Time 5 and 6." + calendar5.getTime()  + calendar6.getTime());
-
-        UpdateSchedule.notificationID = 100;
         Intent intent = new Intent(SelectSchedule.this, NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(SelectSchedule.this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(SelectSchedule.this, UpdateSchedule.notificationID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), hours24InMilis, pendingIntent);
-
-        UpdateSchedule.notificationID = 200;
-        Intent intent2 = new Intent(SelectSchedule.this, NotificationReceiver.class);
-        PendingIntent pendingIntent2 = PendingIntent.getBroadcast(SelectSchedule.this, 200,intent2, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarmManager2 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager2.setRepeating(AlarmManager.RTC_WAKEUP, calendar2.getTimeInMillis(), hours24InMilis, pendingIntent2);
-
-        UpdateSchedule.notificationID = 300;
-        Intent intent3 = new Intent(SelectSchedule.this, NotificationReceiver.class);
-        PendingIntent pendingIntent3 = PendingIntent.getBroadcast(SelectSchedule.this, 300,intent3, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarmManager3 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager3.setRepeating(AlarmManager.RTC_WAKEUP, calendar3.getTimeInMillis(), hours24InMilis, pendingIntent3);
-
-        UpdateSchedule.notificationID = 400;
-        Intent intent4 = new Intent(SelectSchedule.this, NotificationReceiver.class);
-        PendingIntent pendingIntent4 = PendingIntent.getBroadcast(SelectSchedule.this, 400,intent4, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarmManager4 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager4.setRepeating(AlarmManager.RTC_WAKEUP, calendar4.getTimeInMillis(), hours24InMilis, pendingIntent4);
-
-        UpdateSchedule.notificationID = 500;
-        Intent intent5 = new Intent(SelectSchedule.this, NotificationReceiver.class);
-        PendingIntent pendingIntent5 = PendingIntent.getBroadcast(SelectSchedule.this, 500,intent5, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarmManager5 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager5.setRepeating(AlarmManager.RTC_WAKEUP, calendar5.getTimeInMillis(), hours24InMilis, pendingIntent5);
-
-        UpdateSchedule.notificationID = 600;
-        Intent intent6 = new Intent(SelectSchedule.this, NotificationReceiver.class);
-        PendingIntent pendingIntent6 = PendingIntent.getBroadcast(SelectSchedule.this, 600,intent6, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarmManager6 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager6.setRepeating(AlarmManager.RTC_WAKEUP, calendar6.getTimeInMillis(), hours24InMilis, pendingIntent6);
     }
+
+//    public void setNotifications(ArrayList<String> list){
+//
+//        Calendar calendar = Calendar.getInstance();
+//        Calendar calendar2 = Calendar.getInstance();
+//        Calendar calendar3 = Calendar.getInstance();
+//        Calendar calendar4 = Calendar.getInstance();
+//        Calendar calendar5 = Calendar.getInstance();
+//        Calendar calendar6 = Calendar.getInstance();
+//
+//        //Log.d(TAG,list.get(0) + " time 1");
+//
+//        int h1,h2,h3,h4,h5,h6;
+//        int min1,min2,min3,min4,min5,min6;
+//        long hours24InMilis = 1000 * 60 * 60 * 24;
+//
+//        //set all hours and minutes convert them to military time
+//        h1= setHourOrMin(list.get(0),true);
+//        h2= setHourOrMin(list.get(1),true);
+//        h3= setHourOrMin(list.get(2),true);
+//        h4= setHourOrMin(list.get(3),true);
+//        h5= setHourOrMin(list.get(4),true);
+//        h6= setHourOrMin(list.get(5),true);
+//        min1 = setHourOrMin(list.get(0), false);
+//        min2 = setHourOrMin(list.get(1), false);
+//        min3 = setHourOrMin(list.get(2), false);
+//        min4 = setHourOrMin(list.get(3), false);
+//        min5 = setHourOrMin(list.get(4), false);
+//        min6 = setHourOrMin(list.get(5), false);
+//
+//        calendar.set(Calendar.HOUR_OF_DAY,h1);
+//        calendar.set(Calendar.MINUTE,min1);
+//        calendar.set(Calendar.SECOND,0);
+//
+//        calendar2.set(Calendar.HOUR_OF_DAY,h2);
+//        calendar2.set(Calendar.MINUTE,min2);
+//        calendar2.set(Calendar.SECOND,0);
+//
+//        calendar3.set(Calendar.HOUR_OF_DAY,h3);
+//        calendar3.set(Calendar.MINUTE,min3);
+//        calendar3.set(Calendar.SECOND,0);
+//
+//
+//        calendar4.set(Calendar.HOUR_OF_DAY,h4);
+//        calendar4.set(Calendar.MINUTE,min4);
+//
+//        calendar5.set(Calendar.HOUR_OF_DAY,h5);
+//        calendar5.set(Calendar.MINUTE,min5);
+//
+//        calendar6.set(Calendar.HOUR_OF_DAY,h6);
+//        calendar6.set(Calendar.MINUTE,min6);
+//
+//
+//        Log.d(TAG, "\nTime 1 and 2." + calendar.getTime()  + calendar2.getTime());
+//        Log.d(TAG, "Time 3 and 4." + calendar3.getTime()  + calendar4.getTime());
+//        Log.d(TAG, "Time 5 and 6." + calendar5.getTime()  + calendar6.getTime());
+//
+//        UpdateSchedule.notificationID = 100;
+//        Intent intent = new Intent(SelectSchedule.this, NotificationReceiver.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(SelectSchedule.this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), hours24InMilis, pendingIntent);
+//
+//        UpdateSchedule.notificationID = 200;
+//        Intent intent2 = new Intent(SelectSchedule.this, NotificationReceiver.class);
+//        PendingIntent pendingIntent2 = PendingIntent.getBroadcast(SelectSchedule.this, 200,intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        AlarmManager alarmManager2 = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        alarmManager2.setRepeating(AlarmManager.RTC_WAKEUP, calendar2.getTimeInMillis(), hours24InMilis, pendingIntent2);
+//
+//        UpdateSchedule.notificationID = 300;
+//        Intent intent3 = new Intent(SelectSchedule.this, NotificationReceiver.class);
+//        PendingIntent pendingIntent3 = PendingIntent.getBroadcast(SelectSchedule.this, 300,intent3, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        AlarmManager alarmManager3 = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        alarmManager3.setRepeating(AlarmManager.RTC_WAKEUP, calendar3.getTimeInMillis(), hours24InMilis, pendingIntent3);
+//
+//        UpdateSchedule.notificationID = 400;
+//        Intent intent4 = new Intent(SelectSchedule.this, NotificationReceiver.class);
+//        PendingIntent pendingIntent4 = PendingIntent.getBroadcast(SelectSchedule.this, 400,intent4, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        AlarmManager alarmManager4 = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        alarmManager4.setRepeating(AlarmManager.RTC_WAKEUP, calendar4.getTimeInMillis(), hours24InMilis, pendingIntent4);
+//
+//        UpdateSchedule.notificationID = 500;
+//        Intent intent5 = new Intent(SelectSchedule.this, NotificationReceiver.class);
+//        PendingIntent pendingIntent5 = PendingIntent.getBroadcast(SelectSchedule.this, 500,intent5, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        AlarmManager alarmManager5 = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        alarmManager5.setRepeating(AlarmManager.RTC_WAKEUP, calendar5.getTimeInMillis(), hours24InMilis, pendingIntent5);
+//
+//        UpdateSchedule.notificationID = 600;
+//        Intent intent6 = new Intent(SelectSchedule.this, NotificationReceiver.class);
+//        PendingIntent pendingIntent6 = PendingIntent.getBroadcast(SelectSchedule.this, 600,intent6, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        AlarmManager alarmManager6 = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        alarmManager6.setRepeating(AlarmManager.RTC_WAKEUP, calendar6.getTimeInMillis(), hours24InMilis, pendingIntent6);
+//    }
 
     int setHourOrMin(String time_str, boolean hour_or_min){
         int time;
