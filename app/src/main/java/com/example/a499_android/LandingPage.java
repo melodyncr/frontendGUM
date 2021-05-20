@@ -6,20 +6,30 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.NotificationCompat;
@@ -31,12 +41,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.type.TimeOfDayOrBuilder;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.LogRecord;
 
 import static com.example.a499_android.LoginActivity.loggedUserName;
 
@@ -217,7 +230,39 @@ public class LandingPage extends AppCompatActivity {
             }
         });
 
-    }
+       if(FinishedExerciseActivity.fromNotification){
+           DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialog, int which) {
+                   switch (which){
+                       case DialogInterface.BUTTON_POSITIVE:
+                           //Yes button clicked
+                           //TODO
+                           //get difficulty and current avatar
+                           //get random exercise from difficulty
+                           //construct video name
+
+                           SelectWorkout.selectedWorkout = "session1_gentle_nature";    //Temporary for testing
+
+                           Intent intent = new Intent(LandingPage.this, StartExercise.class);
+                           startActivity(intent);
+                           break;
+
+                       case DialogInterface.BUTTON_NEGATIVE:
+                           //No button clicked
+                           FinishedExerciseActivity.fromNotification = false;
+                           dialog.cancel();
+                           break;
+                   }
+               }
+           };
+
+           androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(LandingPage.this);
+           builder.setMessage("Start Scheduled Exercise? Saying no means you will miss out on points!").setPositiveButton("Yes", dialogClickListener)
+                   .setNegativeButton("No", dialogClickListener).show();
+       }
+
+    }//End of onCreate()
 
     // Intent Factory
     public static Intent getIntent(Context context, String val){

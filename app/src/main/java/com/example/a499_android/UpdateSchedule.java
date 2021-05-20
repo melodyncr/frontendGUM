@@ -301,7 +301,11 @@ public class UpdateSchedule extends AppCompatActivity {
                     wBtn5.setText(times_list.get(4));
                     wBtn6.setText(times_list.get(5));
 
-                    updateNotification(times_list);
+                    //Recreate all notifications/alarms in the newly sorted order
+                    for(int i = 0; i < times_list.size(); i++){
+                        updateNotification(times_list, i);
+                    }
+
                 }
             }
         });
@@ -380,20 +384,23 @@ public class UpdateSchedule extends AppCompatActivity {
         wBtn6 = findViewById(R.id.workout6_btn);
     }
 
-    // update a notification
-    public void updateNotification(ArrayList<String> list){
+    public void updateNotification(ArrayList<String> list, int index){
         int h1;
         int min1;
         long hours24InMilis = 1000 * 60 * 60 * 24;
 
         //set all hours and minutes convert them to military time
-        h1= setHourOrMin(list.get(index_to_update),true);
-        min1 = setHourOrMin(list.get(index_to_update), false);
+        h1= setHourOrMin(list.get(index),true);
+        min1 = setHourOrMin(list.get(index), false);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY,h1);
         calendar.set(Calendar.MINUTE,min1);
-//        calendar.set(Calendar.SECOND,0);
+
+        //if the time being updated is before the current time then add a day
+        if(calendar.before(Calendar.getInstance())){
+            calendar.add(Calendar.DATE, 1);
+        }
 
         Intent intent = new Intent(UpdateSchedule.this, NotificationReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(UpdateSchedule.this, notificationID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
