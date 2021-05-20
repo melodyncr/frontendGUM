@@ -43,6 +43,7 @@ public class VideoDemonstrations extends AppCompatActivity implements AdapterVie
         recyclerView = (RecyclerView) findViewById(R.id.videosListRecyclerView_Lvl);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(VideoDemonstrations.this));
+        // document path is default to the level
         videosDoc = db.collection("Videos").document(LandingPage.fitnessLevel);
         query_for_levels();
         spinner.setOnItemSelectedListener(this);
@@ -79,9 +80,9 @@ public class VideoDemonstrations extends AppCompatActivity implements AdapterVie
                 }
             }
         });
-        //return weeklyQuestionsList;
     }
 
+    // category , use the string to get the document path gets changed
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item

@@ -42,8 +42,10 @@ public class MessageAdmin extends AppCompatActivity {
         setContentView(R.layout.message_admin);
 
         if(AdminMsgList.fromAdmin){
+            // document the user selected
             messageDoc = db.collection("Messages").document(AdminMsgList.userNameSelected);
         }else {
+            // get the document that has all the messages from the loggin user
             messageDoc = db.collection("Messages").document(LoginActivity.loggedUserName);
         }
         usersList = db.collection("Users_List").document("List");
@@ -67,6 +69,7 @@ public class MessageAdmin extends AppCompatActivity {
                     messageDoc.update("messages", obj).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+                            //makes sure message is sent before intenting
                             Toast.makeText(MessageAdmin.this, "Message sent!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MessageAdmin.this, MessageAdmin.class);
                             startActivity(intent);
@@ -75,7 +78,6 @@ public class MessageAdmin extends AppCompatActivity {
                 }
             }
         });
-        // create timer for activity completion (add visual timer later)
     }
     void query1(){
         messageDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -91,6 +93,7 @@ public class MessageAdmin extends AppCompatActivity {
                             if(pair.getKey().toString().equals("messages")){ messageList = (ArrayList<String>) document.get("messages"); }
                             it.remove(); // avoids a ConcurrentModificationException
                         }
+                        // gets the list of messages and puts them in the recycler view
                         recyclerView = (RecyclerView) findViewById(R.id.messages_recycler_view);
                         Log.d(TAG, messageList.toString() + LoginActivity.loggedUserName);
                         recyclerView.setLayoutManager(new LinearLayoutManager(MessageAdmin.this));
@@ -109,7 +112,7 @@ public class MessageAdmin extends AppCompatActivity {
     }
 
 
-
+    // if this is the admin, we will remove the user from the priority list if the user is in it
     void query2() {
         usersList.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

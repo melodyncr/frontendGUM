@@ -19,6 +19,9 @@ import java.util.Map;
 
 public class GetResponseListQuery  extends AppCompatActivity {
 
+    // this activity is similar to determine question type, however since we have seperate collectins for first survey,
+    // weekly survey, past weekly survey q, past weekly survey r, past weekly survey count, time etc we have to do queries for each one depending
+    // on what the user selects.
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public String TAG = "Get Response List";
     public static ArrayList<String> listSelected_responses = new ArrayList<>();

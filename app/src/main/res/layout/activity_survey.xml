@@ -92,14 +92,6 @@
                 android:text="Next Question"
                 android:background="@drawable/rounded_corners"
                 />
-            <Button
-                android:id="@+id/previousBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Previous Question"
-                android:background="@drawable/rounded_corners"
-                />
 
         </LinearLayout>
 

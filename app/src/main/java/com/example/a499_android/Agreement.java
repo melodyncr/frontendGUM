@@ -22,6 +22,7 @@ public class Agreement extends AppCompatActivity {
     }
     public void Check(View v)
     {
+        // the agreement
         // Concatenation of the checked options in if
         // Check is used to check whether the person has agreed to the terms above or not
         if(checkBox.isChecked()) {

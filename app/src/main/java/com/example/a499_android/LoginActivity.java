@@ -55,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
                             String passwordValue = document.getString("Password").toString();
                             Log.d(TAG, String.valueOf(document));
                             if(passwordInput.equals(passwordValue)) {
-                                Log.d("HEREEEEE", passwordValue);
                                 //sp.edit().putString("username", usernameInput).apply();
                                 //sp.edit().putInt("Points", Integer.parseInt(document.getString("Points"))).apply();
                                 Toast.makeText(LoginActivity.this, "Login Successful! Welcome " + usernameInput, Toast.LENGTH_SHORT).show();
@@ -67,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
                             else {
                                 Log.d(TAG, "Password did not match");
                                 Log.d(TAG, passwordInput);
-                                Log.d("HEREEEEE", passwordValue);
                                 Toast.makeText(LoginActivity.this,
                                         "Incorrect Password",
                                         Toast.LENGTH_SHORT).show();

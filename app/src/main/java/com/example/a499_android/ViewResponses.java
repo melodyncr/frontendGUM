@@ -130,6 +130,7 @@ public class ViewResponses extends AppCompatActivity {
                 }
             }
         });
+
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -242,6 +243,7 @@ public class ViewResponses extends AppCompatActivity {
         Log.d(TAG, "finished " + max_count);
     }
 
+    // window will show the response text the user selected
     public void onButtonShowPopupWindowClick(View view, String question) {
         final WindowManager w = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         final Display d = w.getDefaultDisplay();

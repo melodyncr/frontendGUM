@@ -13,6 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 public class AddSurveyQuestionsCount extends AppCompatActivity {
+
+    /*these static variables are used to keep track of how many questions the user has selected
+    questionCount is determined  when the user types in how many questions will be in the new
+    survey
+    count will be the index for each question
+    num_questions is the number of questions the user has typed in
+     */
     public static int questionCount;
     public static int count = 0;
     EditText num_questions;
@@ -25,6 +32,7 @@ public class AddSurveyQuestionsCount extends AppCompatActivity {
         num_questions = findViewById(R.id.numOfQuestions);
         beginSurvey = findViewById(R.id.beginSurveyBtn);
 
+        // when clicked, there is a try catch to validate and make sure the number typed in is valid
         beginSurvey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

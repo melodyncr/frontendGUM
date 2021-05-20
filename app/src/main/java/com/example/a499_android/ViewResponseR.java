@@ -75,6 +75,8 @@ public class ViewResponseR extends AppCompatActivity {
             }
         });
 
+
+        // finds the users response
         findUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

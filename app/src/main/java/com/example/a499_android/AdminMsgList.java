@@ -32,6 +32,9 @@ import java.util.Map;
 
 public class AdminMsgList extends AppCompatActivity {
 
+    // this is the admin message list, this list is used for two things, allows the admin to select who to message ,
+    // or to select a user to view their response for a specific survey
+    // there is a static variable that determines where this activity intented from
     ArrayList<String> usersList = new ArrayList<>();
     ArrayList<String> priorityList = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -49,13 +52,15 @@ public class AdminMsgList extends AppCompatActivity {
         finishBtn.setVisibility(View.INVISIBLE);
         priorityText = findViewById(R.id.priorityList);
         if(ViewResponseR.select_question){
+            //if this is from viewresponse, the priority list's unread messages list is INVISIBLE
             priorityText.setVisibility(View.INVISIBLE);
         }
         usersDoc = db.collection("Users_List").document("List");
         init_firebase();
 
-        // create timer for activity completion (add visual timer later)
     }
+
+    //query to get the users
     void init_firebase(){
         usersDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -102,7 +107,6 @@ public class AdminMsgList extends AppCompatActivity {
                 finish();
             }
         });
-        //return weeklyQuestionsList;
     }
 
     private class Adapter extends RecyclerView.Adapter<AdminMsgList.ItemHolder> {
@@ -130,15 +134,16 @@ public class AdminMsgList extends AppCompatActivity {
             super(inflater.inflate(R.layout.message_item, parent, false));
         }
 
-        public void bind(String f) {
+        public void bind(String user) {
             TextView item = itemView.findViewById(R.id.message_id);
-            item.setText(f);
+            item.setText(user);
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     fromAdmin = true;
-                    userNameSelected = f;
+                    userNameSelected = user;
                     Intent intent;
+                    //depending on what activity it is, we can then see what the response was by setting the variable user to username selected
                     if(ViewResponseR.select_question){
                         intent = new Intent(AdminMsgList.this, ViewResponseUser.class);
                     }else {

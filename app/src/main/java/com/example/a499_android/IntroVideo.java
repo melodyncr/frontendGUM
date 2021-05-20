@@ -70,7 +70,7 @@ public class IntroVideo extends AppCompatActivity {
                         Log.d(TAG,  "delay" + delay);
 
                         timer = new Timer();
-                        int delay_int = Integer.parseInt(delay);
+                        int delay_int = Integer.parseInt(delay);// note the delay is on firebase
                         timer.schedule(new TimerTask()  {
                             @Override
                             public void run()   {   // switch activity intent after timer expires

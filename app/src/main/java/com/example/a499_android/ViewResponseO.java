@@ -32,6 +32,7 @@ public class ViewResponseO extends AppCompatActivity {
         backBtn = findViewById(R.id.backBtnChartO);
         nextBtn = findViewById(R.id.nextBtnChartO);
         ArrayList<Integer> responseListInt = returnInts(responseList.get(GetResponseListQuery.index_charts));
+        // here we check how many questions are in the scale question 7 or 10
         txtView = findViewById(R.id.textView1O);
         txtView2 = findViewById(R.id.textView2O);
         txtView3 = findViewById(R.id.textView3O);
@@ -114,6 +115,7 @@ public class ViewResponseO extends AppCompatActivity {
 
     }
 
+    // here we get the numbers and then get the percentages and set them
     private ArrayList<Integer> returnInts(String choices){
         ArrayList<Integer> responseListInt = new ArrayList<>();
         int last_comma = 0;

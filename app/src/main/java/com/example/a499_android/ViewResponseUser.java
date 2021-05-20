@@ -47,6 +47,7 @@ public class ViewResponseUser extends AppCompatActivity {
 
     }
 
+    // checks the response of the user if not found, will let the admin know
     void getPastResponses(){
         pastResponses.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

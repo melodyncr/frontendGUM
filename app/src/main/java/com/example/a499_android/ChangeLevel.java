@@ -37,6 +37,7 @@ public class ChangeLevel extends AppCompatActivity {
             public void onClick(View v) {
                 boolean checked = isChecked();
                 if(checked){
+                    // change users fitness level, we can do a simple update query and set the str to an object and update the users fitness level
                     docRef = db.collection("Users").document(LoginActivity.loggedUserName);
                     Object obj_name = LandingPage.fitnessLevel;
                     docRef.update("FitnessLvl",obj_name).addOnCompleteListener(new OnCompleteListener<Void>() {
