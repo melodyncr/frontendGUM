@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class AddVideos extends AppCompatActivity {
+    // add videos, user can select the type of video the want to add, then enter the id of the video, and description to then put in the firestore db
     Button addVideoBtn;
     EditText videoDescription;
     EditText videoID;
@@ -54,6 +55,7 @@ public class AddVideos extends AppCompatActivity {
             public void onClick(View v) {
                 String category = isChecked();
                 Log.d(TAG, category + "id");
+                // various checks to ensure valid videos are uploaded
                 if(category.equals("")) {
                     Toast.makeText(AddVideos.this, "Category not selected empty or not 11 characters!", Toast.LENGTH_SHORT).show();
                 }else{
@@ -67,6 +69,7 @@ public class AddVideos extends AppCompatActivity {
                         uploadVideo = false;
                     }
                     if (uploadVideo) {
+                        //if a valid video is determined, then begin the process of adding the video on firebase
                         videosDoc = db.collection("Videos").document(category);
                         String i_frame_str = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/"+videoID.getText().toString()+"\" frameborder=\"0\" allowfullscreen></iframe>";
                         videosDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -83,6 +86,7 @@ public class AddVideos extends AppCompatActivity {
                                             if(pair.getKey().toString().equals("videos_list")){ videoIFrame = (ArrayList<String>) document.get("videos_list"); }
                                             it.remove(); // avoids a ConcurrentModificationException
                                         }
+                                        //pull videos object by category then add new video and update the field
                                         videoDescList.add(videoDescription.getText().toString());
                                         videoIFrame.add(i_frame_str);
                                         Object vDescObj = videoDescList;

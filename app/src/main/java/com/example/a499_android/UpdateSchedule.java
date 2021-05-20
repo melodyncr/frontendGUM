@@ -380,6 +380,7 @@ public class UpdateSchedule extends AppCompatActivity {
         wBtn6 = findViewById(R.id.workout6_btn);
     }
 
+    // update a notification
     public void updateNotification(ArrayList<String> list){
         int h1;
         int min1;

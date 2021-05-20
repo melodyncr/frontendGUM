@@ -27,7 +27,7 @@ public class SurveyMultiC extends AppCompatActivity {
     TextView typeSurvey, questionText;
     RadioGroup radioGroup;
     RadioButton b1, b2, b3, b4;
-    Button  submitBtn, previousBtn;
+    Button  submitBtn;
     public String TAG = "SubmitMC";
 
     @Override
@@ -74,31 +74,10 @@ public class SurveyMultiC extends AppCompatActivity {
                 }
             }
         });
-        previousBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (question_count == 0) {
-                    Toast.makeText(SurveyMultiC.this, "No previous questions", Toast.LENGTH_SHORT).show();
-                } else {
-                    question_count--;
-                    response_count--;
-                    responseList.remove(response_count);
-                    Intent intent;
-                    if (weeklyQuestionsList.get(question_count).charAt(0) == 'M') {
-                        intent = new Intent(SurveyMultiC.this, SurveyMultiC.class);
-                    }
-                    else if (weeklyQuestionsList.get(question_count).charAt(0) == 'O') {
-                        intent = new Intent(SurveyMultiC.this, SurveyOneTen.class);
-                    }
-                    else {
-                        intent = new Intent(SurveyMultiC.this, SurveyResponse.class);
-                    }
-                    startActivity(intent);
-                }
-            }
-        });
+
     }
 
+    // partition the choices by comma and make a temporary list of choices
     void setChoices(String choices) {
         int last_comma = 0;
         String substr = "";
@@ -116,7 +95,7 @@ public class SurveyMultiC extends AppCompatActivity {
         questionText = findViewById(R.id.questionText);
         radioGroup = findViewById(R.id.radioQuestionsGroup);
         submitBtn = findViewById(R.id.submitBtn);
-        previousBtn = findViewById(R.id.previousBtn);
+        // if the first question of the survey depending on the type, a different title will appear
         if(question_count ==0 && CreateAccount.first_survey){
             typeSurvey.setText("Thank you so much for helping us gather information on how the GUM program is working for you. This is not a test, there are no right or wrong answers.");
         }else if(question_count ==0){
@@ -140,6 +119,7 @@ public class SurveyMultiC extends AppCompatActivity {
         b2.setText(""+tempChoiceList.get(1));
         b3.setVisibility(View.INVISIBLE);
         b4.setVisibility(View.INVISIBLE);
+        // we need to check if the number of responses is greater than 2 to see if we need to show question 3 or 4
         if(tempChoiceList.size() == 3){
             b3.setText(""+tempChoiceList.get(2));
             b3.setVisibility(View.VISIBLE);
@@ -174,6 +154,7 @@ public class SurveyMultiC extends AppCompatActivity {
         }
     }
 
+    // record answer and determine score will get the list of counts and add 1 to whatever the value is to increment the value
     void recordAnswer(int index,String choices){
         int last_comma = 0;
         String substr = "";
@@ -208,6 +189,5 @@ public class SurveyMultiC extends AppCompatActivity {
         }
         int temp_score = list.get(index);
         DetermineQuestionType.survey_score = DetermineQuestionType.survey_score + temp_score;
-        Log.d(TAG, ""+ DetermineQuestionType.survey_score + " right now...");
     }
 }

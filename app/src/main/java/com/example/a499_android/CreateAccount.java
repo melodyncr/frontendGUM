@@ -30,6 +30,8 @@ public class CreateAccount extends AppCompatActivity {
 
     private final String TAG = "Create Account";
 
+    // these lists are the paths for each document for firebase, when we create a new user we will set the first_survey boolean variable to true to
+    // tell the app it's a first survey and will be uploading all their results to the first survey collections
     public static final String FSURVEYQ = "FSurveyQ";
     public static final String FSURVEYR = "FSurveyR";
     public static final String TYPE_SURVEY = "Onboarding Survey";

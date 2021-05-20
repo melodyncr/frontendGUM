@@ -32,9 +32,10 @@ public class AddSurveyQuestionsMC  extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(answersText.getText().toString().equals("")){
+                    //empty text
                     Toast.makeText(AddSurveyQuestionsMC.this, "Add some text!", Toast.LENGTH_SHORT).show();
                 }else {
-                    //check if the string if formatted correctly
+                    //check if the string if formatted correctly no commas ',' are allowed in a question
                     String check_comma = answersText.getText().toString();
                     boolean no_comma = true;
                     for(int i =0; i < check_comma.length(); i++){
@@ -44,6 +45,7 @@ public class AddSurveyQuestionsMC  extends AppCompatActivity {
                         }
                     }
                     if(no_comma) {
+                        // can only add up to four questions per mc question
                         if (answersList.size() < 4) {
                             answersList.add(answersText.getText().toString());
                             String text = "";
@@ -64,6 +66,7 @@ public class AddSurveyQuestionsMC  extends AppCompatActivity {
         nextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // determine how many questions there are from 2-4 get the list of responses and convert them into one string seperated by comma
                 if(answersList.size() >=2 && answersList.size() <=4){
                     String responses = returnStr(answersList);
                     if(answersList.size() == 2){

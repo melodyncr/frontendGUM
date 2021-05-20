@@ -54,6 +54,7 @@ public class PreviewNewSurvey extends AppCompatActivity {
         confirmSurvey = findViewById(R.id.submitBtnAS);
         setTextView();
 
+        // a list of queries must happen
         confirmSurvey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +72,7 @@ public class PreviewNewSurvey extends AppCompatActivity {
 
     private void setTextView(){
         String s = "";
+        // view all questions for a survey
         for(int i =0; i < w_questions.size(); i++){
             int question_num = i+1;
             if(w_questions.get(i).charAt(0) == 'M'){
@@ -83,8 +85,8 @@ public class PreviewNewSurvey extends AppCompatActivity {
         }
         previewSurveyTxt.setText(s);
     }
+    //first will get all of the current survey data and store them into past survey data
     void start_queries(){
-
         wSurveyQDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -112,6 +114,8 @@ public class PreviewNewSurvey extends AppCompatActivity {
     }
 
     void start_queries2(){
+        // a new field will be added into past survey containing the name and the number of the list
+        // past survey data will now be put in that new field
         pastWSurveyQLDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -158,6 +162,7 @@ public class PreviewNewSurvey extends AppCompatActivity {
                 });
     }
     void start_time_query(){
+        // will add a timestamp when the survey was archived
         times.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

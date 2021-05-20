@@ -255,7 +255,6 @@ public class LandingPage extends AppCompatActivity {
 
                             it.remove(); // avoids a ConcurrentModificationException
                         }
-
                         Log.d(TAG, "workout list: " + workoutList.toString());
                         Log.d(TAG, "Fitness Level: " + workoutList.toString());
                     }

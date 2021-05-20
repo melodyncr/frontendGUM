@@ -20,6 +20,7 @@ import java.util.Map;
 
 public class DetermineQuestionType extends AppCompatActivity {
 
+
     public static String TAG = "Determine Questions";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static String SURVEYQ = "";
@@ -73,6 +74,8 @@ public class DetermineQuestionType extends AppCompatActivity {
         response_count =0;
     }
 
+    // here we will get all of the questions, responses, count and everything else necessary to enroll the user or collect weekly survey data depending  if the user
+    //is creating an account or doing a weekly survey
     void init_firebase(){
         surveyQuestions.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -93,6 +96,8 @@ public class DetermineQuestionType extends AppCompatActivity {
                         }
                         int multiChoiceQ = determineQuestion(weeklyQuestionsList.get(0).charAt(0));
                         Intent intent;
+                        // we will read the first character of the first question and determine which question type it is and intent to the
+                        //approrate one.
                         if(multiChoiceQ == 0){
                             intent = new Intent(DetermineQuestionType.this, SurveyMultiC.class);
                         }else if(multiChoiceQ ==1){
@@ -114,11 +119,11 @@ public class DetermineQuestionType extends AppCompatActivity {
     }
 
     public static int determineQuestion(char type){
-        if(type == 'M'){
+        if(type == 'M'){// if multiple choice
             return 0;
-        }else if(type == 'O'){
+        }else if(type == 'O'){//if scale
             return 1;
-        }else{
+        }else{// if response
             return -1;
         }
     }

@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button toLoginBtn, toCreateAccountBtn, selectScheduleBtn;
 
+    // main landing page, to create an account or login to an account
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

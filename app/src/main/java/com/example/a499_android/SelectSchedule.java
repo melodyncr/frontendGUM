@@ -174,6 +174,7 @@ public class SelectSchedule extends AppCompatActivity {
         return list;
     }
 
+    // check if every scheudled workout is an hour apart
     public boolean validSchedule(int hour, int minute, HashMap<Integer,Integer>list){
         if(list.size() == 0){
             return true;
@@ -208,6 +209,8 @@ public class SelectSchedule extends AppCompatActivity {
         }
     }
 
+
+    // here we set the alarm notifications for a user who is enrolling
     public void setNotifications(ArrayList<String> list){
 
         Calendar calendar = Calendar.getInstance();

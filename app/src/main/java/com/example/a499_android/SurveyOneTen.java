@@ -28,7 +28,7 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
 
     public static String TAG = "Weekly Survey";
     TextView typeSurvey, questionText;
-    Button backBtn, submitBtn;
+    Button submitBtn;
     public String item = "";
     ArrayList<String> tempChoiceList = new ArrayList<>();
 
@@ -45,6 +45,7 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
         String[] numbers;
         String seven_or_ten = weeklyQuestionsList.get(question_count).substring(1,3);
         Log.d(TAG, seven_or_ten);
+        //checks if the question is a scale from 1 -7 or 1-10
         if(seven_or_ten.equals("10")){
             numbers = new String[]{"Select a Level","1", "2", "3","4","5","6","7","8","9","10"};
         }else{
@@ -88,30 +89,6 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(question_count == 0){
-                    Toast.makeText(SurveyOneTen.this, "No previous questions", Toast.LENGTH_SHORT).show();
-                }else{
-                    question_count--;
-                    response_count--;
-                    responseList.remove(response_count);
-                    Intent intent;
-                    if(weeklyQuestionsList.get(question_count).charAt(0) == 'R'){
-                        intent = new Intent(SurveyOneTen.this, SurveyResponse.class);
-                    }else if (weeklyQuestionsList.get(question_count).charAt(0) == 'O'){
-                        intent = new Intent(SurveyOneTen.this, SurveyOneTen.class);
-                    }
-                    else{
-                        intent = new Intent(SurveyOneTen.this, SurveyMultiC.class);
-                    }
-                    startActivity(intent);
-                }
-
-            }
-        });
     }
 
     @Override
@@ -128,8 +105,9 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
     void setObjects(){
         typeSurvey = findViewById(R.id.typeSurvey);
         questionText = findViewById(R.id.questionText);
-        backBtn = findViewById(R.id.previousBtn);
         submitBtn = findViewById(R.id.submitBtn);
+
+        // first title message will be this if it is the first question
         if(question_count ==0 && CreateAccount.first_survey){
             typeSurvey.setText("Thank you so much for helping us gather information on how the GUM program is working for you. This is not a test, there are no right or wrong answers.");
         }else if(question_count ==0){
@@ -168,6 +146,7 @@ public class SurveyOneTen extends AppCompatActivity implements AdapterView.OnIte
         }
 
 
+    // record answer and determine score will get the list of counts and add 1 to whatever the value is to increment the value
     void recordAnswer(int index,String choices){
         int last_comma = 0;
         String substr = "";

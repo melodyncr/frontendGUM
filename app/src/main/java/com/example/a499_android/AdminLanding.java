@@ -18,7 +18,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class AdminLanding extends AppCompatActivity {
-
+    // these lists are created incase the the user selects add a survey or wants to load previous survey data
+    // this is also the landing page for the admin, this page can only be accessed by mark angel himself or you the developer
     CardView addEditTidbits, viewResponsesBtn, addSurveyBtn,addVideosBtn, resetSurvey;
     ActionBar actionBar;
     public static ArrayList<String> w_survey_count_list = new ArrayList<>();
@@ -88,6 +89,7 @@ public class AdminLanding extends AppCompatActivity {
         resetSurvey = findViewById(R.id.resetUsers);
     }
     private void clearLists(){
+        // since all of these variables are static, we must clear them or set them to false ensuring to avoid any out of bounds errors or intenting to activities we shouldn't
         LoadPreviousSurvey.w_survey_list_names.clear();
         LoadPreviousSurvey.previous_times_list.clear();
         GetResponseListQuery.listSelected_questions.clear();

@@ -13,6 +13,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddSurveyQuestions extends AppCompatActivity {
+    // Objects  that are used to reference xml ids
+    // this activity allows the admin user to select what type of question will be for the next question
+
     RadioGroup radioGroup;
     RadioButton b1, b2, b3;
     Button nxtQuestion;
@@ -33,17 +36,23 @@ public class AddSurveyQuestions extends AppCompatActivity {
         nxtQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //no text
                 if (questionText.getText().toString().equals("")) {
                     Toast.makeText(AddSurveyQuestions.this, "No question has been written!", Toast.LENGTH_SHORT).show();
                 } else {
+                    //if multiple choice is checked , an M will be appended to the question to ensure it is a multiple choice question, then the user
+                    //will be taken to the add survey question mc activity to add the responses of each question
                     char type_question = isChecked();
                     if (type_question == 'M') {
                         String question = "M"+questionText.getText().toString();
                         AdminLanding.w_survey_questions_list.add(question);
                         startActivity(new Intent(AddSurveyQuestions.this, AddSurveyQuestionsMC.class));
                     }else if(type_question == 'O'){
+                        // if a scale question is checked, an O10 will be appended to ensure the question is a multiple choice question
                         String question = "O10"+questionText.getText().toString();
                         AdminLanding.w_survey_questions_list.add(question);
+                        //since it is a scale choice question, there are no responses, it can be left empty, and also we need to append a list of
+                        // 10 zeros to indicate no data has been recorded
                         AdminLanding.w_survey_responses_list.add(" ");
                         AdminLanding.w_survey_count_list.add("0,0,0,0,0,0,0,0,0,0,");
                         AddSurveyQuestionsCount.count++;
@@ -59,6 +68,7 @@ public class AddSurveyQuestions extends AppCompatActivity {
                         AdminLanding.w_survey_responses_list.add(" ");
                         AdminLanding.w_survey_count_list.add(" ");
                         AddSurveyQuestionsCount.count++;
+                        // if it's a response question the count is empty because we don't need to record data on them
                         if(AddSurveyQuestionsCount.count == AddSurveyQuestionsCount.questionCount){
                             Toast.makeText(AddSurveyQuestions.this, "Survey is finished!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(AddSurveyQuestions.this, PreviewNewSurvey.class));
@@ -74,6 +84,7 @@ public class AddSurveyQuestions extends AppCompatActivity {
     }
 
     char isChecked() {
+        //will check if user has selected an answer or not.
         int selectedId = radioGroup.getCheckedRadioButtonId();
         if (selectedId == -1) {
             Toast.makeText(AddSurveyQuestions.this, "No answer has been selected", Toast.LENGTH_SHORT).show();

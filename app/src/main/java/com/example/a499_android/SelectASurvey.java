@@ -57,6 +57,7 @@ public class SelectASurvey extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new SelectASurvey.Adapter());
     }
+    // is this first or the weekly survey we will determine this so we can use the correct names to reference the right collection name
     public void F_or_W(String f_or_w){
         if(f_or_w.equals("F")){
             document_responses_str = "FSurveyQ";
@@ -93,6 +94,7 @@ public class SelectASurvey extends AppCompatActivity {
         }
 
     }
+    // recycler view of previous survey, if selected we will use this survey to see the data
     private class ItemHolder extends RecyclerView.ViewHolder {
 
         public ItemHolder(LayoutInflater inflater, ViewGroup parent) {

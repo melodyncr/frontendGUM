@@ -103,6 +103,7 @@ public class UploadSurvey extends AppCompatActivity {
                 }
             });
 
+            // determines level
             int advance_lvl = Integer.parseInt(DetermineQuestionType.levelList.get(0));
             int intermediate_lvl = Integer.parseInt(DetermineQuestionType.levelList.get(1));
             String level = "";
@@ -161,6 +162,7 @@ public class UploadSurvey extends AppCompatActivity {
 
     }
 
+    // adds user in a done survey to make sure they've completed the survey and prevent them from adding more data
     private void usersDoneSurvey(){
         usersSurveyDone.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

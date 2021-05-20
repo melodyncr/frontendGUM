@@ -45,6 +45,7 @@ public class SelectAvatar extends AppCompatActivity {
     DocumentReference userDocRef;
     ActionBar actionBar;
 
+    // three avatars are hardcoded in the database
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,7 @@ public class SelectAvatar extends AppCompatActivity {
         // Access a Cloud Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        // we check if the users has unlocked a said avatar
         userDocRef = db.collection("Users").document(username);
         readData(new FirestoreCallback() {
             @Override

@@ -34,6 +34,7 @@ public class LoadPreviousSurvey extends AppCompatActivity {
         getWSurvey();
     }
 
+    // get the names of the weekly surveys
     void getWSurvey(){
         wSurveyTotal.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -60,7 +61,7 @@ public class LoadPreviousSurvey extends AppCompatActivity {
         });
         //return surveyList;
     }
-    void getTimes(){
+    void getTimes(){// gets the times of the weekly survey
         times.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

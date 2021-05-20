@@ -22,7 +22,7 @@ public class SurveyResponse extends AppCompatActivity {
     public static String TAG = "Weekly Survey";
     TextView typeSurvey, questionText;
     EditText responseText;
-    Button backBtn, submitBtn;
+    Button submitBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,37 +60,12 @@ public class SurveyResponse extends AppCompatActivity {
             }
         });
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(question_count == 0){
-                    Toast.makeText(SurveyResponse.this, "No previous questions", Toast.LENGTH_SHORT).show();
-                }else{
-                    question_count--;
-                    response_count--;
-                    responseList.remove(response_count);
-                    Intent intent;
-                    if(weeklyQuestionsList.get(question_count).charAt(0) == 'R'){
-                        intent = new Intent(SurveyResponse.this, SurveyResponse.class);
-                    } else if(weeklyQuestionsList.get(question_count).charAt(0) == 'O'){
-                        intent = new Intent(SurveyResponse.this, SurveyOneTen.class);
-                    }
-                    else{
-                        intent = new Intent(SurveyResponse.this, SurveyMultiC.class);
-                    }
-                    startActivity(intent);
-                }
-
-            }
-        });
     }
     
     void setObjects(){
         typeSurvey = findViewById(R.id.typeSurvey);
         questionText = findViewById(R.id.questionText);
         responseText = findViewById(R.id.responseText);
-        backBtn = findViewById(R.id.previousBtn);
         submitBtn = findViewById(R.id.submitBtn);
         if(question_count ==0 && CreateAccount.first_survey){
             typeSurvey.setText("Thank you so much for helping us gather information on how the GUM program is working for you. This is not a test, there are no right or wrong answers.");
