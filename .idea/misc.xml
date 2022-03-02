@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_admin_landing.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_finished_exercise.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_landing_page.xml" value="0.264" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_landing_page2.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_main.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_select_avatar.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_start_exercise.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_survey.xml" value="0.536" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_survey_multiple_choice.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_survey_one_ten.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/add_videos.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/agreement.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/change_level.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/intro_video.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/item.xml" value="0.1" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/load_responses.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/loading_questions.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/message_admin.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/message_item.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/movement_workout.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/popup_window.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/preview_new_survey.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/recycler_popup_window.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/select_a_survey.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/survey.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/tidbits_popup.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/tidbits_row.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/users_list_msg.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/video_demonstration.xml" value="0.175" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/view_video.xml" value="0.175" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

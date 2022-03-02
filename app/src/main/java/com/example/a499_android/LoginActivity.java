@@ -46,39 +46,40 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String usernameInput = username.getText().toString().toLowerCase();
                 String passwordInput = password.getText().toString();
-
-                userDocRef = users.document(usernameInput);
-                findUser(new FirestoreCallback() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot document) {
-                        if(document.exists()) {
-                            String passwordValue = document.getString("Password").toString();
-                            Log.d(TAG, String.valueOf(document));
-                            if(passwordInput.equals(passwordValue)) {
-                                //sp.edit().putString("username", usernameInput).apply();
-                                //sp.edit().putInt("Points", Integer.parseInt(document.getString("Points"))).apply();
-                                Toast.makeText(LoginActivity.this, "Login Successful! Welcome " + usernameInput, Toast.LENGTH_SHORT).show();
-                                loggedUserName = usernameInput;
-                                SaveSharedPreference.setUserName(LoginActivity.this, usernameInput);
-                                Intent toLandingPage = new Intent(LoginActivity.this, LandingPage.class);
-                                startActivity(toLandingPage);
-                            }
-                            else {
-                                Log.d(TAG, "Password did not match");
-                                Log.d(TAG, passwordInput);
+                if(usernameInput.length() != 0) {
+                    userDocRef = users.document(usernameInput);
+                    findUser(new FirestoreCallback() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot document) {
+                            if (document.exists()) {
+                                String passwordValue = document.getString("Password").toString();
+                                Log.d(TAG, String.valueOf(document));
+                                if (passwordInput.equals(passwordValue)) {
+                                    //sp.edit().putString("username", usernameInput).apply();
+                                    //sp.edit().putInt("Points", Integer.parseInt(document.getString("Points"))).apply();
+                                    Toast.makeText(LoginActivity.this, "Login Successful! Welcome " + usernameInput, Toast.LENGTH_SHORT).show();
+                                    loggedUserName = usernameInput;
+                                    SaveSharedPreference.setUserName(LoginActivity.this, usernameInput);
+                                    Intent toLandingPage = new Intent(LoginActivity.this, LandingPage.class);
+                                    startActivity(toLandingPage);
+                                } else {
+                                    Log.d(TAG, "Password did not match");
+                                    Log.d(TAG, passwordInput);
+                                    Toast.makeText(LoginActivity.this,
+                                            "Incorrect Password",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
                                 Toast.makeText(LoginActivity.this,
-                                        "Incorrect Password",
+                                        "Username not found",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
-                        else {
-                            Toast.makeText(LoginActivity.this,
-                                    "Username not found",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
 
+                    });
+                } else {
+                    Toast.makeText(LoginActivity.this, "Username cannot be blank", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

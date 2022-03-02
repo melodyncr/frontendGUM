@@ -41,14 +41,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Pref", "username not saved. Not logged in");
         }
 
-//        toLoginBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent toLoginIntent = new Intent(MainActivity.this, LoginActivity.class); //or whatever the login activity is called
-//                startActivity(toLoginIntent);
-//            }
-//        });
-
         toCreateAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +48,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(toCreateAccountBtn);
             }
         });
+
+        //This doesn't work. toLoginBtn is not a button, its a TextView
+/*
+        toLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toLoginIntent = new Intent(MainActivity.this, LoginActivity.class); //or whatever the login activity is called
+                startActivity(toLoginIntent);
+            }
+        });
+*/
 
     }
 
