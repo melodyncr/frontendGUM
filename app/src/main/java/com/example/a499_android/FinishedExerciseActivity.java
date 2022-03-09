@@ -58,20 +58,24 @@ public class FinishedExerciseActivity extends AppCompatActivity {
         docRef = db.collection("Users").document(uName);
 
         // Read User Info
+        Log.d(TAG, "GetUserInfo will be called now. Look out for this text!");
         getUserInfo(new FinishedExerciseActivity.FirestoreCallback() {
             @Override
             public void onSuccess(DocumentSnapshot document) {
                 if (document.exists()) {
-                    if(fromNotification){
+                    Log.d(TAG, "This should be called if document exists!");
+                   // if(fromNotification){ //fromNotification is never changed to true. No need for this
+                        Log.d(TAG, "fromNotification value is true");
                         //add points
                         pointTotal = (long) document.getData().get("Points");
                         pointTotal = pointTotal + 10;
                         docRef.update("Points", pointTotal);
-                        userPoints.setText("Total Points: " + document.getData().get("Points").toString());
+                        Log.d(TAG, "We now have this many points: " + document.getData().get("Points").toString());
+                        userPoints.setText("Total Points: " + pointTotal);
                         earnedMessage.setText("You earned 10 points!");
                         earnedMessage.setVisibility(View.VISIBLE);
                         fromNotification = false;
-                    } else{ userPoints.setText("Total Points: " + document.getData().get("Points").toString()); }
+                    //} else{ userPoints.setText("Total Points: " + document.getData().get("Points").toString()); Log.d(TAG,"fromNotification value is false!"); }
                 } else {
                     Toast.makeText(FinishedExerciseActivity.this, "Unable to Load User Data", Toast.LENGTH_SHORT).show();
                 }

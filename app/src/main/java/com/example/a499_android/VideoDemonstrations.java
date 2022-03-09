@@ -69,6 +69,7 @@ public class VideoDemonstrations extends AppCompatActivity implements AdapterVie
                             it.remove(); // avoids a ConcurrentModificationException
                         }
                         Log.d(TAG, video_list.toString() + "\n" + description_list.toString());
+                        Log.d(TAG, "Video List is " + video_list.toString());
                         VideoAdapter videosAdapter = new VideoAdapter(video_list,description_list);
                         recyclerView.setAdapter(videosAdapter);
                         Log.d(TAG, "delay" + delay);

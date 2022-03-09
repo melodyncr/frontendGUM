@@ -74,7 +74,7 @@ public class IntroVideo extends AppCompatActivity {
                         timer.schedule(new TimerTask()  {
                             @Override
                             public void run()   {   // switch activity intent after timer expires
-                                Intent intent = new Intent(IntroVideo.this, DetermineQuestionType.class);
+                                Intent intent = new Intent(IntroVideo.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
