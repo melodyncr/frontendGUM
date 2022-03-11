@@ -22,6 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,17 +90,23 @@ public class CreateAccount extends AppCompatActivity {
                              * Add to database. Warnings will come from the functions themselves.
                              */
                             Map<String, Object> newUser = new HashMap<>();
+                            //userDocRef.
+                            //String [] temp_time = {"9:00 AM", "11:00 AM", "1:00 AM"
+                                   // , "3:00 PM", "5:00 PM", "7:00 PM"};
                             newUser.put("Password", enteredPassword);
                             newUser.put("Points", 0);
                             newUser.put("Score", 0);
                             newUser.put("FitnessLvl"," ");
                             newUser.put("AvatarUrl", "orange_avatar.png");
+                            newUser.put("Schedule", Arrays.asList("9:00 AM", "10:00 AM", "11:00 AM"
+                                    , "2:00 PM", "3:00 PM", "4:00 PM"));
                             List<String> listOfAvatars = new ArrayList<String>(){{
                                 add("orange_avatar.png");
                             }};
                             newUser.put("UnlockedAvatars", listOfAvatars);
 
                             Log.d(TAG, String.valueOf(newUser));
+                            Log.d(TAG, "Adding user to document");
 
                             users.document(enteredUsername.toLowerCase()).set(newUser)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
