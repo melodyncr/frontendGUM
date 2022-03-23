@@ -47,6 +47,8 @@ public class DetermineQuestionType extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_questions);
+        //TODO remove this
+        //We changed the way the schedule is handled, so we need to update this.
         boolean f_or_w = first_or_weekly(CreateAccount.first_survey);
         if(f_or_w){
             //first survey will be shown

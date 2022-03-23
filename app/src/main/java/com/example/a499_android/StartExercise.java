@@ -53,7 +53,7 @@ public class StartExercise extends AppCompatActivity {
         Context mContext = getApplicationContext();
         int videoResId = mContext.getResources().getIdentifier(videoName, "raw", mContext.getPackageName());  // retrieve the resource id number for a video located in the raw directory
         videoView.setVideoPath("android.resource://"+mContext.getPackageName()+"/"+videoResId);  // tell video view what file to play
-
+        //Log.d("TAG", "Current context is " + mContext.getFilesDir().getAbsoluteFile().getAbsolutePath());
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {

@@ -215,6 +215,7 @@ public class LandingPage extends AppCompatActivity {
             }
         });
 
+        //TODO remove this
         msgAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -270,13 +271,13 @@ public class LandingPage extends AppCompatActivity {
         intent.putExtra(EXTRA, val);
         return intent;
     }
-
+/*
     //maybe retrieve schedule and pass it through intent first
     public void startEditScheduleActivity(View view){
         Intent intent = SelectSchedule.getIntent(this, "");
         startActivity(intent);
     }
-
+*/
     private void getUserInfo(FirestoreCallback firestoreCallback, DocumentReference currentUserName) {
         currentUserName.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
