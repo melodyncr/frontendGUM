@@ -185,6 +185,62 @@
             </intent-filter>
         </activity>
 
+        <!-- these activities are for the groups section of the app -->
+        <activity android:name=".GroupsLandingPage"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LandingPage" />
+        </activity>
+
+        <activity android:name=".CreateGroups"
+                android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GroupsLandingPage" />
+        </activity>
+
+        <activity android:name=".CreateGroupSuccessPage"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GroupsLandingPage" />
+        </activity>
+
+        <activity android:name=".JoinGroup"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GroupsLandingPage" />
+        </activity>
+
+        <activity android:name=".JoinGroup2"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GroupsLandingPage" />
+        </activity>
+
+        <activity android:name=".ViewCurrentGroups"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GroupsLandingPage" />
+        </activity>
+
+        <activity android:name=".MemberJoinedGroup"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GroupsLandingPage" />
+        </activity>
+
+        <activity android:name=".CreatedJoinedGroup"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GroupsLandingPage" />
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

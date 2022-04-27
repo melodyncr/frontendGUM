@@ -49,7 +49,7 @@ public class DetermineQuestionType extends AppCompatActivity {
         setContentView(R.layout.loading_questions);
         //TODO remove this
         //We changed the way the schedule is handled, so we need to update this.
-        boolean f_or_w = first_or_weekly(CreateAccount.first_survey);
+        /*boolean f_or_w = first_or_weekly(CreateAccount.first_survey);
         if(f_or_w){
             //first survey will be shown
             SURVEYQ = CreateAccount.FSURVEYQ;
@@ -60,7 +60,7 @@ public class DetermineQuestionType extends AppCompatActivity {
             SURVEY_QC = CreateAccount.F_SURVEY_QC;
             F_SURVEY_SCORE = "f_survey_score";
             F_SURVEY_LEVEL = "f_survey_level";
-        }else{
+        }else{*/
             //second survey
             SURVEYQ = LandingPage.WSURVEYQ;
             SURVEYR = LandingPage.WSURVEYR;
@@ -69,7 +69,7 @@ public class DetermineQuestionType extends AppCompatActivity {
             SURVEY_Q = LandingPage.W_SURVEY_Q;
             SURVEY_QC = LandingPage.W_SURVEY_QC;
             //F_SURVEY_SCORE = "w_survey_count";
-        }
+        //}
         surveyQuestions = db.collection("Surveys").document(SURVEYQ);
         init_firebase();
         question_count =0;

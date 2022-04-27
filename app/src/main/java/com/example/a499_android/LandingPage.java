@@ -216,6 +216,7 @@ public class LandingPage extends AppCompatActivity {
         });
 
         //TODO remove this
+
         msgAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -225,7 +226,7 @@ public class LandingPage extends AppCompatActivity {
                     Intent intent = new Intent(LandingPage.this, AdminMsgList.class);
                     startActivity(intent);
                 }else {
-                    Intent intent = new Intent(LandingPage.this, MessageAdmin.class);
+                    Intent intent = new Intent(LandingPage.this, GroupsLandingPage.class);
                     startActivity(intent);
                 }
             }

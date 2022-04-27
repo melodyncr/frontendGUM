@@ -38,6 +38,7 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
     Spinner spinner;
     public String level = "";
     public static long time_mil = 0;
+    private PopupWindow popupWindow = new PopupWindow();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +146,11 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
 
     public void showPopup(){
         final View popupView = LayoutInflater.from(SelectWorkout.this).inflate(R.layout.recycler_popup_window, null);
-        final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        //final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        if(popupWindow.isShowing()){
+            popupWindow.dismiss();
+        }
+        popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
         Button btn = (Button) popupView.findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
