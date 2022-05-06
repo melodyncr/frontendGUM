@@ -82,7 +82,8 @@ public class LandingPage extends AppCompatActivity {
         CardView editSchedule = findViewById(R.id.editScheduleBtn);
         CardView changeAvatar = findViewById(R.id.viewShopBtn);
         CardView startSurveyBtn = findViewById(R.id.startSurveyBtnC);
-        CardView msgAdmin = findViewById(R.id.messageMarkBtn);
+        //Originally called msgAdmin. Changed to groups per Marks request.
+        CardView groups = findViewById(R.id.groupButton);
         // Start Exercise
         CardView startExerciseBtn = findViewById(R.id.startWorkoutBtn);
         CardView viewVideos = findViewById(R.id.videoDemosBtn);
@@ -217,7 +218,7 @@ public class LandingPage extends AppCompatActivity {
 
         //TODO remove this
 
-        msgAdmin.setOnClickListener(new View.OnClickListener() {
+        groups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AdminMsgList.fromAdmin = false;// used to make sure when login from admin to regular user, it does not do other queries.
