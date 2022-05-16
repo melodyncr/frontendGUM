@@ -119,7 +119,9 @@
             android:id="@+id/proceedBtn"
             android:onClick="Check"
             android:background="@drawable/rounded_corners"
-            android:text="Continue"/>
+            android:text="Continue"
+            android:textColor="@color/black"/>
+
     </LinearLayout>
 
 </ScrollView>

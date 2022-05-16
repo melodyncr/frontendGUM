@@ -80,8 +80,11 @@ public class LandingPage extends AppCompatActivity {
         actionBar.setTitle("Welcome...");
 //        actionBar.setDisplayShowTitleEnabled(false);
         CardView editSchedule = findViewById(R.id.editScheduleBtn);
-        CardView changeAvatar = findViewById(R.id.viewShopBtn);
-        CardView startSurveyBtn = findViewById(R.id.startSurveyBtnC);
+        //CardView changeAvatar = findViewById(R.id.viewShopBtn);
+        //Too lazy to remove, just making them inaccessible for now.
+        //changeAvatar.setVisibility(View.INVISIBLE);
+        //CardView startSurveyBtn = findViewById(R.id.startSurveyBtnC);
+        //startSurveyBtn.setVisibility(View.INVISIBLE);
         //Originally called msgAdmin. Changed to groups per Marks request.
         CardView groups = findViewById(R.id.groupButton);
         // Start Exercise
@@ -91,6 +94,7 @@ public class LandingPage extends AppCompatActivity {
         ImageView profile_image = findViewById(R.id.avatarPicture);
         messageMark = findViewById(R.id.messageMarktxt);
 //        TextView displayedUsername = findViewById(R.id.usernameDisplay);
+
 
 
         // NOTE: user info read from db will be hardcoded until login activity is done
@@ -143,7 +147,7 @@ public class LandingPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+/*
         changeAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,7 +201,7 @@ public class LandingPage extends AppCompatActivity {
                 });
             }
         });
-
+*/
         // Start Activity
         startExerciseBtn.setOnClickListener(new View.OnClickListener() {
             @Override

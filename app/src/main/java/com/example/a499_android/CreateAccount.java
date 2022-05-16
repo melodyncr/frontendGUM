@@ -97,6 +97,7 @@ public class CreateAccount extends AppCompatActivity {
                             newUser.put("Points", 0);
                             newUser.put("Score", 0);
                             newUser.put("FitnessLvl"," ");
+                            newUser.put("Groups", Arrays.asList());
                             newUser.put("AvatarUrl", "orange_avatar.png");
                             newUser.put("Schedule", Arrays.asList("9:00 AM", "10:00 AM", "11:00 AM"
                                     , "2:00 PM", "3:00 PM", "4:00 PM"));

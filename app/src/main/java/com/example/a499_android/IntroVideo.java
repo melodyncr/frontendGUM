@@ -1,10 +1,14 @@
 package com.example.a499_android;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,11 +36,11 @@ public class IntroVideo extends AppCompatActivity {
     Timer timer;
     public String TAG = "Intro Video";
     String delay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro_video);
-
         videosDoc = db.collection("Videos").document("IntroVideo");
         init_firebase();
 
@@ -77,6 +81,26 @@ public class IntroVideo extends AppCompatActivity {
                                 Intent intent = new Intent(IntroVideo.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
+                                /*AlertDialog.Builder alert = new AlertDialog.Builder(IntroVideo.this);
+                                alert.setTitle("Orientation");
+                                alert.setMessage("Would you like the link to the orientation");
+                                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        //Go to page here
+                                        Intent intent = new Intent(IntroVideo.this, LoginActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+                                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        new Intent(IntroVideo.this, LoginActivity.class);
+                                        //
+                                    }
+                                });
+                                alert.create().show();*/
                             }
                         }, delay_int);// one minute delay
                     } else {

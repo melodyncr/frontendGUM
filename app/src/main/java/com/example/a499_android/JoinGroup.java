@@ -74,7 +74,7 @@ public class JoinGroup extends AppCompatActivity {
                                             if(pair.getKey().toString().equals("Group Name")){
                                                 groupName = pair.getValue().toString();
                                             }
-                                            if(pair.getKey().toString().equals("Group Password")){
+                                            if(pair.getKey().toString().equals("Password")){
                                                 groupPassword = pair.getValue().toString();
                                             }
                                             it.remove(); // avoids a ConcurrentModificationException
@@ -102,6 +102,7 @@ public class JoinGroup extends AppCompatActivity {
                 intent.putExtra("Leader Name", leader);
                 intent.putExtra("Group Password", groupPassword);
                 startActivity(intent);
+                finish();
             }
         });
     }

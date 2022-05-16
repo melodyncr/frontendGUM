@@ -15,11 +15,12 @@
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_join_groups_page_2.xml" value="0.1" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_landing_page.xml" value="0.264" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_landing_page2.xml" value="0.2" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_login.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_main.xml" value="0.175" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_member_joined_group.xml" value="0.14492753623188406" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_select_avatar.xml" value="0.175" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_select_schedule.xml" value="0.15942028985507245" />
-        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_select_workout.xml" value="0.11413043478260869" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_select_workout.xml" value="0.152" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_start_exercise.xml" value="0.175" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_survey.xml" value="0.536" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_survey_multiple_choice.xml" value="0.175" />
@@ -27,6 +28,7 @@
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_tidbits.xml" value="0.15942028985507245" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_update_schedule.xml" value="0.21195652173913043" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_view_current_groups.xml" value="0.16802536231884058" />
+        <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/activity_view_specific_group.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/add_videos.xml" value="0.175" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/agreement.xml" value="0.175" />
         <entry key="..\:/Users/stick/Downloads/499_android - Copy/499_android/app/src/main/res/layout/change_level.xml" value="0.175" />

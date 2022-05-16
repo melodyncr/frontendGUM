@@ -28,6 +28,7 @@ public class CreateGroupSuccessPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CreateGroupSuccessPage.this, GroupsLandingPage.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

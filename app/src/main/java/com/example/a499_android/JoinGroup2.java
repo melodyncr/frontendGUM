@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a499_android.utility.SaveSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -50,6 +51,7 @@ public class JoinGroup2 extends AppCompatActivity {
         String inviteCode = getIntent().getExtras().getString("Invite Code");
         String groupPassword = getIntent().getExtras().getString("Group Password");
         info.setText("Enter password to join the following group:\n" + groupName + "\n" + leaderName + " ");
+        String uName = SaveSharedPreference.getUserName(JoinGroup2.this);
 
         finishJoinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,30 +59,48 @@ public class JoinGroup2 extends AppCompatActivity {
                 TextView pWord = findViewById(R.id.joinGroupPassword);
                 String password = pWord.getText().toString();
                 groupDocRef = groups.document(inviteCode);
-
                 checkPassword(new FirestoreCallback() {
                     @Override
                     public void onSuccess(DocumentSnapshot document) {
                         if(password.equals(groupPassword)){
-                            groupDocRef.collection(password).document("Info")
-                                    .update("members",
-                                            FieldValue.arrayUnion(SaveSharedPreference.getUserName(JoinGroup2.this)))
+                            groupDocRef.update("Members",
+                                            FieldValue.arrayUnion(uName))
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(JoinGroup2.this,
+                                            "Error. Could not join group",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            DocumentReference userDocRef = db.collection("Users")
+                                    .document(uName);
+                            userDocRef.update("Groups",FieldValue.arrayUnion(inviteCode))
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
                                             Intent intent = new Intent(JoinGroup2.this, GroupsLandingPage.class);
                                             startActivity(intent);
+                                            finish();
                                         }
-                                    });
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(JoinGroup2.this,
+                                            "Error. Could not join Group.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         } else {
                             Toast.makeText(JoinGroup2.this, "Incorrect Password!",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
-                //Intent intent = new Intent(JoinGroup2.this, GroupsLandingPage.class);
-                //startActivity(intent);
             }
         });
     }

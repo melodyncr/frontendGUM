@@ -19,9 +19,9 @@
         android:id="@+id/topView"/>
 
     <ImageView
-        android:layout_below="@+id/topView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/topView"
         android:layout_centerInParent="true"
         android:src="@drawable/logo" />
 
@@ -81,7 +81,7 @@
 
     <GridLayout
         android:columnCount="2"
-        android:rowCount="3"
+        android:rowCount="2"
         android:alignmentMode="alignMargins"
         android:layout_weight="8"
         android:columnOrderPreserved="false"
@@ -92,40 +92,6 @@
         <!-- Row 1 -->
 
         <!-- Column 1 View Shop-->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/viewShopBtn"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp"
-            >
-
-            <LinearLayout
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:src="@drawable/shop"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="80dp"
-                    android:layout_height="100dp"/>
-                <TextView
-                    android:text="Unlock Avatars!"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
 
         <!-- Column 2 Start Workout-->
         <androidx.cardview.widget.CardView
@@ -265,7 +231,7 @@
                     android:layout_height="100dp"/>
                 <TextView
                     android:id="@+id/messageMarktxt"
-                    android:text="Message Mark"
+                    android:text="Groups"
                     android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -277,40 +243,6 @@
         </androidx.cardview.widget.CardView>
 
         <!-- Column 2 Start Survey -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/startSurveyBtnC"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp"
-            >
-
-            <LinearLayout
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:src="@drawable/survey"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="80dp"
-                    android:layout_height="100dp"/>
-                <TextView
-                    android:text="Start Survey"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
 
     </GridLayout>
 </LinearLayout>

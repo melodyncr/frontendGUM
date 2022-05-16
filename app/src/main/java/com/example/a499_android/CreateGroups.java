@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
@@ -50,30 +51,34 @@ public class CreateGroups extends AppCompatActivity {
         submitCreatedGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView groupName = findViewById(R.id.createGroupName);
-                TextView groupPassword = findViewById(R.id.createGroupPassword);
-                String gN = groupName.getText().toString();
-                String gP = groupPassword.getText().toString();
-                boolean nameCheck = checkName(gN);
-                boolean passwordCheck = checkPassword(gP);
+                TextView gN = findViewById(R.id.createGroupName);
+                TextView gP = findViewById(R.id.createGroupPassword);
+                String groupName = gN.getText().toString();
+                String groupPassword = gP.getText().toString();
+                boolean nameCheck = checkName(groupName);
+                boolean passwordCheck = checkPassword(groupPassword);
                 if(nameCheck){
                     if(passwordCheck){
                         String inviteCode = inviteCodeGenerate();
                         groupDocRef = groups.document(inviteCode);
-
+                        //groupDocRef = groups.document("262288");
                         checkInviteCode(new FirestoreCallback() {
                             @Override
                             public void onSuccess(DocumentSnapshot document) {
+                                String uName = SaveSharedPreference.getUserName(CreateGroups.this);
                                 if(document.exists()){
                                     //TODO
                                     //Add something here in case this randomly generated code already exists
+                                    Toast.makeText(CreateGroups.this, "Document already exists", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    String uName = SaveSharedPreference.getUserName(CreateGroups.this);
                                     Map<String, Object> newGroup = new HashMap<>();
-                                    newGroup.put("Group Name", gN);
-                                    newGroup.put("Group Password", gP);
+                                    newGroup.put("Group Name", groupName);
+                                    newGroup.put("Group", inviteCode);
+                                    newGroup.put("Password", groupPassword);
                                     newGroup.put("Point Goal", 0);
                                     newGroup.put("Leader Name", uName);
+                                    newGroup.put("Members", Arrays.asList());
+                                    newGroup.put("Point Goal", 0);
                                     //newGroup.put("Members", Arrays.asList());
                                     //Add new group to database
                                     groups.document(inviteCode).set(newGroup)
@@ -84,27 +89,6 @@ public class CreateGroups extends AppCompatActivity {
                                                     "Group has been successfully created",
                                                     Toast.LENGTH_SHORT)
                                                     .show();
-                                            //This info will be locked behind a password. Some semblance of security.
-                                            Map<String, Object> hiddenInfo = new HashMap<>();
-                                            hiddenInfo.put("Members", Arrays.asList());
-                                            hiddenInfo.put("Point Goal", 0);
-                                            //Add new collection to database.
-                                            groups.document(inviteCode).collection(gP).document("Info").set(hiddenInfo)
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void unused) {
-                                                            Intent intent = new Intent(CreateGroups.this, CreateGroupSuccessPage.class);
-                                                            intent.putExtra("InviteCode", inviteCode);
-                                                            startActivity(intent);
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(CreateGroups.this,
-                                                            "Failure in creating a group",
-                                                    Toast.LENGTH_LONG);
-                                                }
-                                            });
                                         }
                                     })
                                             .addOnFailureListener(new OnFailureListener() {
@@ -118,17 +102,35 @@ public class CreateGroups extends AppCompatActivity {
                                                             .show();
                                                 }
                                             });
+                                    DocumentReference userDocReference = db.collection("Users")
+                                            .document(uName);
+                                    userDocReference.update("Groups", FieldValue.arrayUnion(inviteCode))
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Intent intent = new Intent(CreateGroups.this, CreateGroupSuccessPage.class);
+                                            intent.putExtra("InviteCode", inviteCode);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(CreateGroups.this,
+                                                    "Error. Could not properly save Group", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
                             }
                         });
 
                     } else {
                         Toast.makeText(CreateGroups.this,
-                                "Password cannot be empty", Toast.LENGTH_SHORT).show();
+                                "Password must be at least 5 characters", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(CreateGroups.this,
-                            "Group name should not be empty", Toast.LENGTH_SHORT).show();
+                            "Group name must be at least 5 characters", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -166,11 +168,12 @@ public class CreateGroups extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
+                    //These if statements work in tandem to ensure that this page works.
                     if (document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                         firestoreCallback.onSuccess(document);
                     } else {
-                        Log.d(TAG, "No such document, This group     is available");
+                        Log.d(TAG, "No such document, This group is available");
                         firestoreCallback.onSuccess(document);
                     }
                 } else {
