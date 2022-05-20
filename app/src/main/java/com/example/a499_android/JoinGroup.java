@@ -79,7 +79,7 @@ public class JoinGroup extends AppCompatActivity {
                                             }
                                             it.remove(); // avoids a ConcurrentModificationException
                                         }
-                                        results.setText("Group Name " + groupName + "\nLeader Name " + leader);
+                                        results.setText("Group: " + groupName + "\nLeader: " + leader);
                                     } else {
                                         Toast.makeText(JoinGroup.this, "This group doesn't exist", Toast.LENGTH_SHORT).show();
                                     }

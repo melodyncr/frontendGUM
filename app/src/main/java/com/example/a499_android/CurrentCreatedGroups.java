@@ -1,12 +1,12 @@
 package com.example.a499_android;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -26,24 +26,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
-public class CreatedJoinedGroup extends AppCompatActivity {
+public class CurrentCreatedGroups extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference groups = db.collection("Users");
+    private CollectionReference groups = db.collection("Groups");
     private DocumentReference groupDocRef;
     private ArrayList<String> members;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_created_joined_group);
+        setContentView(R.layout.activity_current_created_group);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Current Groups");
         String inviteCode = getIntent().getExtras().getString("InviteCode");
         Log.d("What is invite Code", inviteCode);
         groupDocRef = groups.document(inviteCode);
         ListView membersView = findViewById(R.id.created_members_view);
+        Button inviteCodeBtn = findViewById(R.id.invite_code_btn);
 
         groupDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -65,33 +65,52 @@ public class CreatedJoinedGroup extends AppCompatActivity {
                 }
             }
         });
+
+        inviteCodeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(CurrentCreatedGroups.this);
+                    alert.setTitle("This is your groups invite code");
+                    alert.setMessage(inviteCode);
+                    alert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    alert.create().show();
+            }
+        });
+
     }
 
     private void adapter(@NonNull ListView view, ArrayList<String> array){
-        ArrayAdapter adapt = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, array);
-        view.setAdapter(adapt);
-        view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //String temp = array.get(i).substring(6);
-                AlertDialog.Builder alert = new AlertDialog.Builder(CreatedJoinedGroup.this);
-                alert.setTitle("Go to " + array.get(position).substring(8) + " Page?");
-                alert.setMessage(array.get(position).substring(0,6));
-                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //Go to page here
-                    }
-                });
-                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-                alert.create().show();
-            }
-        });
+        if(array.size() >= 1){
+            ArrayAdapter adapt = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1, array);
+            view.setAdapter(adapt);
+            view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    /*AlertDialog.Builder alert = new AlertDialog.Builder(CreatedJoinedGroup.this);
+                    alert.setTitle("Remove User From Group?");
+                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //Go to page here
+                        }
+                    });
+                    alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    alert.create().show();*/
+                }
+            });
+        }
     }
+
+
 }

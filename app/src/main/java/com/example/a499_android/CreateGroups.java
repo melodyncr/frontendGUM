@@ -24,6 +24,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.w3c.dom.Text;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -71,6 +73,8 @@ public class CreateGroups extends AppCompatActivity {
                                     //Add something here in case this randomly generated code already exists
                                     Toast.makeText(CreateGroups.this, "Document already exists", Toast.LENGTH_SHORT).show();
                                 } else {
+                                    TextView gPts = findViewById(R.id.createGroupPoints);
+                                    String points = gPts.getText().toString();
                                     Map<String, Object> newGroup = new HashMap<>();
                                     newGroup.put("Group Name", groupName);
                                     newGroup.put("Group", inviteCode);
@@ -78,7 +82,7 @@ public class CreateGroups extends AppCompatActivity {
                                     newGroup.put("Point Goal", 0);
                                     newGroup.put("Leader Name", uName);
                                     newGroup.put("Members", Arrays.asList());
-                                    newGroup.put("Point Goal", 0);
+                                    newGroup.put("Point Goal", points);
                                     //newGroup.put("Members", Arrays.asList());
                                     //Add new group to database
                                     groups.document(inviteCode).set(newGroup)
@@ -138,7 +142,7 @@ public class CreateGroups extends AppCompatActivity {
 
     //Checks to see if the group name is smaller than 5 characters.
     private boolean checkName(String groupName){
-        if(groupName.length() < 5){
+        if(groupName.length() < 1){
             return false;
         }
 

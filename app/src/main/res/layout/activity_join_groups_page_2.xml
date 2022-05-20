@@ -17,6 +17,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.23" />
 
+    <TextView
+        android:layout_width="263dp"
+        android:layout_height="64dp"
+        android:text="Enter Password to Join"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.413" />
+
     <EditText
         android:id="@+id/joinGroupPassword"
         android:layout_width="wrap_content"

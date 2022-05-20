@@ -9,7 +9,7 @@
         android:layout_width="306dp"
         android:layout_height="97dp"
         android:text="The following is your invite code. You can find it in your group page as well."
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

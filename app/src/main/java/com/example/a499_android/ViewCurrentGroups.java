@@ -150,16 +150,15 @@ public class ViewCurrentGroups extends AppCompatActivity {
                 //String temp = array.get(i).substring(6);
                 AlertDialog.Builder alert = new AlertDialog.Builder(ViewCurrentGroups.this);
                 alert.setTitle("Go to " + array.get(position).substring(8) + " Page?");
-                alert.setMessage(array.get(position).substring(0,6));
                 alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //Go to page here
                         Intent intent;
                         if(user) {
-                            intent = new Intent(ViewCurrentGroups.this, CreatedJoinedGroup.class);
+                            intent = new Intent(ViewCurrentGroups.this, CurrentCreatedGroups.class);
                         } else {
-                            intent = new Intent(ViewCurrentGroups.this, MemberJoinedGroup.class);
+                            intent = new Intent(ViewCurrentGroups.this, CurrentJoinedGroups.class);
                         }
                         intent.putExtra("InviteCode", array.get(position).substring(0,6));
                         startActivity(intent);

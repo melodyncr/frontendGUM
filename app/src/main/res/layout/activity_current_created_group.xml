@@ -9,10 +9,24 @@
         android:id="@+id/created_members_view"
         android:layout_width="408dp"
         android:layout_height="463dp"
+        android:layout_marginBottom="16dp"
+        android:background="#EDEBEB"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.675" />
+
+    <Button
+        android:id="@+id/invite_code_btn"
+        android:layout_width="177dp"
+        android:layout_height="49dp"
+        android:text="Invite Code"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/created_members_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

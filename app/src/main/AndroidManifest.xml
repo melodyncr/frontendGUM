@@ -228,14 +228,14 @@
                 android:value=".GroupsLandingPage" />
         </activity>
 
-        <activity android:name=".MemberJoinedGroup"
+        <activity android:name=".CurrentJoinedGroups"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GroupsLandingPage" />
         </activity>
 
-        <activity android:name=".CreatedJoinedGroup"
+        <activity android:name=".CurrentCreatedGroups"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
