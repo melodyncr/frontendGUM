@@ -47,9 +47,6 @@ public class CreateGroups extends AppCompatActivity {
         Button submitCreatedGroup = findViewById(R.id.createNewGroupBtn);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        //TODO
-        //There are no checks at all for duplicate invite codes.
-        //This will bring issues down the line.
         submitCreatedGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +68,7 @@ public class CreateGroups extends AppCompatActivity {
                                 if(document.exists()){
                                     //TODO
                                     //Add something here in case this randomly generated code already exists
-                                    Toast.makeText(CreateGroups.this, "Document already exists", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CreateGroups.this, "An Error Occurred. Please Try Again.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     TextView gPts = findViewById(R.id.createGroupPoints);
                                     String points = gPts.getText().toString();
