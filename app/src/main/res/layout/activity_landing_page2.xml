@@ -57,25 +57,6 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/avatarPicture"
-        android:layout_width="95dp"
-        android:layout_height="95dp"
-        android:layout_below="@+id/topView"
-        android:background="@drawable/border_points"
-        android:layout_marginLeft="300dp"
-        android:src="@drawable/logo_no_text" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/avatarPicture"
-        android:layout_marginLeft="320dp"
-        android:text="Your Avatar"
-        android:textColor="@color/black"
-        android:textSize="10dp" />
-
 
 </RelativeLayout>
 

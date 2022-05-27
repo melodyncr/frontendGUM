@@ -91,7 +91,7 @@ public class LandingPage extends AppCompatActivity {
         CardView startExerciseBtn = findViewById(R.id.startWorkoutBtn);
         CardView viewVideos = findViewById(R.id.videoDemosBtn);
         TextView displayedPoints = findViewById(R.id.pointDisplay);
-        ImageView profile_image = findViewById(R.id.avatarPicture);
+        //ImageView profile_image = findViewById(R.id.avatarPicture);
         messageMark = findViewById(R.id.messageMarktxt);
 //        TextView displayedUsername = findViewById(R.id.usernameDisplay);
 
@@ -124,7 +124,7 @@ public class LandingPage extends AppCompatActivity {
                     String profile_path_name = profile_path_total.substring(0,stop);
                     Context context = LandingPage.this;
                     int resourceId =getResourceId(profile_path_name, "drawable", context.getPackageName(),context);
-                    profile_image.setImageResource(resourceId);
+                    //profile_image.setImageResource(resourceId);
 
                     actionBar.setTitle("Welcome, " + uName);
                     if (document.getData().get("IsAdmin") == null) {
