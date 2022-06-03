@@ -36,10 +36,12 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.a499_android.utility.SaveSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.type.TimeOfDayOrBuilder;
 
@@ -91,6 +93,7 @@ public class LandingPage extends AppCompatActivity {
         CardView startExerciseBtn = findViewById(R.id.startWorkoutBtn);
         CardView viewVideos = findViewById(R.id.videoDemosBtn);
         TextView displayedPoints = findViewById(R.id.pointDisplay);
+        ImageView icon = findViewById(R.id.landingIcon);
         //ImageView profile_image = findViewById(R.id.avatarPicture);
         messageMark = findViewById(R.id.messageMarktxt);
 //        TextView displayedUsername = findViewById(R.id.usernameDisplay);
@@ -145,6 +148,22 @@ public class LandingPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LandingPage.this, UpdateSchedule.class);
                 startActivity(intent);
+            }
+        });
+
+        icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(LandingPage.this);
+                alert.setTitle("Copy the following link to learn more.");
+                alert.setMessage("https://getupandmove.net/GUM/GUM_Orientation/index.html\n");
+                alert.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                alert.create().show();
             }
         });
 /*

@@ -36,6 +36,7 @@ public class IntroVideo extends AppCompatActivity {
     Timer timer;
     public String TAG = "Intro Video";
     String delay;
+    Button continueBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,8 @@ public class IntroVideo extends AppCompatActivity {
         setContentView(R.layout.intro_video);
         videosDoc = db.collection("Videos").document("IntroVideo");
         init_firebase();
-
+        continueBtn = findViewById(R.id.introContBttn);
+        continueBtn.setVisibility(View.INVISIBLE);
         // create timer for activity completion (add visual timer later)
     }
     void init_firebase(){
@@ -81,6 +83,7 @@ public class IntroVideo extends AppCompatActivity {
                                 Intent intent = new Intent(IntroVideo.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
+                                //continueBtn.setVisibility(View.VISIBLE);
                                 /*AlertDialog.Builder alert = new AlertDialog.Builder(IntroVideo.this);
                                 alert.setTitle("Orientation");
                                 alert.setMessage("Would you like the link to the orientation");
