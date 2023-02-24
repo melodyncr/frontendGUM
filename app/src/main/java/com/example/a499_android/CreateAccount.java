@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CreateAccount extends AppCompatActivity {
-
+    // Hi there
     private final String TAG = "Create Account";
 
     // these lists are the paths for each document for firebase, when we create a new user we will set the first_survey boolean variable to true to
