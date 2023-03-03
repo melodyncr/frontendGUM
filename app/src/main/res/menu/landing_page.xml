@@ -23,5 +23,10 @@
         android:orderInCategory="102"
         android:title="Gum Website"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/contact_mark"
+        android:orderInCategory="103"
+        android:title="Contact"
+        app:showAsAction="never"/>
 
 </menu>

@@ -69,7 +69,7 @@ public class UpdateSchedule extends AppCompatActivity {
                             if(pair.getKey().toString().equals("Schedule")){ times_list = (ArrayList<String>) document.get("Schedule"); }
                             it.remove(); // avoids a ConcurrentModificationException
                         }
-
+                        // Gets the value of selected time and setss the buttons to that selected time
                         wBtn1.setText(times_list.get(0));
                         wBtn2.setText(times_list.get(1));
                         wBtn3.setText(times_list.get(2));
