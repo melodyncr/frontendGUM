@@ -84,7 +84,7 @@ public class LandingPage extends AppCompatActivity {
         CardView editSchedule = findViewById(R.id.editScheduleBtn);
         //CardView changeAvatar = findViewById(R.id.viewShopBtn);
         //Too lazy to remove, just making them inaccessible for now.
-        //changeAvatar.setVisibility(View.INVISIBLE);
+//        changeAvatar.setVisibility(View.INVISIBLE);
         //CardView startSurveyBtn = findViewById(R.id.startSurveyBtnC);
         //startSurveyBtn.setVisibility(View.INVISIBLE);
         //Originally called msgAdmin. Changed to groups per Marks request.
@@ -94,7 +94,7 @@ public class LandingPage extends AppCompatActivity {
         CardView viewVideos = findViewById(R.id.videoDemosBtn);
         TextView displayedPoints = findViewById(R.id.pointDisplay);
         ImageView icon = findViewById(R.id.landingIcon);
-        //ImageView profile_image = findViewById(R.id.avatarPicture);
+//        ImageView profile_image = findViewById(R.id.avatarPicture);
         messageMark = findViewById(R.id.messageMarktxt);
 //        TextView displayedUsername = findViewById(R.id.usernameDisplay);
 
