@@ -403,8 +403,13 @@ public class LandingPage extends AppCompatActivity {
                 break;
             case R.id.gum_website:
                 Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse("https://gum-website.herokuapp.com/"));
+                i.setData(Uri.parse("https://getupandmove.net/index.html"));
                 startActivity(i);
+                break;
+            case R.id.contact:
+                Intent j = new Intent(Intent.ACTION_VIEW);
+                j.setData(Uri.parse("https://www.markangelhealingarts.com/contact.html"));
+                startActivity(j);
                 break;
         }
 
