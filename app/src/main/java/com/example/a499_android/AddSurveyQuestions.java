@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AddSurveyQuestions extends AppCompatActivity {
     // Objects  that are used to reference xml ids
     // this activity allows the admin user to select what type of question will be for the next question
-
+    // Hi there
     RadioGroup radioGroup;
     RadioButton b1, b2, b3;
     Button nxtQuestion;
