@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutActivity2">
+
+
+
+    <ImageView
+        android:layout_width="191dp"
+        android:layout_height="259dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="250dp"
+        android:textSize="18dp"
+        android:textColor="#000000"
+        android:text=" You can create Groups with your team, friends and Clients. The Groups will help you to keep track of all your members.Tibits and Longevity points. You can Create, Join or track the progress of your groups. Get Up and Move Also teaches to communities on how to be fit, Feel free to Donate."/>
+
+    <Button
+        android:layout_width="320dp"
+        android:layout_height="80dp"
+        android:text="Donate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#000000"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.780" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
