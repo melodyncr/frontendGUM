@@ -16,6 +16,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.a499_android.utility.ScalableVideoView;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -29,6 +32,8 @@ import java.util.TimerTask;
 public class StartExercise extends AppCompatActivity {
 
     ScalableVideoView videoView;
+
+    private YouTubePlayerView youTubePlayerView;
     int i = 0;  //tracks time for progress bar
 
     @Override
@@ -44,21 +49,32 @@ public class StartExercise extends AppCompatActivity {
 
 //        ------------------------- SET UP VIDEO VIEW -------------------------
 
-        videoView = findViewById(R.id.scalableVideoView);
-        // video files will later follow this naming format: "avatarName_workoutName.mp4"
-        // create string based off of current avatar and selected workout
-//        String videoName = "counter_swing"; // do not include file extension in name
-        String videoName = SelectWorkout.selectedWorkout; // do not include file extension in name
+//        videoView = findViewById(R.id.scalableVideoView);
+//        // video files will later follow this naming format: "avatarName_workoutName.mp4"
+//        // create string based off of current avatar and selected workout
+////        String videoName = "counter_swing"; // do not include file extension in name
+//        String videoName = SelectWorkout.selectedWorkout; // do not include file extension in name
+//
+//        Context mContext = getApplicationContext();
+//        int videoResId = mContext.getResources().getIdentifier(videoName, "raw", mContext.getPackageName());  // retrieve the resource id number for a video located in the raw directory
+//        videoView.setVideoPath("android.resource://"+mContext.getPackageName()+"/"+videoResId);  // tell video view what file to play
+//        //Log.d("TAG", "Current context is " + mContext.getFilesDir().getAbsoluteFile().getAbsolutePath());
+//        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//            @Override
+//            public void onPrepared(MediaPlayer mp) {
+//                mp.setLooping(true);    // loop video
+//                videoView.start();  // start video
+//            }
+//        });
 
-        Context mContext = getApplicationContext();
-        int videoResId = mContext.getResources().getIdentifier(videoName, "raw", mContext.getPackageName());  // retrieve the resource id number for a video located in the raw directory
-        videoView.setVideoPath("android.resource://"+mContext.getPackageName()+"/"+videoResId);  // tell video view what file to play
-        //Log.d("TAG", "Current context is " + mContext.getFilesDir().getAbsoluteFile().getAbsolutePath());
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        YouTubePlayerView youTubePlayerView = findViewById(R.id.youtubeplayerId);
+        getLifecycle().addObserver(youTubePlayerView);
+
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.setLooping(true);    // loop video
-                videoView.start();  // start video
+            public void onReady(YouTubePlayer youTubePlayer) {
+                String videoId = "PLq_40h4ps4ckcR216SAn4D65qbINkH0ND";
+                youTubePlayer.loadVideo(videoId, 0);
             }
         });
 
