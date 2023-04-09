@@ -68,8 +68,7 @@ public class StartExerciseM extends AppCompatActivity implements SensorEventList
 
         Context mContext = getApplicationContext();
         int videoResId = mContext.getResources().getIdentifier(videoName, "raw", mContext.getPackageName());  // retrieve the resource id number for a video located in the raw directory
-        videoView.setVideoPath("android.resource://"+mContext.getPackageName()+"/"+videoResId);  // tell video view what file to play
-
+        videoView.setVideoPath("android.resource://"+mContext.getPackageName()+"/"+videoResId);  // tell video view what file to pla
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -82,6 +81,8 @@ public class StartExerciseM extends AppCompatActivity implements SensorEventList
         //        ------------------------- TIMER AND PROGRESS BAR -------------------------
 
         long mMilliseconds = SelectWorkout.time_mil; //length of all timers
+
+        // Hi there
 
         //format time for countdown display
         SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("HH:mm:ss");

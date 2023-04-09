@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/black"
-            android:text="Please select the category the new video will be inserted in. Enter a breif description, then finally enter a 11 digit unique ID to the video. There is an example below it's the last 11 characters of any video on Youtube."
+            android:text="Please select the category the new video will be inserted in. Enter a brief description, then finally enter a 11 digit unique ID to the video. There is an example below it's the last 11 characters of any video on Youtube."
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view1" />
 
