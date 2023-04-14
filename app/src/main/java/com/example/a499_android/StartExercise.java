@@ -16,11 +16,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.a499_android.utility.ScalableVideoView;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -29,9 +38,17 @@ import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 public class StartExercise extends AppCompatActivity {
 
-    ScalableVideoView videoView;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    CollectionReference videos = db.collection("Videos");
+    DocumentReference docRef = db.collection("Videos").document();
+    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
     private YouTubePlayerView youTubePlayerView;
     int i = 0;  //tracks time for progress bar
@@ -50,15 +67,15 @@ public class StartExercise extends AppCompatActivity {
 //        ------------------------- SET UP VIDEO VIEW -------------------------
 
 //        videoView = findViewById(R.id.scalableVideoView);
-//        // video files will later follow this naming format: "avatarName_workoutName.mp4"
-//        // create string based off of current avatar and selected workout
-////        String videoName = "counter_swing"; // do not include file extension in name
-//        String videoName = SelectWorkout.selectedWorkout; // do not include file extension in name
-//
-//        Context mContext = getApplicationContext();
+        // video files will later follow this naming format: "avatarName_workoutName.mp4"
+        // create string based off of current avatar and selected workout
+//        String videoName = "counter_swing"; // do not include file extension in name
+        String videoName = SelectWorkout.selectedWorkout; // do not include file extension in name
+
+        Context mContext = getApplicationContext();
 //        int videoResId = mContext.getResources().getIdentifier(videoName, "raw", mContext.getPackageName());  // retrieve the resource id number for a video located in the raw directory
 //        videoView.setVideoPath("android.resource://"+mContext.getPackageName()+"/"+videoResId);  // tell video view what file to play
-//        //Log.d("TAG", "Current context is " + mContext.getFilesDir().getAbsoluteFile().getAbsolutePath());
+//        Log.d("TAG", "Current context is " + mContext.getFilesDir().getAbsoluteFile().getAbsolutePath());
 //        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 //            @Override
 //            public void onPrepared(MediaPlayer mp) {
@@ -67,13 +84,38 @@ public class StartExercise extends AppCompatActivity {
 //            }
 //        });
 
+//        docRef.getDocument("path/to/youtube_link");
+//        ref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String youtubeLink = dataSnapshot.getValue(String.class);
+//                // Insert the YouTube link into the XML file using the steps from the previous answer
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                // Handle the error
+//            }
+//        });
+        try{
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(new File("activity_start_exercise.xml"));
+            doc.getElementsByTagName("videoId");
+        }catch (ParserConfigurationException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
         YouTubePlayerView youTubePlayerView = findViewById(R.id.youtubeplayerId);
         getLifecycle().addObserver(youTubePlayerView);
 
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(YouTubePlayer youTubePlayer) {
-                String videoId = "Qwd25JV-jnU";
+//                videos.document();
+                String videoId = "t2uU6yaZXn8";
                 youTubePlayer.loadVideo(videoId, 0);
             }
         });
