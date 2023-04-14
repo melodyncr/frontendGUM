@@ -19,6 +19,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a499_android.utility.ScalableVideoView;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Random;
@@ -39,6 +42,7 @@ public class StartExerciseM extends AppCompatActivity implements SensorEventList
     private Vibrator vibrator;
     MediaPlayer move;
     ScalableVideoView videoView;
+    private YouTubePlayerView youTubePlayerView;
     int i = 0;  //tracks time for progress bar
 
     @Override
@@ -57,23 +61,34 @@ public class StartExerciseM extends AppCompatActivity implements SensorEventList
             isMeterAvailable = false;
         }
         //define media player
-        move = MediaPlayer.create(this, R.raw.move1);
+//        move = MediaPlayer.create(this, R.raw.move1);
+//
+//
+//        videoView = findViewById(R.id.scalableVideoViewM);
+//        // video files will later follow this naming format: "avatarName_workoutName.mp4"
+//        // create string based off of current avatar and selected workout
+////        String videoName = "counter_swing"; // do not include file extension in name
+//        String videoName = SelectWorkout.selectedWorkout; // do not include file extension in name
+//
+//        Context mContext = getApplicationContext();
+//        int videoResId = mContext.getResources().getIdentifier(videoName, "raw", mContext.getPackageName());  // retrieve the resource id number for a video located in the raw directory
+//        videoView.setVideoPath("android.resource://"+mContext.getPackageName()+"/"+videoResId);  // tell video view what file to pla
+//        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//            @Override
+//            public void onPrepared(MediaPlayer mp) {
+//                mp.setLooping(true);    // loop video
+//                videoView.start();  // start video
+//            }
+//        });
 
+        YouTubePlayerView youTubePlayerView = findViewById(R.id.youtubeplayerId);
+        getLifecycle().addObserver(youTubePlayerView);
 
-        videoView = findViewById(R.id.scalableVideoViewM);
-        // video files will later follow this naming format: "avatarName_workoutName.mp4"
-        // create string based off of current avatar and selected workout
-//        String videoName = "counter_swing"; // do not include file extension in name
-        String videoName = SelectWorkout.selectedWorkout; // do not include file extension in name
-
-        Context mContext = getApplicationContext();
-        int videoResId = mContext.getResources().getIdentifier(videoName, "raw", mContext.getPackageName());  // retrieve the resource id number for a video located in the raw directory
-        videoView.setVideoPath("android.resource://"+mContext.getPackageName()+"/"+videoResId);  // tell video view what file to pla
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.setLooping(true);    // loop video
-                videoView.start();  // start video
+            public void onReady(YouTubePlayer youTubePlayer) {
+                String videoId = "Qwd25JV-jnU";
+                youTubePlayer.loadVideo(videoId, 0);
             }
         });
 
@@ -81,8 +96,6 @@ public class StartExerciseM extends AppCompatActivity implements SensorEventList
         //        ------------------------- TIMER AND PROGRESS BAR -------------------------
 
         long mMilliseconds = SelectWorkout.time_mil; //length of all timers
-
-        // Hi there
 
         //format time for countdown display
         SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("HH:mm:ss");

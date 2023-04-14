@@ -73,7 +73,7 @@ public class StartExercise extends AppCompatActivity {
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(YouTubePlayer youTubePlayer) {
-                String videoId = "PLq_40h4ps4ckcR216SAn4D65qbINkH0ND";
+                String videoId = "Qwd25JV-jnU";
                 youTubePlayer.loadVideo(videoId, 0);
             }
         });
