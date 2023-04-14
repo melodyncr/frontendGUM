@@ -28,31 +28,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/youtubeplayerId"
-        app:autoPlay="true"
-        app:videoId="Qwd25JV-jnU"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-<!--    <LinearLayout-->
+<!--    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
 <!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent" >-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/youtubeplayerId"-->
+<!--        app:autoPlay="true"-->
+<!--        app:videoId="Qwd25JV-jnU"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
-<!--            android:id="@+id/youtube_player_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-<!--            app:videoId="PLq_40h4ps4ckcR216SAn4D65qbINkH0ND"-->
-<!--            app:autoPlay="true"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/someText"/>-->
-<!--    </LinearLayout>-->
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtubeplayerId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:videoId="t2uU6yaZXn8"
+            app:autoPlay="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someText"/>
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
