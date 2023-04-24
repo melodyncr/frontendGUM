@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
 }
 
 android {
@@ -18,7 +19,7 @@ android {
             }
             applicationId "com.example.a499_android"
             minSdkVersion 22
-            targetSdkVersion 30
+            targetSdkVersion 33
             multiDexEnabled true  //ADD THIS LINE
             versionCode 1
             versionName "1.0"
