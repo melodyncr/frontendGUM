@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
-//  id 'com.google.gms.google-services'
+    id 'com.google.gms.google-services'
+    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
 }
 
 android {
@@ -16,7 +17,7 @@ android {
                 force 'androidx.core:core:1.6.0'
                 force 'androidx.lifecycle:lifecycle-runtime:2.3.1'
             }
-            applicationId "com.gum.a499_android"
+            applicationId "com.example.a499_android"
             minSdkVersion 22
             targetSdkVersion 33
             multiDexEnabled true  //ADD THIS LINE
