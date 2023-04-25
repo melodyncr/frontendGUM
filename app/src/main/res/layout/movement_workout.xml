@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.example.a499_android.utility.ScalableVideoView
+    <com.gum.a499_android.utility.ScalableVideoView
         android:id="@+id/scalableVideoViewM"
         android:layout_width="393dp"
         android:layout_height="488dp"

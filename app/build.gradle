@@ -17,12 +17,12 @@ android {
                 force 'androidx.core:core:1.6.0'
                 force 'androidx.lifecycle:lifecycle-runtime:2.3.1'
             }
-            applicationId "com.example.a499_android"
+            applicationId 'com.gum.a499_android'
             minSdkVersion 22
             targetSdkVersion 33
             multiDexEnabled true  //ADD THIS LINE
-            versionCode 1
-            versionName "1.0"
+            versionCode 2
+            versionName "1.0.1"
 
             testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         }
