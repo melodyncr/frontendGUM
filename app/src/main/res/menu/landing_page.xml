@@ -29,4 +29,16 @@
         android:title="Contact"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/about_mark"
+        android:orderInCategory="104"
+        android:title="About"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/Donate"
+        android:orderInCategory="105"
+        android:title="Donate"
+        app:showAsAction="never"/>
+
 </menu>

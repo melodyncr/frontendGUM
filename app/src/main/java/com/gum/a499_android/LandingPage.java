@@ -389,6 +389,16 @@ public class LandingPage extends AppCompatActivity {
                 j.setData(Uri.parse("https://www.markangelhealingarts.com/contact.html"));
                 startActivity(j);
                 break;
+            case R.id.about_mark:
+                Intent m = new Intent(Intent.ACTION_VIEW);
+                m.setData(Uri.parse("https://www.markangelhealingarts.com/about.html"));
+                startActivity(m);
+                break;
+            case R.id.Donate:
+                Intent s = new Intent(Intent.ACTION_VIEW);
+                s.setData(Uri.parse("https://getupandmove.net/pages/donate.html"));
+                startActivity(s);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
