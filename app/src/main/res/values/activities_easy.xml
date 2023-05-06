@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="easy_workouts">
-        <item>session1</item>
-        <item>session2</item>
-        <item>session3</item>
-        <item>session4</item>
-        <item>session5</item>
-        <item>session6</item>
-        <item>bouncing</item>
-        <item>counter_swing</item>
-        <item>swaying</item>
-        <item>praise_sun</item>
+        <item>Level 1: Session 1</item>
+        <item>Level 1: Session 2</item>
+        <item>Level 1: Session 3</item>
+        <item>Level 1: Session 4</item>
+        <item>Level 1: Session 5</item>
+        <item>Level 1: Session 6</item>
     </string-array>
 </resources>

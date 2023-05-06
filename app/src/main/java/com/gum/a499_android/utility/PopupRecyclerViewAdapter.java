@@ -1,6 +1,8 @@
 package com.gum.a499_android.utility;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gum.a499_android.LandingPage;
@@ -56,6 +59,10 @@ public class PopupRecyclerViewAdapter extends RecyclerView.Adapter<PopupRecycler
                 public void onClick(View view) {
                     //save selected object
                     choice = data[getAdapterPosition()];
+                    Intent intent = new Intent("level");
+                    intent.putExtra("choice",choice);
+                    LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+//                    Log.d("PopUpRecycler",data[getAdapterPosition()]);
                     if(SelectWorkout.difficulty.equals("easy")){
                         choice = choice + "_gentle_" + LandingPage.avatarName;
                     }else if(SelectWorkout.difficulty.equals("medium")){

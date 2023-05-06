@@ -1,19 +1,33 @@
 package com.gum.a499_android;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.gum.a499_android.utility.ScalableVideoView;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -24,6 +38,9 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -41,10 +58,21 @@ public class StartExercise extends AppCompatActivity {
     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
     private YouTubePlayerView youTubePlayerView;
+    private String passedString = "";
     int i = 0;  //tracks time for progress bar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null) {
+            passedString = extras.getString("myChoice");
+        }
+
+        Toast.makeText(this, passedString, Toast.LENGTH_LONG).show();
+        // make a query for document - title
+        // get title and pull YtURL
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_exercise);
 
@@ -109,6 +137,7 @@ public class StartExercise extends AppCompatActivity {
                 youTubePlayer.loadVideo(videoId, 0);
             }
         });
+//        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/videoId" frameborder="0" allowfullscreen></iframe>
 
 //        ------------------------- TIMER AND PROGRESS BAR -------------------------
 

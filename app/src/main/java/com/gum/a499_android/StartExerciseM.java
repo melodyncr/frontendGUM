@@ -176,15 +176,15 @@ public class StartExerciseM extends AppCompatActivity implements SensorEventList
                          int num = rand.nextInt(3);
                          if (num == 0) {
                              stopPlaying();
-                             move = MediaPlayer.create(this, R.raw.good1);
+//                             move = MediaPlayer.create(this, R.raw.good1);
                              move.start();// move 1 will be triggered
                          } else if (num == 1) {
                              stopPlaying();
-                             move = MediaPlayer.create(this, R.raw.good2);
+//                             move = MediaPlayer.create(this, R.raw.good2);
                              move.start();
                          } else {
                              stopPlaying();
-                             move = MediaPlayer.create(this, R.raw.good3);
+//                             move = MediaPlayer.create(this, R.raw.good3);
                              move.start();
                          }
                      }
@@ -200,15 +200,15 @@ public class StartExerciseM extends AppCompatActivity implements SensorEventList
                  }else {
                      if (num == 0) {
                          stopPlaying();
-                         move = MediaPlayer.create(this, R.raw.move1);
+//                         move = MediaPlayer.create(this, R.raw.move1);
                          move.start();// move 1 will be triggered
                      } else if (num == 1) {
                          stopPlaying();
-                         move = MediaPlayer.create(this, R.raw.move2);
+//                         move = MediaPlayer.create(this, R.raw.move2);
                          move.start();
                      } else {
                          stopPlaying();
-                         move = MediaPlayer.create(this, R.raw.move3);
+//                         move = MediaPlayer.create(this, R.raw.move3);
                          move.start();
                      }
                  }

@@ -1,8 +1,11 @@
 package com.gum.a499_android;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,8 +41,18 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
     public static long time_mil = 0;
     private PopupWindow popupWindow = new PopupWindow();
 
+    private String myChoice = "";
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            myChoice = intent.getStringExtra("choice");
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("level"));
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_workout);
         ActionBar actionBar = getSupportActionBar();
@@ -87,7 +101,11 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
                 }else {
+                    Log.d("SelectWorkout", myChoice);
                     Intent intent = new Intent(SelectWorkout.this, StartExercise.class);
+                    Bundle extraInfo = new Bundle();
+                    extraInfo.putString("myChoice", myChoice);
+                    intent.putExtras(extraInfo);
                     startActivity(intent);
                 }
             }
@@ -96,7 +114,7 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
         easyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                difficulty = "easy";
+                difficulty = "Beginner";
                 interval = false;
                 spinner.setVisibility(View.INVISIBLE);
                 data = res.getStringArray(R.array.easy_workouts);
@@ -107,7 +125,7 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
         mediumBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                difficulty = "medium";
+                difficulty = "Intermediate";
                 interval = false;
                 spinner.setVisibility(View.INVISIBLE);
                 data = res.getStringArray(R.array.medium_workouts);
@@ -118,7 +136,7 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
         hardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                difficulty = "hard";
+                difficulty = "Advance";
                 interval = false;
                 spinner.setVisibility(View.INVISIBLE);
                 data = res.getStringArray(R.array.hard_workouts);
@@ -170,7 +188,7 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         level = parent.getItemAtPosition(position).toString();
-        Log.d("String", level);
+        Log.d("SelectWorkout", level);
         if(level.equals("Select a Time(Default 20 seconds)")) {
             time_mil = 20000;
         }else {

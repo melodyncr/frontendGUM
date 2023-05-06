@@ -29,7 +29,7 @@
 
 
     <com.gum.a499_android.utility.ScalableVideoView
-        android:id="@+id/scalableVideoViewM"
+        android:id="@+id/youtubeplayerId"
         android:layout_width="393dp"
         android:layout_height="488dp"
         android:layout_alignParentLeft="true"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scalableVideoViewM" />
+        app:layout_constraintTop_toBottomOf="@+id/youtubeplayerId" />
 
     <TextView
         android:id="@+id/timerM"
