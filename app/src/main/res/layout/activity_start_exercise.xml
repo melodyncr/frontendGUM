@@ -28,6 +28,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<!--    Old Implementation of VideoView-->
+<!--    <com.example.a499_android.utility.ScalableVideoView-->
+<!--        android:id="@+id/scalableVideoView"-->
+<!--        android:layout_width="393dp"-->
+<!--        android:layout_height="488dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/someText" />-->
+
 <!--    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
@@ -46,9 +60,6 @@
             android:id="@+id/youtubeplayerId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            app:videoId="t2uU6yaZXn8"
-            app:autoPlay="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/someText"/>
@@ -63,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scalableVideoView" />
+        app:layout_constraintTop_toBottomOf="@+id/youtubeplayerId" />
 
     <TextView
         android:id="@+id/timer"

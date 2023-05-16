@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="medium_workouts">
-        <item>session1</item>
-        <item>session2</item>
-        <item>session3</item>
-        <item>session4</item>
+        <item>Level 2: Session 1</item>
+        <item>Level 2: Session 2</item>
+        <item>Level 2: Session 3</item>
+        <item>Level 2: Session 4</item>
+        <item>Level 2: Session 5</item>
+        <item>Level 2: Session 6</item>
     </string-array>
 </resources>

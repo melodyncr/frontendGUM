@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.a499_android">
+    package="com.gum.a499_android">
 
     <uses-permission android:name="android.permission.SET_ALARM" />
 
@@ -13,6 +13,8 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,10 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.499_android">
-        <activity
-            android:name=".AboutActivity2"
-            android:exported="false" />
-        <!-- these activites are for admin users only -->
+
         <activity
             android:name=".ViewResponseR"
             android:screenOrientation="portrait">
@@ -218,6 +217,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:exported = "true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -234,6 +234,7 @@
         </activity>
         <activity
             android:name=".CreateGroups"
+            android:exported = "false"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
