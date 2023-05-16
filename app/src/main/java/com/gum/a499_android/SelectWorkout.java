@@ -42,11 +42,13 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
     private PopupWindow popupWindow = new PopupWindow();
 
     private String myChoice = "";
+    private String myMode = "";
     public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             // Get extra data included in the Intent
             myChoice = intent.getStringExtra("choice");
+            myMode = intent.getStringExtra("mode");
         }
     };
     @Override
@@ -102,9 +104,11 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
                     alert11.show();
                 }else {
                     Log.d("SelectWorkout", myChoice);
+                    Log.d("SelectWorkout", myMode);
                     Intent intent = new Intent(SelectWorkout.this, StartExercise.class);
                     Bundle extraInfo = new Bundle();
                     extraInfo.putString("myChoice", myChoice);
+                    extraInfo.putString("myMode", myMode);
                     intent.putExtras(extraInfo);
                     startActivity(intent);
                 }
@@ -125,7 +129,7 @@ public class SelectWorkout extends AppCompatActivity implements AdapterView.OnIt
         mediumBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                difficulty = "Intermediate";
+                difficulty = "Moderate";
                 interval = false;
                 spinner.setVisibility(View.INVISIBLE);
                 data = res.getStringArray(R.array.medium_workouts);

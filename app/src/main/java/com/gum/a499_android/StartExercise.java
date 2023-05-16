@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.Timer;
@@ -48,17 +49,23 @@ import java.util.TimerTask;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
 public class StartExercise extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    CollectionReference videos = db.collection("Videos");
-    DocumentReference docRef = db.collection("Videos").document();
+    CollectionReference videos = db.collection("StartMoving");
+    DocumentReference videosDoc;
     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
     private YouTubePlayerView youTubePlayerView;
+
+    private String modeString = "";
     private String passedString = "";
+
+    public String TAG = "StartExercise";
+
+    public static String ytUrl;
+    public static String title;
     int i = 0;  //tracks time for progress bar
 
     @Override
@@ -66,11 +73,35 @@ public class StartExercise extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         if(extras != null) {
+            modeString = extras.getString("myMode");
             passedString = extras.getString("myChoice");
         }
 
         Toast.makeText(this, passedString, Toast.LENGTH_LONG).show();
         // make a query for document - title
+        videosDoc = videos.document(modeString);
+
+        videosDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()){
+                        List<String> titlesList = (List<String>) document.get("Titles");
+                        List<String> ytUrlsList = (List<String>) document.get("YtUrls");
+                        int index = titlesList.indexOf(passedString); // Set the index of the session to retrieve
+                        title = titlesList.get(index);
+                        ytUrl = ytUrlsList.get(index);
+                        Log.d(TAG, "Title: " + title);
+                        Log.d(TAG, "YouTube URL: " + ytUrl);
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
         // get title and pull YtURL
 
         super.onCreate(savedInstanceState);
@@ -115,25 +146,28 @@ public class StartExercise extends AppCompatActivity {
 //                // Handle the error
 //            }
 //        });
-        try{
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(new File("activity_start_exercise.xml"));
-            doc.getElementsByTagName("videoId");
-        }catch (ParserConfigurationException e){
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
+//        try{
+//            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+//            Document doc = dBuilder.parse(new File("activity_start_exercise.xml"));
+//            doc.getElementsByTagName("videoId");
+//        }catch (ParserConfigurationException e){
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (SAXException e) {
+//            e.printStackTrace();
+//        }
         YouTubePlayerView youTubePlayerView = findViewById(R.id.youtubeplayerId);
         getLifecycle().addObserver(youTubePlayerView);
+//        youTubePlayerView.setVideoId("" + ytUrl);
 
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(YouTubePlayer youTubePlayer) {
 //                videos.document();
-                String videoId = "t2uU6yaZXn8";
+                Log.d(TAG, "goddamnit");
+                Log.d(TAG, "Youtube URL:" + ytUrl);
+                String videoId = "" + ytUrl;
                 youTubePlayer.loadVideo(videoId, 0);
             }
         });

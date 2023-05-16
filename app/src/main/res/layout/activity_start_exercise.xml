@@ -60,9 +60,6 @@
             android:id="@+id/youtubeplayerId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            app:videoId="t2uU6yaZXn8"
-            app:autoPlay="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/someText"/>

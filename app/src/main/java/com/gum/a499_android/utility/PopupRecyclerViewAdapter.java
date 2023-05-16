@@ -22,6 +22,8 @@ public class PopupRecyclerViewAdapter extends RecyclerView.Adapter<PopupRecycler
     private Context mContext;
     private String data[];
     private String choice;
+
+    private String mode;
     private PopupWindow popUp;
 
     public PopupRecyclerViewAdapter(Context mContext, String data[], PopupWindow popUp) {
@@ -59,17 +61,23 @@ public class PopupRecyclerViewAdapter extends RecyclerView.Adapter<PopupRecycler
                 public void onClick(View view) {
                     //save selected object
                     choice = data[getAdapterPosition()];
+                    mode = SelectWorkout.difficulty;
                     Intent intent = new Intent("level");
                     intent.putExtra("choice",choice);
+                    intent.putExtra("mode", mode);
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
-//                    Log.d("PopUpRecycler",data[getAdapterPosition()]);
-                    if(SelectWorkout.difficulty.equals("easy")){
-                        choice = choice + "_gentle_" + LandingPage.avatarName;
-                    }else if(SelectWorkout.difficulty.equals("medium")){
-                        choice = choice + "_moderate_" + LandingPage.avatarName;
+                    Log.d("PopUpRecycler",data[getAdapterPosition()]);
+                    if(SelectWorkout.difficulty.equals("Beginner")){
+                        mode = "Beginner";
+//                        choice = choice + "_gentle_" + LandingPage.avatarName;
+                    }else if(SelectWorkout.difficulty.equals("Moderate")){
+                        mode = "Moderate";
+//                        choice = choice + "_moderate_" + LandingPage.avatarName;
                     }else {
-                        choice = choice + "_vigorous_" + LandingPage.avatarName;
+                        mode = "Advance";
+//                        choice = choice + "_vigorous_" + LandingPage.avatarName;
                     }
+//                    SelectWorkout.difficulty = mode;
                     SelectWorkout.selectedWorkout = choice;
                     popUp.dismiss();
                     Toast.makeText(mContext, choice, Toast.LENGTH_SHORT).show();

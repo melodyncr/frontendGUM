@@ -396,7 +396,7 @@ public class LandingPage extends AppCompatActivity {
                 break;
             case R.id.Donate:
                 Intent s = new Intent(Intent.ACTION_VIEW);
-                s.setData(Uri.parse("https://getupandmove.net/pages/donate.html"));
+                s.setData(Uri.parse("https://www.paypal.com/donate?token=agWU6pjDkWSRg8z9DeIr8U2CHB_aEk9jEV0Eqw9vVPQClr87OsFzzNRdLyczruILIi-vWfqsrtCfxcCC"));
                 startActivity(s);
                 break;
         }
